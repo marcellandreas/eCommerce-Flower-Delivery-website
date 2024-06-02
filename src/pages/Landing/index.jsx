@@ -5,6 +5,7 @@ import Benefits from "../../components/templates/Benefits";
 import ContactUs from "../../components/templates/ContactUs";
 import Reviews from "../../components/templates/Reviews";
 import Service from "../../components/templates/Service";
+import Footer from "../../components/templates/footer";
 
 const Landing = () => {
   return (
@@ -16,6 +17,7 @@ const Landing = () => {
       <ContactUs />
       <Service />
       <Reviews />
+      <Footer />
     </main>
   );
 };

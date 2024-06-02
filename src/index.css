@@ -38,3 +38,20 @@
 .swiper-button-next {
   color: black;
 }
+
+/* styles.css */
+@keyframes roll {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-100%) rotate(360deg);
+  }
+  100% {
+    transform: translateY(0) rotate(720deg);
+  }
+}
+
+.roll-on-hover:hover {
+  animation: roll 1s ease-in-out;
+}
