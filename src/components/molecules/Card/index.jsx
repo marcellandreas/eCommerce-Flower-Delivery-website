@@ -52,6 +52,7 @@ export const CardBanner = ({
   itemName,
   ItemPrice,
   buttonLink,
+  to,
 }) => {
   const isEven = index % 2 === 0;
 
@@ -66,7 +67,7 @@ export const CardBanner = ({
           {label}
         </label>
         <p className="absolute bottom-6">
-          <CustomButtonLink leftIcon={!isEven} rightIcon={isEven}>
+          <CustomButtonLink to={to} leftIcon={!isEven} rightIcon={isEven}>
             {buttonLink}
           </CustomButtonLink>
         </p>
@@ -84,10 +85,10 @@ export const CardBanner = ({
 
         <div className="flex absolute left-1/2 bottom-2 transform -translate-x-1/2 hover:scale-90 flex-col justify-center items-center gap-1 self-stretch">
           <h6 className=" self-stretch text-black text-center text-mobileH6 md:text-desktopH6 capitalize font-medium">
-            {itemName}absolutea
+            {itemName}
           </h6>
           <caption className=" self-stretch text-center text-gray text-mobileCaption md:text-desktopCaption font-medium">
-            {ItemPrice}a
+            {ItemPrice}
           </caption>
         </div>
       </section>

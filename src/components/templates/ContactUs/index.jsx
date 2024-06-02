@@ -20,7 +20,7 @@ const ContactUs = () => {
             </label>
             <div className="flex self-stretch  items-start flex-col md:flex-row gap-4">
               <InputText placeholder="+380 XX XXX XX XX" />
-              <Button type="primary">Book A Call</Button>
+              {/* <Button type="primary">Book A Call</Button> */}
             </div>
           </div>
         </div>

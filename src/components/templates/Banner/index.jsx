@@ -1,8 +1,8 @@
 import hero from "../../../assets/images/hero.png";
 import { CardBanner, CardCategory, CardItem } from "../../molecules/Card";
 import { CustomButtonLink } from "../../atoms/Button";
-import itemImg from "../../../assets/images/1.jpg";
-import itemImg2 from "../../../assets/images/2.jpg";
+import itemImg from "../../../assets/images/item.png";
+import itemImg2 from "../../../assets/images/item2.png";
 import itemImg3 from "../../../assets/images/item3.png";
 import itemImg4 from "../../../assets/images/item4.png";
 import itemImg5 from "../../../assets/images/item5.png";
@@ -10,23 +10,28 @@ import itemImg5 from "../../../assets/images/item5.png";
 const Banner = () => {
   const data = [
     {
-      name: "Fresh Flowers2222",
+      name: "Fresh Flowers",
       itemImg: itemImg,
+      to: "shop",
     },
     {
       name: "Dried Flowers",
+      to: "shop",
       itemImg: itemImg2,
     },
     {
       name: "Live Plants",
+      to: "shop",
       itemImg: itemImg3,
     },
     {
       name: "Aroma Candes",
+      to: "shop",
       itemImg: itemImg4,
     },
     {
       name: "Freshener",
+      to: "shop",
       itemImg: itemImg5,
     },
   ];
@@ -69,6 +74,7 @@ const Banner = () => {
             index={i}
             label={data.name}
             itemImg={data.itemImg}
+            to={data.to}
             // itemName={"nama"}
             // ItemPrice={""}
             buttonLink={"Shop Now"}

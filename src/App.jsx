@@ -1,8 +1,6 @@
-import { Button } from "./components/atoms/Button";
-import { InputDate, InputText } from "./components/atoms/Input";
-import Banner from "./components/templates/Banner";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing";
+import Category from "./pages/shopProducts/Category";
 
 const App = () => {
   return (
@@ -11,6 +9,7 @@ const App = () => {
         <Route path="/">
           <Route index element={<Landing />} />
         </Route>
+        <Route path="/shop" element={<Category />} />
       </Routes>
     </BrowserRouter>
   );

@@ -22,8 +22,8 @@ export const Button = ({
     }
   };
 
-  const buttonClass = `max-w-[175px] min-w-[175px]  max-h-[48px] min-h-[48px] md:max-h-[56px] md:min-h-[56px] px-6 py-4  flex justify-center items-center flex-shrink-0 gap-2 text-mobileButton md:text-desktopButton uppercase ${getButtonClass()}`;
-
+  const buttonClass = ` w-full max-h-[48px] min-h-[48px] md:max-h-[56px] md:min-h-[56px] px-6 py-4  flex justify-center items-center flex-shrink-0 gap-2 text-mobileButton md:text-desktopButton uppercase ${getButtonClass()}`;
+  //max-w-[175px] min-w-[175px]
   return (
     <button className={buttonClass} onClick={onClick} onChange={onChange}>
       {leftIcon ? <FaArrowLeft size={24} /> : null}

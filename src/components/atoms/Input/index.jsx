@@ -8,7 +8,7 @@ export const InputText = ({
   value,
 }) => {
   return (
-    <div className=" flex flex-col bg-white gap-3 h-full text-black capitalize min-w-[328px] max-w-[328px]">
+    <div className=" flex flex-col bg-white gap-3 h-full text-black capitalize w-full ">
       {label ? (
         <label className=" text-mobileH6 font-medium">{label}</label>
       ) : null}
@@ -39,3 +39,5 @@ export const InputDate = ({ value }) => {
     </div>
   );
 };
+
+// min-w-[328px] max-w-[328px]

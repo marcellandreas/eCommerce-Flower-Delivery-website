@@ -33,7 +33,9 @@ const Service = () => {
                 </p>
               </div>
             </div>
-            <Button>Subscribe Now</Button>
+            <div className=" w-1/2">
+              <Button>Subscribe Now</Button>
+            </div>
           </div>
         </Content>
       </section>
@@ -63,7 +65,9 @@ const Service = () => {
               </p>
             </div>
           </div>
-          <Button>Inquire Now</Button>
+          <div className=" w-1/4">
+            <Button>Inquire Now</Button>
+          </div>
         </Content>
       </section>
     </>
