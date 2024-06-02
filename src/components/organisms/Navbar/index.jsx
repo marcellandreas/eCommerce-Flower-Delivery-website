@@ -8,6 +8,7 @@ import {
   FaTelegram,
   FaX,
 } from "react-icons/fa6";
+import CardMediaSosial from "../../molecules/CardMediaSosial";
 
 const Navbar = () => {
   const [activeToggle, setActiveToggle] = useState(false);
@@ -71,23 +72,7 @@ const Navbar = () => {
                 <span>Terms & Condision</span>
                 <span>Privacy Policy</span>
               </p>
-              <p className="p-5 flex justify-between">
-                <span>
-                  <FaInstagram size={22} />
-                </span>
-                <span>
-                  <FaFacebook size={22} />
-                </span>
-                <span>
-                  <FaPinterest size={22} />
-                </span>
-                <span>
-                  <FaX size={22} />
-                </span>
-                <span>
-                  <FaTelegram size={22} />
-                </span>
-              </p>
+              <CardMediaSosial className={`p-5`} />
             </div>
           </div>
         ) : null}

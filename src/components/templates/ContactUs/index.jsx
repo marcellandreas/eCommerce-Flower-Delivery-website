@@ -9,6 +9,7 @@ import {
   FaTelegram,
   FaX,
 } from "react-icons/fa6";
+import CardMediaSosial from "../../molecules/CardMediaSosial";
 
 const ContactUs = () => {
   return (
@@ -73,23 +74,11 @@ const ContactUs = () => {
           <h3 className="flex-1 text-mobileH3 md:text-desktopH3 flex items-center justify-between lg:justify-center pt-4 pb-2 px-4 md:pt-4 md:pb-4 md:px-10 md:border-y md:border-l md:border-black">
             Follow Us
           </h3>
-          <div className="flex-1 flex items-center pb-4 px-4 pt-2 md:pt-4 md:pb-4 md:px-10 justify-between md:border-y md:border-l md:border-black">
-            <span>
-              <FaInstagram size={22} />
-            </span>
-            <span>
-              <FaFacebook size={22} />
-            </span>
-            <span>
-              <FaPinterest size={22} />
-            </span>
-            <span>
-              <FaX size={22} />
-            </span>
-            <span>
-              <FaTelegram size={22} />
-            </span>
-          </div>
+          <CardMediaSosial
+            className={
+              "flex-1  pb-4 px-4 pt-2 md:pt-4 md:pb-4 md:px-10  md:border-y md:border-l md:border-black"
+            }
+          />
         </div>
       </div>
     </section>
