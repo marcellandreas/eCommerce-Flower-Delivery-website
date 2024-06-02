@@ -2,6 +2,13 @@ import { Button } from "../../atoms/Button";
 import { InputText } from "../../atoms/Input";
 import itemImg from "../../../assets/images/item.png";
 import { FaPhoneAlt } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaPinterest,
+  FaTelegram,
+  FaX,
+} from "react-icons/fa6";
 
 const ContactUs = () => {
   return (
@@ -23,31 +30,34 @@ const ContactUs = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col bg-amber-300 md:flex-row items-start border-b border-t  h-full border-black w-full">
+        <div className="flex flex-col border  md:flex-row items-start   h-full w-full">
           <div
-            className={`flex text-center flex-1 w-full flex-col h-full border border-black  justify-stretch items-center `}
+            className={`flex text-center  flex-1 w-full flex-col h-full  justify-stretch items-center  `}
           >
-            <h4 className=" text-center  text-mobileH3 md:text-desktopH3 py-4 px-3 ">
+            <h4 className=" text-center border-b  border-r w-full   text-mobileH3 md:text-desktopH3 py-4 px-3 ">
               Phone
             </h4>
-            <aside className="flex p-6 flex-col justify-center border-t-2 border-black w-full items-center gap-6 flex-1">
+            <aside className="flex p-6 flex-col border-r justify-center w-full items-center gap-6 flex-1">
               <section className=" flex justify-center items-center gap-2">
                 <FaPhoneAlt />
-                <p> aaa</p>
+                <p> +380980099111</p>
               </section>
-              <p> aaa</p>
+              <section className=" flex justify-center items-center gap-2">
+                <FaPhoneAlt />
+                <p> +380980099111</p>
+              </section>
             </aside>
           </div>
 
           <div
-            className={`flex flex-1 w-full flex-col h-full border border-black  justify-stretch items-center `}
+            className={`flex flex-1 w-full  flex-col h-full  justify-stretch items-center `}
           >
-            <h4 className=" text-center   text-mobileH3 md:text-desktopH3 py-4 px-3 ">
+            <h4 className=" text-center border-b w-full   text-mobileH3 md:text-desktopH3 py-4 px-3 ">
               Address
             </h4>
-            <aside className="flex p-6 flex-col justify-center border-t-2 border-black w-full items-center gap-6 flex-1">
-              <p> aaa</p>
-              <p> aaa</p>
+            <aside className="flex p-6 flex-col justify-center  w-full items-center gap-6 flex-1">
+              <p> OPENING HOURS: 8 TO 11 P.M.</p>
+              <p>15/4 Khreshchatyk Street, Kyiv</p>
             </aside>
           </div>
         </div>
@@ -64,7 +74,21 @@ const ContactUs = () => {
             Follow Us
           </h3>
           <div className="flex-1 flex items-center pb-4 px-4 pt-2 md:pt-4 md:pb-4 md:px-10 justify-between md:border-y md:border-l md:border-black">
-            Sosial Media
+            <span>
+              <FaInstagram size={22} />
+            </span>
+            <span>
+              <FaFacebook size={22} />
+            </span>
+            <span>
+              <FaPinterest size={22} />
+            </span>
+            <span>
+              <FaX size={22} />
+            </span>
+            <span>
+              <FaTelegram size={22} />
+            </span>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import Navbar from "../../components/organisms/Navbar";
 import AboutUs from "../../components/templates/AboutUs";
 import Banner from "../../components/templates/Banner";
 import Benefits from "../../components/templates/Benefits";
@@ -7,7 +8,8 @@ import Service from "../../components/templates/Service";
 
 const Landing = () => {
   return (
-    <main className=" bg-white">
+    <main className=" bg-white w-full">
+      <Navbar />
       <Banner />
       <AboutUs />
       <Benefits />
