@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { RiShoppingBagFill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaPinterest,
-  FaTelegram,
-  FaX,
-} from "react-icons/fa6";
+
 import CardMediaSosial from "../../molecules/CardMediaSosial";
 
 const Navbar = () => {
@@ -26,20 +20,20 @@ const Navbar = () => {
     <nav className={`border sticky top-0 z-50 bg-white`}>
       <article className=" hidden lg:flex justify-between h-16 items-center text-black">
         <section className="flex h-full w-1/4">
-          <div className="w-1/2 border-r bg-white flex justify-center items-center">
+          <button className="w-1/2 border-r bg-white flex justify-center items-center">
             Shop
-          </div>
-          <div className="w-1/2 border-r bg-white flex justify-center items-center">
+          </button>
+          <button className="w-1/2 border-r bg-white flex justify-center items-center">
             Contact
-          </div>
+          </button>
         </section>
         <section className="flex h-full w-1/4">
-          <div className="w-1/2 border-l flex justify-center items-center">
+          <button className="w-1/2 border-l flex justify-center items-center">
             Sign In
-          </div>
-          <div className="w-1/2 border-l flex justify-center items-center">
+          </button>
+          <button className="  w-1/2 border-l flex justify-center items-center">
             Cart
-          </div>
+          </button>
         </section>
       </article>
       <article className=" lg:hidden flex justify-between h-16 items-center text-black">

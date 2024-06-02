@@ -2,13 +2,6 @@ import { Button } from "../../atoms/Button";
 import { InputText } from "../../atoms/Input";
 import itemImg from "../../../assets/images/item.png";
 import { FaPhoneAlt } from "react-icons/fa";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaPinterest,
-  FaTelegram,
-  FaX,
-} from "react-icons/fa6";
 import CardMediaSosial from "../../molecules/CardMediaSosial";
 
 const ContactUs = () => {
