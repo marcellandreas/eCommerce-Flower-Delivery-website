@@ -5,6 +5,7 @@ import itemImg2 from "../../../assets/images/item2.png";
 import itemImg3 from "../../../assets/images/item3.png";
 import itemImg4 from "../../../assets/images/item4.png";
 import itemImg5 from "../../../assets/images/item5.png";
+import { Categories } from "../../../assets/data/categoryShop";
 
 const Banner = () => {
   const data = [
@@ -67,7 +68,7 @@ const Banner = () => {
         </div>
       </div>
       <div className=" col-span-12 lg:col-span-6  ">
-        {data.map((data, i) => (
+        {Categories.map((data, i) => (
           <CardBanner
             key={i}
             index={i}

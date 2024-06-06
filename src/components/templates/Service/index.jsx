@@ -1,4 +1,4 @@
-import itemImg from "../../../assets/images/item.png";
+import itemImg from "../../../assets/images/fresh/1.png";
 import service2 from "../../../assets/images/section-2.png";
 import { Button } from "../../atoms/Button";
 import Content from "../../molecules/Content";

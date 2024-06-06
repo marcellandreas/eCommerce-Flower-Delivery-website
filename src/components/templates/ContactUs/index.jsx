@@ -1,6 +1,7 @@
 import { Button } from "../../atoms/Button";
 import { InputText } from "../../atoms/Input";
-import itemImg from "../../../assets/images/item.png";
+
+import itemImg from "../../../assets/images/fresh/1.png";
 import { FaPhoneAlt } from "react-icons/fa";
 import CardMediaSosial from "../../molecules/CardMediaSosial";
 
