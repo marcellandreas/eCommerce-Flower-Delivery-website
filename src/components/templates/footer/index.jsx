@@ -4,7 +4,7 @@ import CardMediaSosial from "../../molecules/CardMediaSosial";
 const Footer = () => {
   return (
     <footer className=" border border-black grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4  ">
-      <section className=" col-span-1 min-h-[150px]  border p-5 flex flex-col gap-3 ">
+      <section className=" col-span-1 min-h-[150px]   p-5 flex flex-col gap-3 ">
         <p>
           Remember to offer beautiful flowers from Kyiv Florist Studio
           Valentines Day, Mothers Day, Christmas... Reminds you 7 days before.
@@ -21,7 +21,7 @@ const Footer = () => {
           </div>
         </div>
       </section>
-      <section className=" col-span-1 min-h-[150px] border p-5 ">
+      <section className=" col-span-1 min-h-[150px] border-l p-5 ">
         <div className="flex flex-col gap-4">
           <h5 className=" text-gray text-xl font-semibold">Contact US</h5>
           <div>
@@ -44,7 +44,7 @@ const Footer = () => {
           </div>
         </div>
       </section>
-      <section className=" col-span-1 min-h-[150px] border p-5 ">
+      <section className=" col-span-1 min-h-[150px] border-l p-5 ">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-4">
             <h5 className=" text-gray text-xl font-semibold">Contact US</h5>
@@ -67,7 +67,7 @@ const Footer = () => {
           </div>
         </div>
       </section>
-      <section className=" col-span-1 min-h-[150px] border p-5 ">
+      <section className=" col-span-1 min-h-[150px] border-l p-5 ">
         <div className="flex flex-col gap-4">
           <h5 className=" text-gray text-xl font-semibold">Contact US</h5>
           <ul className=" flex flex-col gap-1">
