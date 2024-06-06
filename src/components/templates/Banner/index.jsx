@@ -1,7 +1,6 @@
 import hero from "../../../assets/images/hero.png";
-import { CardBanner, CardCategory, CardItem } from "../../molecules/Card";
-import { CustomButtonLink } from "../../atoms/Button";
-import itemImg from "../../../assets/images/item.png";
+import { CardBanner } from "../../molecules/Card";
+import itemImg from "../../../assets/images/fresh/1.png";
 import itemImg2 from "../../../assets/images/item2.png";
 import itemImg3 from "../../../assets/images/item3.png";
 import itemImg4 from "../../../assets/images/item4.png";

@@ -1,103 +1,63 @@
+import fresh_1 from "../../assets/images/fresh/1.png";
+import fresh_2 from "../../assets/images/fresh/2.png";
+import fresh_3 from "../../assets/images/fresh/3.png";
+import fresh_4 from "../../assets/images/fresh/4.png";
+import fresh_5 from "../../assets/images/fresh/5.png";
+import fresh_6 from "../../assets/images/fresh/6.png";
+import fresh_7 from "../../assets/images/fresh/7.png";
+import fresh_8 from "../../assets/images/fresh/8.png";
+import fresh_9 from "../../assets/images/fresh/9.png";
+import fresh_10 from "../../assets/images/fresh/10.png";
+
 export const freshFlowers = [
   {
     name: "Rose Bouquet",
-    image:
-      "https://2.bp.blogspot.com/-GLHR429VOio/UNHeUidi0jI/AAAAAAAAdMM/ut9X692432k/s1600/Flowers+wallpapers+red+roses.+(1).jpg",
+    image: fresh_1,
     price: 25.0,
   },
   {
     name: "Tulip Arrangement",
-    image: "https://wallpaperaccess.com/full/1178499.jpg",
+    image: fresh_2,
     price: 30.0,
   },
   {
     name: "Sunflower Bunch",
-    image: "https://example.com/images/sunflower-bunch.jpg",
+    image: fresh_3,
     price: 20.0,
   },
   {
     name: "Lily Bouquet",
-    image: "https://example.com/images/lily-bouquet.jpg",
+    image: fresh_4,
     price: 28.0,
   },
   {
     name: "Orchid Vase",
-    image: "https://example.com/images/orchid-vase.jpg",
+    image: fresh_5,
     price: 35.0,
   },
   {
     name: "Daisy Basket",
-    image: "https://example.com/images/daisy-basket.jpg",
+    image: fresh_6,
     price: 18.0,
   },
   {
     name: "Carnation Spray",
-    image: "https://example.com/images/carnation-spray.jpg",
+    image: fresh_7,
     price: 22.0,
   },
   {
     name: "Peony Posy",
-    image: "https://example.com/images/peony-posy.jpg",
+    image: fresh_8,
     price: 32.0,
   },
   {
     name: "Hydrangea Arrangement",
-    image: "https://example.com/images/hydrangea-arrangement.jpg",
+    image: fresh_9,
     price: 40.0,
   },
   {
     name: "Iris Bunch",
-    image: "https://example.com/images/iris-bunch.jpg",
+    image: fresh_10,
     price: 27.0,
-  },
-  {
-    name: "Gardenia Bouquet",
-    image: "https://example.com/images/gardenia-bouquet.jpg",
-    price: 34.0,
-  },
-  {
-    name: "Chrysanthemum Spray",
-    image: "https://example.com/images/chrysanthemum-spray.jpg",
-    price: 24.0,
-  },
-  {
-    name: "Freesia Bunch",
-    image: "https://example.com/images/freesia-bunch.jpg",
-    price: 21.0,
-  },
-  {
-    name: "Dahlia Posy",
-    image: "https://example.com/images/dahlia-posy.jpg",
-    price: 29.0,
-  },
-  {
-    name: "Anemone Bouquet",
-    image: "https://example.com/images/anemone-bouquet.jpg",
-    price: 31.0,
-  },
-  {
-    name: "Ranunculus Arrangement",
-    image: "https://example.com/images/ranunculus-arrangement.jpg",
-    price: 33.0,
-  },
-  {
-    name: "Marigold Bunch",
-    image: "https://example.com/images/marigold-bunch.jpg",
-    price: 26.0,
-  },
-  {
-    name: "Poppy Spray",
-    image: "https://example.com/images/poppy-spray.jpg",
-    price: 23.0,
-  },
-  {
-    name: "Snapdragon Bouquet",
-    image: "https://example.com/images/snapdragon-bouquet.jpg",
-    price: 22.0,
-  },
-  {
-    name: "Lavender Posy",
-    image: "https://example.com/images/lavender-posy.jpg",
-    price: 19.0,
   },
 ];

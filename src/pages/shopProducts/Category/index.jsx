@@ -44,12 +44,12 @@ const Category = () => {
         </div>
         <div className=" col-span-12 lg:col-span-6 grid grid-cols-2 grid-rows-2  ">
           {freshFlowers.map((data, i) => (
-            <div className=" col-span-2 row-span-1  md:col-span-1 md:row-span-1 border">
+            <div className=" col-span-2 row-span-1  md:col-span-1 md:row-span-1">
               <CardItem
-                price={data.price}
+                itemPrice={data.price}
                 key={i}
-                item={data.name}
-                image={data.image}
+                itemName={data.name}
+                itemImg={data.image}
               />
             </div>
           ))}

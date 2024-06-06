@@ -16,31 +16,36 @@ CardCategory.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const CardItem = ({ item, price, image }) => {
+export const CardItem = ({ index, itemPrice, itemName, itemImg }) => {
+  const isEven = index % 2 === 0;
   return (
     <section
-      style={{
-        backgroundImage: `url(${image})`,
-        backgroundPosition: "center center",
-      }}
-      className="flex p-3 flex-shrink-0 lg:p-6 h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw] col-span-6  flex-col justify-end items-center border-l border-b border-black bg-cover"
+      className={` flex flex-1 flex-shrink-0  h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw]  flex-col justify-end items-center overflow-hidden border-l border-b relative  ${
+        isEven ? "order-2" : "order-1"
+      }`}
     >
-      <div className="flex flex-col justify-center items-center gap-1 self-stretch">
+      <img
+        src={itemImg}
+        alt=""
+        className="w-full h-full  transform hover:scale-110 transition-transform duration-300"
+      />
+
+      <button className="flex absolute left-1/2 bottom-2 transform -translate-x-1/2 hover:scale-90 flex-col justify-center items-center gap-1 self-stretch">
         <h6 className=" self-stretch text-black text-center text-mobileH6 md:text-desktopH6 capitalize font-medium">
-          {item}
+          {itemName}
         </h6>
         <caption className=" self-stretch text-center text-gray text-mobileCaption md:text-desktopCaption font-medium">
-          {price}
+          Rp. {itemPrice}
         </caption>
-      </div>
+      </button>
     </section>
   );
 };
 
 CardItem.propTypes = {
-  item: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
+  itemName: PropTypes.string.isRequired,
+  itemPrice: PropTypes.number.isRequired,
+  itemImg: PropTypes.string.isRequired,
 };
 
 import { CustomButtonLink } from "../../atoms/Button";
@@ -59,7 +64,7 @@ export const CardBanner = ({
   return (
     <div className={`flex gap-0 w-full `}>
       <section
-        className={`relative flex-1 h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw]  flex   flex-shrink-0 flex-col justify-center items-center border-b-black border   ${
+        className={`relative flex-1 h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw]  flex   flex-shrink-0 flex-col justify-center items-center border-l border-b    ${
           isEven ? "order-1" : "order-2"
         }`}
       >
@@ -73,7 +78,7 @@ export const CardBanner = ({
         </p>
       </section>
       <section
-        className={` flex flex-1 flex-shrink-0  h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw]  flex-col justify-end items-center overflow-hidden  bg-cover   border-b-black border relative  ${
+        className={` flex flex-1 flex-shrink-0  h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw]  flex-col justify-end items-center overflow-hidden     border-l border-b relative  ${
           isEven ? "order-2" : "order-1"
         }`}
       >
@@ -95,6 +100,7 @@ export const CardBanner = ({
     </div>
   );
 };
+
 CardBanner.propTypes = {
   index: PropTypes.number.isRequired,
   label: PropTypes.string.isRequired,
