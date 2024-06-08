@@ -5,7 +5,7 @@ import Benefits from "../../components/templates/Benefits";
 import ContactUs from "../../components/templates/ContactUs";
 import Reviews from "../../components/templates/Reviews";
 import Service from "../../components/templates/Service";
-import Footer from "../../components/templates/footer";
+import Footer from "../../components/organisms/footer";
 
 const Landing = () => {
   return (

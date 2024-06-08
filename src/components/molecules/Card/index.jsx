@@ -68,7 +68,7 @@ export const CardBanner = ({
           isEven ? "order-1" : "order-2"
         }`}
       >
-        <label className="flex justify-center items-center self-stretch text-black text-center md:text-desktopH3 text-mobileH3  font-medium ">
+        <label className="flex justify-center items-center self-stretch text-black text-center md:text-desktopH3 text-mobileH3  font-medium  ">
           {label}
         </label>
         <p className="absolute bottom-6">

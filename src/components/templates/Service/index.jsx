@@ -7,38 +7,41 @@ const Service = () => {
   return (
     <>
       {/* title */}
-      <section className=" flex py-10 px-4 lg:py-20 lg:px-10 justify-start md:justify-center items-center w-full border-y border-black">
-        <h2 className=" text-mobileH2 md:text-desktopH2">Our Service</h2>
+      <section className=" flex py-10 px-4 lg:py-20 lg:px-10 justify-start md:justify-center items-center w-full border-b">
+        <h2 className=" text-mobileH2 md:text-desktopH2 ">Our Service</h2>
       </section>
-      <section className=" flex flex-col lg:flex-row gap-0">
+      <section className=" flex flex-col lg:flex-row gap-0 ">
         <img
           src={itemImg}
-          className="flex-1 h-[420px] md:h-[500px] lg:h-[720px]"
+          className="flex-1 h-[420px] md:h-[500px] lg:h-[720px] border-b"
           alt=""
         />
-        <Content>
-          <div className="flex flex-col items-center justify-center gap-16 self-stretch">
-            <div className=" flex flex-col justify-center  text-center items-center gap-6 ">
-              <p className=" text-mobileOverline md:text-desktopOverline uppercase ">
-                SERVICE
-              </p>
-              <div className="flex flex-col justify-center items-center gap-4 self-stretch ">
-                <h2 className=" text-mobileH2 md:text-desktopH2">
-                  Flower Subcriptions
-                </h2>
-                <p className=" text-mobileSub md:text-desktopSub">
-                  Experience the convenience and savings of regular flower
-                  deliveries with our flexible subscription service - up to 30%
-                  more profitable than one-time purchases.
+        <div className="border-l border-b">
+          <Content>
+            <div className="flex flex-col  items-center justify-center gap-16 self-stretch">
+              <div className=" flex flex-col justify-center  text-center items-center gap-6 ">
+                <p className=" text-mobileOverline md:text-desktopOverline uppercase ">
+                  SERVICE
                 </p>
+                <div className="flex flex-col justify-center items-center gap-4 self-stretch ">
+                  <h2 className=" text-mobileH2 md:text-desktopH2">
+                    Flower Subcriptions
+                  </h2>
+                  <p className=" text-mobileSub md:text-desktopSub">
+                    Experience the convenience and savings of regular flower
+                    deliveries with our flexible subscription service - up to
+                    30% more profitable than one-time purchases.
+                  </p>
+                </div>
+              </div>
+              <div className=" w-1/2">
+                <Button>Subscribe Now</Button>
               </div>
             </div>
-            <div className=" w-1/2">
-              <Button>Subscribe Now</Button>
-            </div>
-          </div>
-        </Content>
+          </Content>
+        </div>
       </section>
+
       <section
         style={{
           backgroundImage: `url(${service2})`,

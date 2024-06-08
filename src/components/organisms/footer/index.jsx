@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "../../atoms/Button";
 import CardMediaSosial from "../../molecules/CardMediaSosial";
 
@@ -47,10 +48,10 @@ const Footer = () => {
       <section className=" col-span-1 min-h-[150px] border-l p-5 ">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-4">
-            <h5 className=" text-gray text-xl font-semibold">Contact US</h5>
+            <h5 className=" text-gray text-xl font-semibold">Shop</h5>
             <ul className=" flex flex-col gap-1">
               <li>All Products</li>
-              <li>Fresh Flowers</li>
+              <Link to={"/shop"}>Fresh Flowers</Link>
               <li>Dried Flowers</li>
               <li>Live Plants</li>
               <li>Aroma Candles</li>

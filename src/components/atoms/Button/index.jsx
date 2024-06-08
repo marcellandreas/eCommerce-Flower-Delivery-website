@@ -8,6 +8,7 @@ export const Button = ({
   type,
   rightIcon,
   leftIcon,
+  to,
 }) => {
   const getButtonClass = () => {
     switch (type) {
@@ -25,11 +26,11 @@ export const Button = ({
   const buttonClass = ` w-full max-h-[48px] min-h-[48px] md:max-h-[56px] md:min-h-[56px] px-6 py-4  flex justify-center items-center flex-shrink-0 gap-2 text-mobileButton md:text-desktopButton uppercase ${getButtonClass()}`;
   //max-w-[175px] min-w-[175px]
   return (
-    <button className={buttonClass} onClick={onClick} onChange={onChange}>
+    <Link to={to} className={buttonClass} onClick={onClick} onChange={onChange}>
       {leftIcon ? <FaArrowLeft size={24} /> : null}
       {children}
       {rightIcon ? <FaArrowRight size={24} /> : null}
-    </button>
+    </Link>
   );
 };
 
@@ -37,7 +38,7 @@ export const CustomButtonLink = ({ children, leftIcon, rightIcon, to }) => {
   return (
     <Link
       to={to}
-      className="text-mobileButton font-semibold md:text-desktopButton text-black flex justify-center items-center gap-1 hover:text-gray hover:border-b hover:border-black disabled:text-lightGray"
+      className="text-mobileButton font-semibold md:text-desktopButton text-black flex justify-center items-center gap-1 hover:text-gray hover:border-b hover:border-black disabled:text-lightGray rotate-text"
     >
       {leftIcon && <FaArrowLeft size={24} />}
       {children}

@@ -6,9 +6,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 // import required modules
-import { Navigation } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
+import { Button } from "../../atoms/Button";
 
 const Reviews = () => {
   const reviews = [
@@ -94,10 +96,11 @@ const Reviews = () => {
                 navigation={true}
                 modules={[Navigation]}
                 className="mySwiper"
+                pagination={true}
               >
                 {reviews.map((review, i) => {
                   return (
-                    <SwiperSlide>
+                    <SwiperSlide key={i}>
                       <div className="h-[180px]">
                         <div className="  px-40 flex justify-center items-center h-full flex-col">
                           <p>{review.commentCustomer}</p>
@@ -108,6 +111,9 @@ const Reviews = () => {
                   );
                 })}
               </Swiper>
+            </div>
+            <div className=" w-1/5">
+              <Button>Read Views</Button>
             </div>
           </div>
         </div>

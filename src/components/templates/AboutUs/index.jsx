@@ -3,12 +3,15 @@ import { Button } from "../../atoms/Button";
 const AboutUs = () => {
   return (
     <section className="  grid grid-flow-dense grid-cols-12 ">
-      <div className=" h-[60px]  lg:top-0 lg:sticky col-span-12 lg:col-span-6 flex flex-col items-start justify-start gap-4 py-10 px-10 md:py-20 md:px-20 border-t border-black">
-        <h1 className=" text-black text-mobileH2 md:text-desktopH2 font-semibold">
+      <div className=" h-[60px]  lg:top-0 lg:sticky col-span-12 lg:col-span-6 flex flex-col items-start justify-start gap-4 py-10 px-10 md:py-20 md:px-20">
+        <h1
+          data-aos="fade-up"
+          className=" text-black text-mobileH2 md:text-desktopH2 font-semibold"
+        >
           About Us
         </h1>
       </div>
-      <div className=" lg:col-span-6 col-span-12 flex  py-10 px-10 md:py-20 md:px-20    flex-col items-start gap-16 border border-black">
+      <div className=" lg:col-span-6 col-span-12 flex  py-10 px-10 md:py-20 md:px-20    flex-col items-start gap-16 border-l border-b  ">
         <div className=" flex flex-col gap-6 items-start">
           <p className=" text-mobileOverline md:text-desktopOverline font-medium uppercase">
             our story
@@ -31,7 +34,9 @@ const AboutUs = () => {
             </p>
           </div>
         </div>
-        <Button type={"secondary"}>Learn More</Button>
+        <Button to="/about" type={"secondary"}>
+          Learn More
+        </Button>
       </div>
     </section>
   );

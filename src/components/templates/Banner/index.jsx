@@ -1,45 +1,16 @@
 import hero from "../../../assets/images/hero.png";
 import { CardBanner } from "../../molecules/Card";
-import itemImg from "../../../assets/images/fresh/1.png";
-import itemImg2 from "../../../assets/images/item2.png";
-import itemImg3 from "../../../assets/images/item3.png";
-import itemImg4 from "../../../assets/images/item4.png";
-import itemImg5 from "../../../assets/images/item5.png";
 import { Categories } from "../../../assets/data/categoryShop";
 
 const Banner = () => {
-  const data = [
-    {
-      name: "Fresh Flowers",
-      itemImg: itemImg,
-      to: "shop",
-    },
-    {
-      name: "Dried Flowers",
-      to: "shop",
-      itemImg: itemImg2,
-    },
-    {
-      name: "Live Plants",
-      to: "shop",
-      itemImg: itemImg3,
-    },
-    {
-      name: "Aroma Candes",
-      to: "shop",
-      itemImg: itemImg4,
-    },
-    {
-      name: "Freshener",
-      to: "shop",
-      itemImg: itemImg5,
-    },
-  ];
   return (
     <section className="  grid grid-flow-dense grid-cols-12">
       <div className=" col-span-12 lg:col-span-6 px-4 py-10 md:p-20 border-b border-black flex flex-col items-start lg:max-h-[50vw] lg:min-h-[50vw]  lg:sticky top-0">
         {/* row 1 */}
-        <div className="flex flex-col gap-4 flex-1 self-stretch ">
+        <div
+          data-aos="fade-up"
+          className="flex flex-col gap-4 flex-1 self-stretch "
+        >
           <h1 className=" text-black text-mobileH1 md:text-desktopH1 font-semibold">
             Kyiv LuxeBouquets
             <span className=" text-black text-mobileH3 md:text-desktopH3  font-medium">

@@ -1,43 +1,27 @@
-import hero from "../../../assets/images/hero.png";
-import itemImg from "../../../assets/images/1.jpg";
-import itemImg2 from "../../../assets/images/2.jpg";
-import itemImg3 from "../../../assets/images/item3.png";
-import itemImg4 from "../../../assets/images/item4.png";
-import itemImg5 from "../../../assets/images/item5.png";
-import { CardBanner, CardItem } from "../../../components/molecules/Card";
+import { Navigate, useNavigate } from "react-router-dom";
+import { CardItem } from "../../../components/molecules/Card";
 import Navbar from "../../../components/organisms/Navbar";
-import Footer from "../../../components/templates/footer";
+import Footer from "../../../components/organisms/footer";
 import { freshFlowers } from "../data";
+import { FaAnglesLeft } from "react-icons/fa6";
 
 const Category = () => {
-  const data = [
-    {
-      name: "Fresh Flowers",
-      itemImg: itemImg,
-    },
-    {
-      name: "Dried Flowers",
-      itemImg: itemImg2,
-    },
-    {
-      name: "Live Plants",
-      itemImg: itemImg3,
-    },
-    {
-      name: "Aroma Candes",
-      itemImg: itemImg4,
-    },
-    {
-      name: "Freshener",
-      itemImg: itemImg5,
-    },
-  ];
+  const navigate = useNavigate();
+  const handleBack = () => {
+    navigate(-1);
+  };
   return (
     <>
       <Navbar />
       <section className="  grid grid-flow-dense grid-cols-12">
-        <div className=" col-span-12 lg:col-span-6  border-b border-black flex flex-col items-start h-[50vw] lg:max-h-[50vw] lg:min-h-[50vw]  lg:sticky top-0">
+        <div className=" col-span-12 lg:col-span-6  border-b border-black flex flex-col items-start h-[50vw] lg:max-h-[50vw] lg:min-h-[50vw]  lg:sticky top-0 relative">
           {/* row 1 */}
+          <button
+            onClick={handleBack}
+            className=" absolute top-4 left-4 text-white hover:text-black  bg-black hover:bg-white p-3 rounded-full"
+          >
+            <FaAnglesLeft size={20} className="" />
+          </button>
           <div className="flex flex-col gap-4 flex-1 items-center justify-center self-stretch bg-[url(./freshFlower.png)] h-full bg-center bg-cover ">
             <p className=" text-desktopH2 text-white">Fresh Flower</p>
           </div>
