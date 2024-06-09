@@ -1,15 +1,12 @@
-import { useNavigate } from "react-router-dom";
 import { CardItem } from "../../../components/molecules/Card";
 import Navbar from "../../../components/organisms/Navbar";
 import Footer from "../../../components/organisms/footer";
 import { freshFlowers } from "../dataFreshFlowers";
 import { FaAnglesLeft } from "react-icons/fa6";
+import useBackMenu from "../../../utils/useBackMenu";
 
 const Category = () => {
-  const navigate = useNavigate();
-  const handleBack = () => {
-    navigate(-1);
-  };
+  const handleBack = useBackMenu();
   return (
     <>
       <Navbar />
