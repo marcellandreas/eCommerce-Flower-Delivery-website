@@ -1,8 +1,8 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CardItem } from "../../../components/molecules/Card";
 import Navbar from "../../../components/organisms/Navbar";
 import Footer from "../../../components/organisms/footer";
-import { freshFlowers } from "../data";
+import { freshFlowers } from "../dataFreshFlowers";
 import { FaAnglesLeft } from "react-icons/fa6";
 
 const Category = () => {
@@ -28,7 +28,10 @@ const Category = () => {
         </div>
         <div className=" col-span-12 lg:col-span-6 grid grid-cols-2 grid-rows-2  ">
           {freshFlowers.map((data, i) => (
-            <div className=" col-span-2 row-span-1  md:col-span-1 md:row-span-1">
+            <div
+              key={i}
+              className=" col-span-2 row-span-1  md:col-span-1 md:row-span-1"
+            >
               <CardItem
                 itemPrice={data.price}
                 key={i}
