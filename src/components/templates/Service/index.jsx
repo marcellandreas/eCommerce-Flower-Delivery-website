@@ -1,4 +1,4 @@
-import itemImg from "../../../assets/images/fresh/1.png";
+import SERVICE_IMG from "../../../assets/images/ourService.png";
 import service2 from "../../../assets/images/section-2.png";
 import { Button } from "../../atoms/Button";
 import Content from "../../molecules/Content";
@@ -12,9 +12,9 @@ const Service = () => {
       </section>
       <section className=" flex flex-col lg:flex-row gap-0 ">
         <img
-          src={itemImg}
+          src={SERVICE_IMG}
           className="flex-1 h-[420px] md:h-[500px] lg:h-[720px] border-b"
-          alt=""
+          alt="Our Service"
         />
         <div className="border-l border-b">
           <Content>

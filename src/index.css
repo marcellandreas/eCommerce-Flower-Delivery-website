@@ -70,3 +70,11 @@
     transform: rotateX(360deg);
   }
 }
+
+.about-page-position:nth-child(odd) {
+  order: 1;
+}
+
+.about-page-position:nth-child(even) {
+  order: 2;
+}

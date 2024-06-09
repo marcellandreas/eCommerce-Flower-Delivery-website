@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // import required modules
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import { Button } from "../../atoms/Button";
 
 const Reviews = () => {
@@ -96,7 +96,6 @@ const Reviews = () => {
                 navigation={true}
                 modules={[Navigation]}
                 className="mySwiper"
-                pagination={true}
               >
                 {reviews.map((review, i) => {
                   return (
