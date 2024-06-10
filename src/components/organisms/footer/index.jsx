@@ -1,16 +1,44 @@
-import { Link } from "react-router-dom";
 import { Button } from "../../atoms/Button";
 import CardMediaSosial from "../../molecules/CardMediaSosial";
+import {
+  FontTextBody,
+  FontTextCaption,
+  FontTextH5,
+  FontTextLink,
+} from "../../atoms/Font";
 
 const Footer = () => {
+  const CategoryShop = [
+    { name: "All Products", to: "" },
+    { name: "Fresh Flowers", to: "/shop" },
+    { name: "Dried Flowers", to: "" },
+    { name: "Live Plants", to: "" },
+    { name: "Aroma Candles", to: "" },
+    { name: "Designer Vases", to: "" },
+    { name: "Freshener Fiffuser", to: "" },
+  ];
+  const ContactUs = [
+    {
+      name: "Address",
+      content: "15/4 Khreshchatyk Street, Kyiv ",
+    },
+    {
+      name: "Phone",
+      content: "+380980099777",
+    },
+    {
+      name: "General Enquiry:",
+      content: "Kiev.Florist.Studio@gmail.com ",
+    },
+  ];
   return (
     <footer className=" border border-black grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4  ">
       <section className=" col-span-1 min-h-[150px]   p-5 flex flex-col gap-3 ">
-        <p>
+        <FontTextBody>
           Remember to offer beautiful flowers from Kyiv Florist Studio
           Valentines Day, Mothers Day, Christmas... Reminds you 7 days before.
           No spam or sharing your address
-        </p>
+        </FontTextBody>
         <div className="  w-full flex flex-col gap-3">
           <input
             type="text"
@@ -24,23 +52,22 @@ const Footer = () => {
       </section>
       <section className=" col-span-1 min-h-[150px] border-l p-5 ">
         <div className="flex flex-col gap-4">
-          <h5 className=" text-gray text-xl font-semibold">Contact US</h5>
-          <div>
-            <p className=" text-gray">Address</p>
-            <span className="roll-on-hover">
-              15/4 Khreshchatyk Street, Kyiv
-            </span>
-          </div>
-          <div>
-            <p className=" text-gray">Phone</p>
-            <span className="roll-on-hover">+380980099777</span>
-          </div>
-          <div>
-            <p className=" text-gray">General Enquiry:</p>
-            <span className="roll-on-hover">Kiev.Florist.Studio@gmail.com</span>
-          </div>
+          <FontTextH5 className=" text-gray self-stretch">
+            Contact US
+          </FontTextH5>
+          {ContactUs.map((contact, i) => (
+            <div key={i}>
+              <FontTextCaption className=" text-gray">
+                {contact.name}
+              </FontTextCaption>
+              <FontTextLink className="roll-on-hover">
+                {contact.content}
+              </FontTextLink>
+            </div>
+          ))}
+
           <div className="">
-            <p className=" pb-4 text-gray text-xl">Follow Us</p>
+            <FontTextH5 className=" pb-4 text-gray">Follow Us</FontTextH5>
             <CardMediaSosial className={`  text-darktGray`} />
           </div>
         </div>
@@ -48,37 +75,39 @@ const Footer = () => {
       <section className=" col-span-1 min-h-[150px] border-l p-5 ">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-4">
-            <h5 className=" text-gray text-xl font-semibold">Shop</h5>
+            <FontTextH5 className=" text-gray self-stretch">Shop</FontTextH5>
             <ul className=" flex flex-col gap-1">
-              <li>All Products</li>
-              <Link to={"/shop"}>Fresh Flowers</Link>
-              <li>Dried Flowers</li>
-              <li>Live Plants</li>
-              <li>Aroma Candles</li>
-              <li>Designer Vases</li>
-              <li>Freshener Fiffuser</li>
+              {CategoryShop.map((category, i) => (
+                <FontTextLink key={i} to={category.to}>
+                  {category.name}
+                </FontTextLink>
+              ))}
             </ul>
           </div>
           <div className="flex flex-col gap-4">
-            <h5 className=" text-gray text-xl font-semibold">Service</h5>
+            <FontTextH5 className=" text-gray self-stretch">Service</FontTextH5>
             <ul className=" flex flex-col gap-1">
-              <li>Flower Subscription</li>
-              <li>Wedding & Event Decor</li>
+              <FontTextLink>Flower Subscription</FontTextLink>
+              <FontTextLink>Wedding & Event Decor</FontTextLink>
             </ul>
           </div>
         </div>
       </section>
       <section className=" col-span-1 min-h-[150px] border-l p-5 ">
         <div className="flex flex-col gap-4">
-          <h5 className=" text-gray text-xl font-semibold">Contact US</h5>
+          <FontTextH5 className=" text-gray self-stretch">
+            Contact US
+          </FontTextH5>
           <ul className=" flex flex-col gap-1">
-            <li>Our Story</li>
-            <li>Blog</li>
+            <FontTextLink>Our Story</FontTextLink>
+            <FontTextLink>Blog</FontTextLink>
           </ul>
           <ul>
-            <li>Shipping & returns</li>
-            <li>Terms & conditions</li>
-            <li>Privacy policy</li>
+            {["Shipping & returns", "Terms & conditions", "Privacy policy"].map(
+              (item, i) => (
+                <FontTextLink key={i}>{item}</FontTextLink>
+              )
+            )}
           </ul>
         </div>
       </section>
