@@ -53,7 +53,7 @@ export function FontTextH5({ className = "", children, color = "black" }) {
 export function FontTextH6({ className = "", children, color = "black" }) {
   return (
     <h6
-      className={`text-${color} text-mobileH6 md:text-desktopH6 font-medium ${className}`}
+      className={`text-${color} text-mobileH6 md:text-desktopH6 capitalize font-medium ${className}`}
     >
       {children}
     </h6>

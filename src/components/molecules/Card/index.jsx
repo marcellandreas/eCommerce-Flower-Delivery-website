@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 export const CardCategory = ({ label, children }) => {
   return (
     <section className=" relative h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw]  flex col-span-6 p-3 md:p-6 flex-shrink-0 flex-col justify-center items-center border-l border-b border-black">
-      <label className="flex justify-center items-center self-stretch text-black text-center md:text-desktopH3 text-mobileH3  font-medium ">
-        {label}
-      </label>
+      <FontTextH3>{label}</FontTextH3>
       <p className="absolute bottom-6">{children}</p>
     </section>
   );
@@ -31,12 +29,8 @@ export const CardItem = ({ index, itemPrice, itemName, itemImg }) => {
       />
 
       <button className="flex absolute left-1/2 bottom-2 transform -translate-x-1/2 hover:scale-90 flex-col justify-center items-center gap-1 self-stretch">
-        <h6 className=" self-stretch text-black text-center text-mobileH6 md:text-desktopH6 capitalize font-medium">
-          {itemName}
-        </h6>
-        <caption className=" self-stretch text-center text-gray text-mobileCaption md:text-desktopCaption font-medium">
-          Rp. {itemPrice}
-        </caption>
+        <FontTextH6>{itemName}</FontTextH6>
+        <FontTextCaption className="text-gray">Rp. {itemPrice}</FontTextCaption>
       </button>
     </section>
   );
@@ -49,6 +43,12 @@ CardItem.propTypes = {
 };
 
 import { CustomButtonLink } from "../../atoms/Button";
+import {
+  FontTextBody,
+  FontTextCaption,
+  FontTextH3,
+  FontTextH6,
+} from "../../atoms/Font";
 
 export const CardBanner = ({
   index,
@@ -68,9 +68,7 @@ export const CardBanner = ({
           isEven ? "order-1" : "order-2"
         }`}
       >
-        <label className="flex justify-center items-center self-stretch text-black text-center md:text-desktopH3 text-mobileH3  font-medium  ">
-          {label}
-        </label>
+        <FontTextH3>{label}</FontTextH3>
         <p className="absolute bottom-6">
           <CustomButtonLink to={to} leftIcon={!isEven} rightIcon={isEven}>
             {buttonLink}
@@ -89,12 +87,10 @@ export const CardBanner = ({
         />
 
         <div className="flex absolute left-1/2 bottom-2 transform -translate-x-1/2 hover:scale-90 flex-col justify-center items-center gap-1 self-stretch">
-          <h6 className=" self-stretch text-black text-center text-mobileH6 md:text-desktopH6 capitalize font-medium">
-            {itemName}
-          </h6>
-          <caption className=" self-stretch text-center text-gray text-mobileCaption md:text-desktopCaption font-medium">
+          <FontTextH6>{itemName}</FontTextH6>
+          <FontTextCaption className=" self-stretch text-center text-gray">
             {ItemPrice}
-          </caption>
+          </FontTextCaption>
         </div>
       </section>
     </div>
@@ -113,12 +109,8 @@ CardBanner.propTypes = {
 export const CardBenefit = ({ title, content }) => {
   return (
     <div className="flex py-10 px-10 md:py-20 md:px-20  flex-col gap-4 items-start border-l border-b border-black">
-      <h3 className=" text-mobileH3 md:text-desktopH3 font-medium text-black">
-        {title}
-      </h3>
-      <p className=" text-black text-mobileBody md:text-desktopBody self-stretch">
-        {content}
-      </p>
+      <FontTextH3>{title}</FontTextH3>
+      <FontTextBody className="self-stretch">{content}</FontTextBody>
     </div>
   );
 };
