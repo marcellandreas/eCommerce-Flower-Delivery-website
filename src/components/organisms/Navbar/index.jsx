@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { RiShoppingBagFill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
-
 import CardMediaSosial from "../../molecules/CardMediaSosial";
-import PopUp from "../../molecules/PopUp";
+import LoginPopUp from "../../molecules/PopUp/LoginPopUp";
+import usePopUp from "../../../utils/usePopUp";
 
 const Navbar = () => {
   const [activeToggle, setActiveToggle] = useState(false);
@@ -12,21 +12,8 @@ const Navbar = () => {
     setActiveToggle(!activeToggle);
   };
 
-  const [activeShop, setActiveShop] = useState(false);
+  const { showPopUp, handleOpenPopUp, handleClosePopUp } = usePopUp();
 
-  const handleActiveShop = () => {
-    setActiveShop(!activeShop);
-  };
-
-  const [showPopUp, setShowPopUp] = useState(false);
-
-  const handleOpenPopUp = () => {
-    setShowPopUp(true);
-  };
-
-  const handleClosePopUp = () => {
-    setShowPopUp(false);
-  };
   return (
     <nav className={`border sticky top-0 z-50 bg-white`}>
       <article className=" hidden lg:flex justify-between h-16 items-center text-black">
@@ -61,7 +48,7 @@ const Navbar = () => {
           <RiShoppingBagFill />
         </button>
       </article>
-      <PopUp show={showPopUp} onClose={handleClosePopUp} />
+      <LoginPopUp show={showPopUp} onClose={handleClosePopUp} />
       <div className=" lg:hidden">
         {activeToggle ? (
           <div className=" absolute top-0 md:w-1/2 w-full h-screen bg-white ">

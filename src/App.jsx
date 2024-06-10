@@ -5,6 +5,7 @@ import AboutUsPage from "./pages/AboutUs";
 import Aos from "aos";
 import { useEffect } from "react";
 import "aos/dist/aos.css";
+import ShopProducts from "./pages/shopProducts";
 
 const App = () => {
   useEffect(() => {
@@ -20,7 +21,8 @@ const App = () => {
         <Route path="/">
           <Route index element={<Landing />} />
         </Route>
-        <Route path="/shop" element={<Category />} />
+        {/* <Route path="/shop" element={<Category />} /> */}
+        <Route path="/shop" element={<ShopProducts />} />
         <Route path="/about" element={<AboutUsPage />} />
       </Routes>
     </BrowserRouter>
