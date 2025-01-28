@@ -2,110 +2,114 @@
 
 import { Link } from "react-router-dom";
 
-// eslint-disable-next-line react/prop-types
-export function FontTextH1({ className = "", children, color = "black" }) {
-  return (
-    <h1
-      className={`text-${color} text-mobileH1 md:text-desktopH1 font-bold ${className}`}
-    >
-      {children}
-    </h1>
-  );
-}
+// Base Text Component
+const BaseText = ({ as: Component, className, children, color, textStyle }) => (
+  <Component className={`text-${color} ${textStyle} ${className}`}>
+    {children}
+  </Component>
+);
 
-export function FontTextH2({ className = "", children, color = "black" }) {
-  return (
-    <h2
-      className={`text-${color} text-mobileH2 md:text-desktopH2 font-semibold ${className}`}
-    >
-      {children}
-    </h2>
-  );
-}
+export const FontTextH1 = (props) => (
+  <BaseText
+    {...props}
+    as="h1"
+    textStyle="text-mobileH1 md:text-desktopH1 font-bold"
+  />
+);
 
-export function FontTextH3({ className = "", children, color = "black" }) {
-  return (
-    <h3
-      className={`text-${color} text-mobileH3 md:text-desktopH3 font-semibold ${className}`}
-    >
-      {children}
-    </h3>
-  );
-}
-export function FontTextH4({ className = "", children, color = "black" }) {
-  return (
-    <h4
-      className={`text-${color} text-mobileH4 md:text-desktopH4 font-semibold ${className}`}
-    >
-      {children}
-    </h4>
-  );
-}
-export function FontTextH5({ className = "", children, color = "black" }) {
-  return (
-    <h5
-      className={`text-${color} text-mobileH5 md:text-desktopH5 font-medium ${className}`}
-    >
-      {children}
-    </h5>
-  );
-}
-export function FontTextH6({ className = "", children, color = "black" }) {
-  return (
-    <h6
-      className={`text-${color} text-mobileH6 md:text-desktopH6 capitalize font-medium ${className}`}
-    >
-      {children}
-    </h6>
-  );
-}
+export const FontTextH2 = (props) => (
+  <BaseText
+    {...props}
+    as="h2"
+    textStyle="text-mobileH2 md:text-desktopH2 font-semibold"
+  />
+);
 
-export function FontTextBody({ className = "", children, color = "black" }) {
-  return (
-    <p
-      className={`text-${color} text-mobileBody md:text-desktopBody font-normal ${className}`}
-    >
-      {children}
-    </p>
-  );
-}
+export const FontTextH3 = (props) => (
+  <BaseText
+    {...props}
+    as="h3"
+    textStyle="text-mobileH3 md:text-desktopH3 font-semibold"
+  />
+);
 
-export function FontTextOverline({
-  className = "",
-  children,
-  color = "black",
-}) {
-  return (
-    <span
-      className={`text-${color} text-mobileOverline md:text-desktopOverline uppercase font-medium  ${className}`}
-    >
-      {children}
-    </span>
-  );
-}
+export const FontTextH4 = (props) => (
+  <BaseText
+    {...props}
+    as="h4"
+    textStyle="text-mobileH4 md:text-desktopH4 font-semibold"
+  />
+);
 
-export function FontTextLink({
-  className = "",
-  children,
-  color = "black",
-  to = "",
-}) {
-  return (
-    <Link
-      to={to}
-      className={`text-${color} text-mobileLinks md:text-desktopLinks font-medium ${className}`}
-    >
-      {children}
-    </Link>
-  );
-}
+export const FontTextH5 = (props) => (
+  <BaseText
+    {...props}
+    as="h5"
+    textStyle="text-mobileH5 md:text-desktopH5 font-medium"
+  />
+);
 
-export function FontTextCaption({ className = "", children, color = "black" }) {
-  return (
-    <caption
-      className={`text-${color} text-mobileCaption md:text-desktopCaption font-medium ${className}`}
-    >
-      {children}
-    </caption>
-  );
-}
+export const FontTextH6 = (props) => (
+  <BaseText
+    {...props}
+    as="h6"
+    textStyle="text-mobileH6 md:text-desktopH6 capitalize font-medium"
+  />
+);
+
+export const FontTextSubtitle = (props) => (
+  <BaseText
+    {...props}
+    as="p"
+    textStyle="text-mobileSub md:text-desktopSub font-normal"
+  />
+);
+
+export const FontTextBody = (props) => (
+  <BaseText
+    {...props}
+    as="p"
+    textStyle="text-mobileBody md:text-desktopBody font-normal"
+  />
+);
+
+export const FontTextButton = (props) => (
+  <BaseText
+    {...props}
+    as="p"
+    textStyle="text-mobileButton uppercase md:text-desktopB font-normal"
+  />
+);
+
+export const FontTextLink = ({ className, children, color, to }) => (
+  <Link
+    to={to}
+    className={`text-${color} text-mobileLinks md:text-desktopLinks font-medium ${className}`}
+  >
+    {children}
+  </Link>
+);
+
+export const FontTextOverline = (props) => (
+  <BaseText
+    {...props}
+    as="span"
+    textStyle="text-mobileOverline md:text-desktopOverline uppercase font-medium"
+  />
+);
+
+export const FontTextCaption = (props) => (
+  <BaseText
+    {...props}
+    as="caption"
+    textStyle="text-mobileCaption md:text-desktopCaption font-normal"
+  />
+);
+
+export const FontTextCaptionSmall = (props) => (
+  <BaseText
+    {...props}
+    as="caption"
+    textStyle="text-mobileCaptionSmall md:text-desktopCaptionSmall font-medium"
+  />
+);

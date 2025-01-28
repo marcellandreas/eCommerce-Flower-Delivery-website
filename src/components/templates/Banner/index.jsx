@@ -1,6 +1,7 @@
 import hero from "../../../assets/images/hero.png";
 import { CardBanner } from "../../molecules/Card";
 import { Categories } from "../../../assets/data/categoryShop";
+import { FontTextCaption } from "../../atoms/Font";
 
 const Banner = () => {
   return (
@@ -31,10 +32,10 @@ const Banner = () => {
           </div>
           {/* 2 */}
           <div className=" flex pl-6 items-end flex-1 self-stretch  text-justify">
-            <caption className=" text-black text-desktopCaption font-normal">
+            <FontTextCaption>
               Experience the joy of giving with our modern floral studio. Order
               online and send fresh flowers, plants and gifts today.
-            </caption>
+            </FontTextCaption>
           </div>
         </div>
       </div>
@@ -46,8 +47,6 @@ const Banner = () => {
             label={data.name}
             itemImg={data.itemImg}
             to={data.to}
-            // itemName={"nama"}
-            // ItemPrice={""}
             buttonLink={"Shop Now"}
           />
         ))}

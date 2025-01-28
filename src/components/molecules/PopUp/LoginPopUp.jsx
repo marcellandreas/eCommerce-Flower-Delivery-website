@@ -23,6 +23,7 @@ function LoginPopUp({ onClose, show }) {
         <div className="flex gap-4 flex-col">
           <InputText
             placeholder="+62 xxx xxxx xxxx"
+            type="number"
             label="Use Your Mobile number to sign up or log in"
           />
           <Button type="primary">CONTINUE</Button>

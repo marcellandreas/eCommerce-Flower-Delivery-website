@@ -35,7 +35,9 @@ const Service = () => {
                 </div>
               </div>
               <div className=" w-1/2">
-                <Button>Subscribe Now</Button>
+                <Button to="/subcribe-now" type={"secondary"}>
+                  Subscribe Now
+                </Button>
               </div>
             </div>
           </Content>

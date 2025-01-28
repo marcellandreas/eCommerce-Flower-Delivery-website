@@ -1,4 +1,5 @@
 export const InputText = ({
+  type = "text",
   label,
   placeholder,
   onChange,
@@ -16,7 +17,7 @@ export const InputText = ({
         <input
           className="px-4 py-3 md:py-4  text-mobileCaption md:text-desktopCaption placeholder:text-mobileCaption placeholder:font-medium placeholder:text-gray border border-lightGray hover:border-gray bg-white 
           min-h-[24px] flex items-center self-stretch focus:text-black focus:placeholder:text-lightGray disabled:bg-extraLight disabled:border-lightGray capitalize"
-          type="text"
+          type={type}
           name={name}
           value={value}
           placeholder={placeholder}
