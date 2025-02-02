@@ -48,9 +48,9 @@ const AboutUsPage = () => {
       <section className=" md:p-20 p-10 gap-4 flex justify-center items-center flex-col border-y">
         <div className=" flex flex-col items-center gap-6">
           <Text level="overline">Our story</Text>
-          <Text level="h3">{`Our Founder's Passion`}</Text>
+          <Text level="h3">Our Founder's Passion</Text>
         </div>
-        <Text className="  text-center md:w-2/4 w-full">
+        <Text className="text-center md:w-3/5 w-full">
           Kyiv LuxeBouquets was founded in 2010 by Natalia Zelinska with the
           goal of bringing unique and exquisite bouquets to the people of Kyiv.
           Natalia has always had a passion for flowers and design, and his
