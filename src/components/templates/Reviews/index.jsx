@@ -11,6 +11,7 @@ import "swiper/css/pagination";
 // import required modules
 import { Navigation } from "swiper/modules";
 import { Button } from "../../atoms/Button";
+import Text from "../../atoms/Text";
 
 const Reviews = () => {
   const reviews = [
@@ -83,14 +84,10 @@ const Reviews = () => {
             <p>
               <FaGoogle />
             </p>
-            <p className=" text-mobileOverline md:text-desktopOverline">
-              REVIEWS
-            </p>
+            <Text level="overline">Reviews</Text>
           </div>
           <div className=" flex justify-center gap-8 items-center flex-col">
-            <h2 className=" text-mobileH2 md:text-desktopH2 font-bold ">
-              Our Clients say
-            </h2>
+            <Text level="h2">Our Clients say</Text>
             <div className="w-[1200px] w-max-[1200px]   ">
               <Swiper
                 navigation={true}
@@ -102,8 +99,8 @@ const Reviews = () => {
                     <SwiperSlide key={i}>
                       <div className="h-[180px]">
                         <div className="  px-40 flex justify-center items-center h-full flex-col">
-                          <p>{review.commentCustomer}</p>
-                          <p>- {review.nameCustomer}</p>
+                          <Text>{review.commentCustomer}</Text>
+                          <Text level="h5">- {review.nameCustomer}</Text>
                         </div>
                       </div>
                     </SwiperSlide>

@@ -2,6 +2,7 @@ import hero from "../../../assets/images/hero.png";
 import { CardBanner } from "../../molecules/Card";
 import { Categories } from "../../../assets/data/categoryShop";
 import { FontTextCaption } from "../../atoms/Font";
+import Text from "../../atoms/Text";
 
 const Banner = () => {
   return (
@@ -12,16 +13,14 @@ const Banner = () => {
           data-aos="fade-up"
           className="flex flex-col gap-4 flex-1 self-stretch "
         >
-          <h1 className=" text-black text-mobileH1 md:text-desktopH1 font-semibold">
+          <Text level="h1">
             Kyiv LuxeBouquets
-            <span className=" text-black text-mobileH3 md:text-desktopH3  font-medium">
-              ®
-            </span>
-          </h1>
-          <p className=" text-mobileSub md:text-desktopSub self-stretch">
+            <Text level="h3">®</Text>
+          </Text>
+          <Text level="subtitle" className="self-stretch">
             Discover Uniquely Crafted Bouquets and Gifts for Any Occasion:
             Spread Joy with Our Online Flower Delivery Service
-          </p>
+          </Text>
         </div>
         {/* row 2 */}
 
@@ -32,10 +31,10 @@ const Banner = () => {
           </div>
           {/* 2 */}
           <div className=" flex pl-6 items-end flex-1 self-stretch  text-justify">
-            <FontTextCaption>
+            <Text level="caption">
               Experience the joy of giving with our modern floral studio. Order
               online and send fresh flowers, plants and gifts today.
-            </FontTextCaption>
+            </Text>
           </div>
         </div>
       </div>

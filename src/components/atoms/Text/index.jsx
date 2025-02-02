@@ -1,4 +1,11 @@
-const Text = ({ level = "body", className, children, color, textStyle }) => {
+const Text = ({
+  level = "body",
+  className,
+  children,
+  color,
+  textStyle,
+  dataAos,
+}) => {
   const levels = {
     h1: "text-mobileH1 md:text-desktopH1 font-bold",
     h2: "text-mobileH2 md:text-desktopH2 font-semibold",
@@ -25,7 +32,10 @@ const Text = ({ level = "body", className, children, color, textStyle }) => {
   }`;
 
   return (
-    <Component className={`text-${color} ${combinedClassNames}`}>
+    <Component
+      data-aos={dataAos}
+      className={`text-${color} ${combinedClassNames}`}
+    >
       {children}
     </Component>
   );

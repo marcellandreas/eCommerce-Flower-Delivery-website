@@ -1,6 +1,7 @@
 import SERVICE_IMG from "../../../assets/images/ourService.png";
 import service2 from "../../../assets/images/section-2.png";
 import { Button } from "../../atoms/Button";
+import Text from "../../atoms/Text";
 import Content from "../../molecules/Content";
 
 const Service = () => {
@@ -8,7 +9,7 @@ const Service = () => {
     <>
       {/* title */}
       <section className=" flex py-10 px-4 lg:py-20 lg:px-10 justify-start md:justify-center items-center w-full border-b">
-        <h2 className=" text-mobileH2 md:text-desktopH2 ">Our Service</h2>
+        <Text level="h2">Our Service</Text>
       </section>
       <section className=" flex flex-col lg:flex-row gap-0 ">
         <img
@@ -20,18 +21,14 @@ const Service = () => {
           <Content>
             <div className="flex flex-col  items-center justify-center gap-16 self-stretch">
               <div className=" flex flex-col justify-center  text-center items-center gap-6 ">
-                <p className=" text-mobileOverline md:text-desktopOverline uppercase ">
-                  SERVICE
-                </p>
+                <Text level="overline">SERVICE</Text>
                 <div className="flex flex-col justify-center items-center gap-4 self-stretch ">
-                  <h2 className=" text-mobileH2 md:text-desktopH2">
-                    Flower Subcriptions
-                  </h2>
-                  <p className=" text-mobileSub md:text-desktopSub">
+                  <Text level="h2">Flower Subcriptions</Text>
+                  <Text level="subtitle">
                     Experience the convenience and savings of regular flower
                     deliveries with our flexible subscription service - up to
                     30% more profitable than one-time purchases.
-                  </p>
+                  </Text>
                 </div>
               </div>
               <div className=" w-1/2">
@@ -56,18 +53,16 @@ const Service = () => {
       >
         <Content>
           <div className="flex flex-col items-center gap-6">
-            <p className=" text-mobileOverline md:text-desktopOverline uppercase">
-              SERVICE
-            </p>
+            <Text level="overline">SERVICE</Text>
             <div className="flex flex-col items-center gap-4 lg:w-[586px]">
-              <h2 className=" text-mobileH2 md:text-desktopH2 text-center">
+              <Text level="h2" className="text-center">
                 Wedding & Event Decor
-              </h2>
-              <p className=" text-mobileSub md:text-desktopSub text-center">
+              </Text>
+              <Text level="subtitle" className="text-center">
                 Let our team of expert florists and designers create stunning,
                 on-trend floral décor for your special day. Trust us to bring
                 your vision to life.
-              </p>
+              </Text>
             </div>
           </div>
           <div className=" w-1/4">
