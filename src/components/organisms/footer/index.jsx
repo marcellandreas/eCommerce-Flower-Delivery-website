@@ -32,7 +32,7 @@ const Footer = () => {
     },
   ];
   return (
-    <footer className=" border border-black grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4  ">
+    <footer className=" border border-black grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 z-30  ">
       <section className=" col-span-1 min-h-[150px]   p-5 flex flex-col gap-3 ">
         <FontTextBody>
           Remember to offer beautiful flowers from Kyiv Florist Studio

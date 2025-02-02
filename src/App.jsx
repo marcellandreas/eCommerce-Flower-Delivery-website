@@ -6,6 +6,7 @@ import Aos from "aos";
 import { useEffect } from "react";
 import "aos/dist/aos.css";
 import ShopProducts from "./pages/shopProducts";
+import Subcription from "./pages/Subscribe";
 
 const App = () => {
   useEffect(() => {
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/shop1" element={<Category />} />
         <Route path="/shop" element={<ShopProducts />} />
         <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/subcribe-now" element={<Subcription />} />
       </Routes>
     </BrowserRouter>
   );
