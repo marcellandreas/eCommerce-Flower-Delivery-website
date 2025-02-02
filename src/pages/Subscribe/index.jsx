@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Footer from "../../components/organisms/footer";
 import Navbar from "../../components/organisms/Navbar";
 import subscriptionImage from "../../assets/images/subscription.png";
-import { CardBenefit } from "../../components/molecules/Card";
 import { Button } from "../../components/atoms/Button";
 import subscss from "./subscribe.module.css";
 import { FAQSection } from "../../components/organisms/FAQSection";
@@ -12,6 +11,7 @@ import {
   subscriptionOptions,
 } from "../../assets/data/Subscribe";
 import Text from "../../components/atoms/Text";
+import { BenefitBlock } from "../../components/molecules/BenefitBlock";
 
 const PlainCard = ({ plain }) => {
   const { title, image, descriptionPoint } = plain;
@@ -82,7 +82,7 @@ const Subcription = () => {
         </div>
         <div className=" col-span-12 lg:col-span-6 flex flex-col items-start">
           {howItWorksSteps.map((data, i) => (
-            <CardBenefit key={i} title={data.title} content={data.desc} />
+            <BenefitBlock key={i} title={data.title} content={data.desc} />
           ))}
         </div>
       </section>

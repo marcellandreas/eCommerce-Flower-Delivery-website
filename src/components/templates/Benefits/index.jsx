@@ -1,6 +1,6 @@
 import { dataBenefit } from "../../../assets/data/Benefits";
 import Text from "../../atoms/Text";
-import { CardBenefit } from "../../molecules/Card";
+import { BenefitBlock } from "../../molecules/BenefitBlock";
 
 const Benefits = () => {
   return (
@@ -10,7 +10,7 @@ const Benefits = () => {
       </div>
       <div className=" col-span-12 lg:col-span-6 flex flex-col items-start">
         {dataBenefit.map((data, i) => (
-          <CardBenefit key={i} title={data.title} content={data.content} />
+          <BenefitBlock key={i} title={data.title} content={data.content} />
         ))}
       </div>
     </section>
