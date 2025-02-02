@@ -2,15 +2,6 @@ import React, { useState } from "react";
 import Footer from "../../components/organisms/footer";
 import Navbar from "../../components/organisms/Navbar";
 import subscriptionImage from "../../assets/images/subscription.png";
-import {
-  FontTextBody,
-  FontTextH2,
-  FontTextH3,
-  FontTextH4,
-  FontTextH6,
-  FontTextOverline,
-  FontTextSubtitle,
-} from "../../components/atoms/Font";
 import { CardBenefit } from "../../components/molecules/Card";
 import { Button } from "../../components/atoms/Button";
 import subscss from "./subscribe.module.css";
@@ -20,6 +11,7 @@ import {
   howItWorksSteps,
   subscriptionOptions,
 } from "../../assets/data/Subscribe";
+import Text from "../../components/atoms/Text";
 
 const PlainCard = ({ plain }) => {
   const { title, image, descriptionPoint } = plain;
@@ -27,11 +19,13 @@ const PlainCard = ({ plain }) => {
     <section className="grid grid-cols-12 border border-lightGray">
       <img src={image} alt={title} className=" md:col-span-6 col-span-12" />
       <div className=" md:col-span-6 col-span-12 gap-4 p-4 flex flex-col">
-        <FontTextSubtitle className="">{title}</FontTextSubtitle>
+        <Text level="subtitle" className="">
+          {title}
+        </Text>
         <ul className="list-disc pl-4">
           {descriptionPoint.map((data) => (
             <li key={data.id}>
-              <FontTextBody>{data.name}</FontTextBody>
+              <Text>{data.name}</Text>
             </li>
           ))}
         </ul>
@@ -65,19 +59,18 @@ const Subcription = () => {
         />
         <section className="md:p-20 p-10 gap-4 flex flex-col  self-stretch justify-between">
           <div className="flex flex-col gap-8">
-            <FontTextH2>Flower Subscription</FontTextH2>
+            <Text level="h2">Flower Subscription</Text>
             <div className="flex flex-col gap-8 ">
               <div className="flex flex-col gap-6">
                 {subscriptionOptions.map((data) => (
                   <div className="flex gap-2 flex-col" key={data.id}>
-                    <FontTextH6>{data.title}</FontTextH6>
-                    <FontTextBody>{data.desc}</FontTextBody>
+                    <Text level="h6">{data.title}</Text>
+                    <Text>{data.desc}</Text>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-
           <div className=" w-2/5">
             <Button>Explore Plans</Button>
           </div>
@@ -85,7 +78,7 @@ const Subcription = () => {
       </section>
       <section className="grid grid-flow-dense grid-cols-12">
         <div className=" h-[60px]  lg:top-0 lg:sticky col-span-12 lg:col-span-6 flex flex-col items-start justify-start gap-4 p-10 md:p-20">
-          <FontTextH2>How does it work?</FontTextH2>
+          <Text level="h2">How does it work?</Text>
         </div>
         <div className=" col-span-12 lg:col-span-6 flex flex-col items-start">
           {howItWorksSteps.map((data, i) => (
@@ -94,21 +87,21 @@ const Subcription = () => {
         </div>
       </section>
       <section className="grid grid-flow-dense grid-cols-12 border-t">
-        <div className=" col-span-12 lg:col-span-6  flex flex-col items-start justify-start gap-4 p-10 md:p-20  ">
+        <div className=" col-span-12 lg:col-span-6  flex flex-col items-start justify-start gap-4 p-10 md:p-20 border-r  ">
           {/* md:order-1 order-2 */}
-          <FontTextOverline className="pb-6">
+          <Text level="overline" className="pb-6">
             Build Your Subscription
-          </FontTextOverline>
+          </Text>
           {/* main info */}
           <div className="flex flex-col gap-4 ">
-            <FontTextH3>Selecting a Plan</FontTextH3>
-            <FontTextBody>
+            <Text level="h3">Selecting a Plan</Text>
+            <Text>
               Enjoy free shipping on every order and save up to 30%. Every
               bouquet we deliver is carefully curated to ensure it arrives fresh
               and stunning. To modify, pause, or cancel your subscription,
               simply log in to your account dashboard. You're in complete
               control of your flower delivery experience.
-            </FontTextBody>
+            </Text>
           </div>
           {/* plain cards */}
           {DataPlainCard.map((data) => (
@@ -119,8 +112,8 @@ const Subcription = () => {
           {/* often */}
           <div className="flex flex-col gap-6 w-full ">
             <div className="flex flex-col gap-4">
-              <FontTextH4>How often do you want flowers delivered ?</FontTextH4>
-              <FontTextBody>Select the delivery frequency</FontTextBody>
+              <Text level="h4">How often do you want flowers delivered ?</Text>
+              <Text>Select the delivery frequency</Text>
             </div>
             <div className="grid grid-cols-3 gap-4">
               {["Monthly", "Bi-Weekly", "Weekly"].map((option) => (
@@ -142,11 +135,11 @@ const Subcription = () => {
           {/* many */}
           <div className="flex flex-col gap-6 w-full">
             <div className="flex flex-col gap-4">
-              <FontTextH4>How many deliveries would you like ?</FontTextH4>
-              <FontTextBody>
+              <Text level="h4">How many deliveries would you like ?</Text>
+              <Text>
                 Pay once and do not worry about flowers, our bouquets will be
                 beautiful and on time, as many times as you need{" "}
-              </FontTextBody>
+              </Text>
             </div>
             <div className="flex gap-1  w-1/3 p-2 ">
               <Button className="w-[60px]" onClick={decrement}>
@@ -174,7 +167,7 @@ const Subcription = () => {
       </section>
       <section className="p-10 md:p-20 border-t ">
         <div className="p10 md:p-20 flex flex-col gap-10 border border-white justify-center items-center ">
-          <FontTextH2>Subscription FAQ</FontTextH2>
+          <Text level="h2">Subscription FAQ</Text>
           <FAQSection />
         </div>
       </section>
