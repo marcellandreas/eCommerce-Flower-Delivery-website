@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import CardMediaSosial from "../../molecules/CardMediaSosial";
 import LoginPopUp from "../../molecules/PopUp/LoginPopUp";
 import usePopUp from "../../../utils/usePopUp";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [activeToggle, setActiveToggle] = useState(false);
@@ -18,12 +19,18 @@ const Navbar = () => {
     <nav className={`border sticky top-0 z-50 bg-white`}>
       <article className=" hidden lg:flex justify-between h-16 items-center text-black">
         <section className="flex h-full w-1/4">
-          <button className="w-1/2 border-r bg-white flex justify-center items-center">
+          <Link
+            to="/shop"
+            className="w-1/2 border-r bg-white flex justify-center items-center"
+          >
             Shop
-          </button>
-          <button className="w-1/2 border-r bg-white flex justify-center items-center">
+          </Link>
+          <Link
+            to="/contact"
+            className="w-1/2 border-r bg-white flex justify-center items-center"
+          >
             Contact
-          </button>
+          </Link>
         </section>
         <section className="flex h-full w-1/4">
           <button
@@ -32,9 +39,12 @@ const Navbar = () => {
           >
             Sign In
           </button>
-          <button className="  w-1/2 border-l flex justify-center items-center">
+          <Link
+            to="/cart"
+            className="  w-1/2 border-l flex justify-center items-center"
+          >
             Cart
-          </button>
+          </Link>
         </section>
       </article>
       <article className=" lg:hidden flex justify-between h-16 items-center text-black">
