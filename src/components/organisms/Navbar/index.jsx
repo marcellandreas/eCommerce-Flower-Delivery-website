@@ -17,9 +17,10 @@ const Navbar = () => {
   const { showPopUp, handleOpenPopUp, handleClosePopUp } = usePopUp();
 
   // Fungsi untuk mendapatkan label navbar & path tujuan
+
   const getNavItem = (path, label) => ({
-    to: pathname === path ? "/" : path,
-    label: pathname === path ? "Home" : label,
+    to: pathname.startsWith(path) ? "/" : path,
+    label: pathname.startsWith(path) ? "Home" : label,
   });
 
   return (

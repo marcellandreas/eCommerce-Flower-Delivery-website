@@ -4,9 +4,23 @@ import Footer from "../../../components/organisms/footer";
 import { freshFlowers } from "../dataFreshFlowers";
 import { FaAnglesLeft } from "react-icons/fa6";
 import useBackMenu from "../../../utils/useBackMenu";
+import { useParams } from "react-router-dom";
+import { Categories } from "../../../assets/data/categoryShop";
 
-const Category = () => {
+const CategoryPage = () => {
   const handleBack = useBackMenu();
+
+  const { name } = useParams();
+
+  // Cari kategori berdasarkan nama
+  const category = Categories.find((cat) => cat.name === name);
+
+  console.log("categgory", category);
+
+  if (!category) {
+    return <h1>Category not found</h1>;
+  }
+
   return (
     <>
       <Navbar />
@@ -19,8 +33,11 @@ const Category = () => {
           >
             <FaAnglesLeft size={20} className="" />
           </button>
-          <div className="flex flex-col gap-4 flex-1 items-center justify-center self-stretch bg-[url(./freshFlower.png)] h-full bg-center bg-cover ">
-            <p className=" text-desktopH2 text-white">Fresh Flower</p>
+          <div
+            className="flex flex-col gap-4 flex-1 items-center justify-center self-stretch h-full bg-center bg-cover"
+            style={{ backgroundImage: `url(${category.itemImg})` }}
+          >
+            <p className="text-desktopH2 text-white">{category?.name}</p>
           </div>
         </div>
         <div className=" col-span-12 lg:col-span-6 grid grid-cols-2 grid-rows-2  ">
@@ -44,4 +61,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default CategoryPage;

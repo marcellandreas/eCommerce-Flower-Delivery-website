@@ -6,28 +6,13 @@ import itemImg5 from "../images/item5.png";
 
 export const Categories = [
   {
+    id: 1,
     name: "Fresh Flowers",
     itemImg: itemImg,
     to: "shop",
   },
-  {
-    name: "Dried Flowers",
-    to: "shop",
-    itemImg: itemImg2,
-  },
-  {
-    name: "Live Plants",
-    to: "shop",
-    itemImg: itemImg3,
-  },
-  {
-    name: "Aroma Candles",
-    to: "shop",
-    itemImg: itemImg4,
-  },
-  {
-    name: "Freshener",
-    to: "shop",
-    itemImg: itemImg5,
-  },
+  { id: 2, name: "Dried Flowers", to: "shop", itemImg: itemImg2 },
+  { id: 3, name: "Live Plants", to: "shop", itemImg: itemImg3 },
+  { id: 4, name: "Aroma Candles", to: "shop", itemImg: itemImg4 },
+  { id: 5, name: "Freshener", to: "shop", itemImg: itemImg5 },
 ];

@@ -1,38 +1,52 @@
-import { CardItem } from "../../components/molecules/Card";
+import { CardBanner, CardItem } from "../../components/molecules/Card";
 import Navbar from "../../components/organisms/Navbar";
 import Footer from "../../components/organisms/footer";
 import { freshFlowers } from "./dataFreshFlowers";
+import { FaAnglesLeft } from "react-icons/fa6";
+import useBackMenu from "../../utils/useBackMenu";
+import { useParams } from "react-router-dom";
+import { Categories } from "../../assets/data/categoryShop";
 
-function ShopProducts() {
+const ShopProductsPage = () => {
+  const handleBack = useBackMenu();
+
+  // Cari kategori berdasarkan nama
+
   return (
-    <section>
+    <>
       <Navbar />
-      <section className=" grid grid-flow-dense grid-cols-12">
-        <div className=" col-span-12 lg:col-span-6   border-black flex flex-col items-start h-full lg:sticky top-0 relative">
+      <section className="  grid grid-flow-dense grid-cols-12">
+        <div className=" col-span-12 lg:col-span-6  border-b border-black flex flex-col items-start h-[50vw] lg:max-h-[50vw] lg:min-h-[50vw]  lg:sticky top-0 relative">
           {/* row 1 */}
-          <div className="flex flex-col gap-4 flex-1 items-center justify-center self-stretch bg-[url(./freshFlower.png)] h-full bg-center bg-cover ">
-            <p className=" text-desktopH2 text-white">Fresh Flower</p>
+          <button
+            onClick={handleBack}
+            className=" absolute top-4 left-4 text-white hover:text-black  bg-black hover:bg-white p-3 rounded-full"
+          >
+            <FaAnglesLeft size={20} className="" />
+          </button>
+          <div
+            className="flex flex-col gap-4 bg-red-700 flex-1 items-center justify-center self-stretch h-full bg-center bg-cover"
+            // style={{ backgroundImage: `url(/)` }}
+          >
+            <p className="text-desktopH2 text-white">SHOP</p>
           </div>
         </div>
-        <div className=" col-span-12 lg:col-span-6 grid grid-cols-2 grid-rows-2  ">
-          {freshFlowers.slice(0, 2).map((data, i) => (
-            <div
+        <div className=" col-span-12 lg:col-span-6  ">
+          {Categories.map((data, i) => (
+            <CardBanner
               key={i}
-              className=" col-span-2 row-span-1  md:col-span-1 md:row-span-1"
-            >
-              <CardItem
-                itemPrice={data.price}
-                key={i}
-                itemName={data.name}
-                itemImg={data.image}
-              />
-            </div>
+              index={i}
+              label={data.name}
+              itemImg={data.itemImg}
+              to={`/shop/${data.name}`}
+              buttonLink={"Shop Now"}
+            />
           ))}
         </div>
       </section>
       <Footer />
-    </section>
+    </>
   );
-}
+};
 
-export default ShopProducts;
+export default ShopProductsPage;

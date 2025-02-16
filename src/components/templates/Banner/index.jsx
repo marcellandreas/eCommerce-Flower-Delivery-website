@@ -45,7 +45,7 @@ const Banner = () => {
             index={i}
             label={data.name}
             itemImg={data.itemImg}
-            to={data.to}
+            to={`/shop/${data.name}`}
             buttonLink={"Shop Now"}
           />
         ))}

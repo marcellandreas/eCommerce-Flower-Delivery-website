@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing";
-import Category from "./pages/shopProducts/Category";
 import AboutUsPage from "./pages/AboutUs";
 import Aos from "aos";
 import { useEffect } from "react";
 import "aos/dist/aos.css";
 import ShopProducts from "./pages/shopProducts";
 import Subcription from "./pages/Subscribe";
+import CategoryPage from "./pages/shopProducts/Category";
 
 const App = () => {
   useEffect(() => {
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/">
           <Route index element={<Landing />} />
         </Route>
-        <Route path="/shop1" element={<Category />} />
+        <Route path="/shop/:name" element={<CategoryPage />} />
         <Route path="/shop" element={<ShopProducts />} />
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/subcribe-now" element={<Subcription />} />
