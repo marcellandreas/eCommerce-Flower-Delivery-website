@@ -7,25 +7,27 @@ export const InputText = ({
   required,
   name,
   value,
+  classNameParent,
+  classInput,
 }) => {
   return (
-    <div className=" flex flex-col bg-white gap-3 h-full text-black capitalize w-full ">
+    <div
+      className={`flex flex-col bg-white gap-3  text-black capitalize w-full ${classNameParent}`}
+    >
       {label ? (
         <label className=" text-mobileH6 font-medium">{label}</label>
       ) : null}
-      <div className=" flex flex-col items-start gap-2 self-stretch w-full">
-        <input
-          className="px-4 py-3 md:py-4  text-mobileCaption md:text-desktopCaption placeholder:text-mobileCaption placeholder:font-medium placeholder:text-gray border border-lightGray hover:border-gray bg-white 
-          min-h-[24px] flex items-center self-stretch focus:text-black focus:placeholder:text-lightGray disabled:bg-extraLight disabled:border-lightGray capitalize"
-          type={type}
-          name={name}
-          value={value}
-          placeholder={placeholder}
-          onChange={onChange}
-          required={required ? true : false}
-          readOnly={readOnly ? true : false}
-        />
-      </div>
+      <input
+        className={`px-4 py-3 md:py-4  text-mobileCaption md:text-desktopCaption placeholder:text-mobileCaption placeholder:font-medium placeholder:text-gray border border-lightGray hover:border-gray bg-white 
+           flex items-center self-stretch focus:text-black focus:placeholder:text-lightGray disabled:bg-extraLight disabled:border-lightGray capitalize ${classInput}`}
+        type={type}
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        required={required ? true : false}
+        readOnly={readOnly ? true : false}
+      />
     </div>
   );
 };
