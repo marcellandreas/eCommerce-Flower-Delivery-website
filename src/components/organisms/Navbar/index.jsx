@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { RiShoppingBagFill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useLocation, Link } from "react-router-dom";
 import CardMediaSosial from "../../molecules/CardMediaSosial";
 import LoginPopUp from "../../molecules/PopUp/LoginPopUp";
 import usePopUp from "../../../utils/usePopUp";
-import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [activeToggle, setActiveToggle] = useState(false);
+  const { pathname } = useLocation(); // Ambil path saat ini
 
   const handleActiveToggle = () => {
     setActiveToggle(!activeToggle);
@@ -15,21 +16,27 @@ const Navbar = () => {
 
   const { showPopUp, handleOpenPopUp, handleClosePopUp } = usePopUp();
 
+  // Fungsi untuk mendapatkan label navbar & path tujuan
+  const getNavItem = (path, label) => ({
+    to: pathname === path ? "/" : path,
+    label: pathname === path ? "Home" : label,
+  });
+
   return (
     <nav className={`border sticky top-0 z-50 bg-white`}>
-      <article className=" hidden lg:flex justify-between h-16 items-center text-black">
+      <article className="hidden lg:flex justify-between h-16 items-center text-black">
         <section className="flex h-full w-1/4">
           <Link
-            to="/shop"
+            to={getNavItem("/shop", "Shop").to}
             className="w-1/2 border-r bg-white flex justify-center items-center"
           >
-            Shop
+            {getNavItem("/shop", "Shop").label}
           </Link>
           <Link
-            to="/contact"
+            to={getNavItem("/contact", "Contact").to}
             className="w-1/2 border-r bg-white flex justify-center items-center"
           >
-            Contact
+            {getNavItem("/contact", "Contact").label}
           </Link>
         </section>
         <section className="flex h-full w-1/4">
@@ -40,50 +47,62 @@ const Navbar = () => {
             Sign In
           </button>
           <Link
-            to="/cart"
-            className="  w-1/2 border-l flex justify-center items-center"
+            to={getNavItem("/cart", "Cart").to}
+            className="w-1/2 border-l flex justify-center items-center"
           >
-            Cart
+            {getNavItem("/cart", "Cart").label}
           </Link>
         </section>
       </article>
-      <article className=" lg:hidden flex justify-between h-16 items-center text-black">
+      <article className="lg:hidden flex justify-between h-16 items-center text-black">
         <button
           onClick={handleActiveToggle}
-          className="flex border-r h-full w-16 justify-center items-center "
+          className="flex border-r h-full w-16 justify-center items-center"
         >
           <GiHamburgerMenu />
         </button>
-        <button className="flex border-l h-full w-16 justify-center items-center ">
+        <button className="flex border-l h-full w-16 justify-center items-center">
           <RiShoppingBagFill />
         </button>
       </article>
       <LoginPopUp show={showPopUp} onClose={handleClosePopUp} />
-      <div className=" lg:hidden">
+      <div className="lg:hidden">
         {activeToggle ? (
-          <div className=" absolute top-0 md:w-1/2 w-full h-screen bg-white ">
-            <div className="flex flex-col  h-full  ">
+          <div className="absolute top-0 md:w-1/2 w-full h-screen bg-white">
+            <div className="flex flex-col h-full">
               <p
                 onClick={handleActiveToggle}
-                className=" p-5 cursor-pointer border-b"
+                className="p-5 cursor-pointer border-b"
               >
                 X
               </p>
               <p
                 onClick={handleOpenPopUp}
-                className=" border-b p-5 flex items-center "
+                className="border-b p-5 flex items-center"
               >
                 Sign In
               </p>
-              <p className=" border-b p-5">Service</p>
-              <p className=" border-b p-5">Contact</p>
-              <p className=" border-b p-5">About us</p>
+              <p className="border-b p-5">
+                <Link to={getNavItem("/service", "Service").to}>
+                  {getNavItem("/service", "Service").label}
+                </Link>
+              </p>
+              <p className="border-b p-5">
+                <Link to={getNavItem("/contact", "Contact").to}>
+                  {getNavItem("/contact", "Contact").label}
+                </Link>
+              </p>
+              <p className="border-b p-5">
+                <Link to={getNavItem("/about", "About Us").to}>
+                  {getNavItem("/about", "About Us").label}
+                </Link>
+              </p>
               <p className="flex flex-col border-b p-5">
-                <span>Shipping & returns</span>
-                <span>Terms & Condision</span>
+                <span>Shipping & Returns</span>
+                <span>Terms & Conditions</span>
                 <span>Privacy Policy</span>
               </p>
-              <CardMediaSosial className={`p-5`} />
+              <CardMediaSosial className="p-5" />
             </div>
           </div>
         ) : null}
