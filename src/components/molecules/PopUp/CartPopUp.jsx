@@ -16,16 +16,16 @@ const CartPopUp = ({ show, onClose }) => {
       onClick={onClose}
     >
       <div
-        className="bg-white absolute right-0 max-h-screen w-1/2 overflow-y-auto"
+        className="bg-white absolute right-0 max-h-screen w-full lg:w-1/2 overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between h-16 items-center border-b p-5">
+        <div className="flex justify-between h-16 items-center border-b px-6 md:px-10 lg:py-[26px] md:py-4  py-3">
           <h2 className="text-lg font-semibold">Shopping Cart</h2>
           <button onClick={onClose} className="text-xl">
             <IoClose />
           </button>
         </div>
-        <div className="flex items-center gap-4 p-10 border-b">
+        <div className="flex items-center gap-4 py-6 px-4 md:p-10 border-b">
           <img src={CartImage} alt="" className="border" width={160} />
           <div className="flex justify-between w-full">
             <div>
@@ -36,17 +36,17 @@ const CartPopUp = ({ show, onClose }) => {
             <button>Remove</button>
           </div>
         </div>
-        <div className="flex justify-between items-center p-10 border-b">
+        <div className="flex justify-between items-center py-6 px-4 md:p-10 border-b">
           <FontTextSubtitle>Subtotal</FontTextSubtitle>
           <FontTextSubtitle>$100.00</FontTextSubtitle>
         </div>
-        <div className="flex justify-between items-center p-10 border-b">
+        <div className="flex justify-between items-center py-6 px-4 md:p-10 border-b">
           <textarea
             placeholder="Gift Message..."
             className="h-32 border-none focus:border-none outline-none w-full"
           ></textarea>
         </div>
-        <div className="flex justify-center items-center text-center w-full p-10 border-b">
+        <div className="flex justify-center items-center text-center w-full py-6 px-4 md:p-10 border-b">
           <FontTextCaption>
             Shipping & taxes calculated at checkout Free standard shipping
             within Kyiv
