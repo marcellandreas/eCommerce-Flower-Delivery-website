@@ -4,19 +4,27 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useLocation, Link } from "react-router-dom";
 import CardMediaSosial from "../../molecules/CardMediaSosial";
 import LoginPopUp from "../../molecules/PopUp/LoginPopUp";
+import CartPopUp from "../../molecules/PopUp/CartPopUp";
 import usePopUp from "../../../utils/usePopUp";
 
 const Navbar = () => {
   const [activeToggle, setActiveToggle] = useState(false);
-  const { pathname } = useLocation(); // Ambil path saat ini
+  const { pathname } = useLocation();
 
   const handleActiveToggle = () => {
     setActiveToggle(!activeToggle);
   };
 
-  const { showPopUp, handleOpenPopUp, handleClosePopUp } = usePopUp();
-
-  // Fungsi untuk mendapatkan label navbar & path tujuan
+  const {
+    showPopUp: showLogin,
+    handleOpenPopUp: openLogin,
+    handleClosePopUp: closeLogin,
+  } = usePopUp();
+  const {
+    showPopUp: showCart,
+    handleOpenPopUp: openCart,
+    handleClosePopUp: closeCart,
+  } = usePopUp();
 
   const getNavItem = (path, label) => ({
     to: pathname.startsWith(path) ? "/" : path,
@@ -24,7 +32,7 @@ const Navbar = () => {
   });
 
   return (
-    <nav className={`border sticky top-0 z-50 bg-white`}>
+    <nav className="border sticky top-0 z-50 bg-white">
       <article className="hidden lg:flex justify-between h-16 items-center text-black">
         <section className="flex h-full w-1/4">
           <Link
@@ -42,17 +50,17 @@ const Navbar = () => {
         </section>
         <section className="flex h-full w-1/4">
           <button
-            onClick={handleOpenPopUp}
+            onClick={openLogin}
             className="w-1/2 border-l flex justify-center items-center"
           >
             Sign In
           </button>
-          <Link
-            to={getNavItem("/cart", "Cart").to}
+          <button
+            onClick={openCart}
             className="w-1/2 border-l flex justify-center items-center"
           >
-            {getNavItem("/cart", "Cart").label}
-          </Link>
+            Cart
+          </button>
         </section>
       </article>
       <article className="lg:hidden flex justify-between h-16 items-center text-black">
@@ -62,11 +70,15 @@ const Navbar = () => {
         >
           <GiHamburgerMenu />
         </button>
-        <button className="flex border-l h-full w-16 justify-center items-center">
+        <button
+          onClick={openCart}
+          className="flex border-l h-full w-16 justify-center items-center"
+        >
           <RiShoppingBagFill />
         </button>
       </article>
-      <LoginPopUp show={showPopUp} onClose={handleClosePopUp} />
+      <LoginPopUp show={showLogin} onClose={closeLogin} />
+      <CartPopUp show={showCart} onClose={closeCart} />
       <div className="lg:hidden">
         {activeToggle ? (
           <div className="absolute top-0 md:w-1/2 w-full h-screen bg-white">
@@ -77,10 +89,7 @@ const Navbar = () => {
               >
                 X
               </p>
-              <p
-                onClick={handleOpenPopUp}
-                className="border-b p-5 flex items-center"
-              >
+              <p onClick={openLogin} className="border-b p-5 flex items-center">
                 Sign In
               </p>
               <p className="border-b p-5">
