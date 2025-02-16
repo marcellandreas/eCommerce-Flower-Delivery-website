@@ -4,7 +4,7 @@ import Text from "../../atoms/Text";
 
 export const CardCategory = ({ label, children }) => {
   return (
-    <section className=" relative h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw]  flex col-span-6 p-3 md:p-6 flex-shrink-0 flex-col justify-center items-center border-l border-b border-black">
+    <section className="relative flex col-span-6 h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw] p-3 md:p-6 flex-col justify-center items-center border-l border-b border-black">
       <Text level="h3">{label}</Text>
       <p className="absolute bottom-6">{children}</p>
     </section>
@@ -20,17 +20,17 @@ export const CardItem = ({ index, itemPrice, itemName, itemImg }) => {
   const isEven = index % 2 === 0;
   return (
     <section
-      className={` flex flex-1 flex-shrink-0  h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw]  flex-col justify-end items-center overflow-hidden border-l border-b relative  ${
+      className={`relative flex flex-1 flex-col justify-end items-center h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw] border-l border-b overflow-hidden ${
         isEven ? "order-2" : "order-1"
       }`}
     >
       <img
         src={itemImg}
-        alt=""
-        className="w-full h-full  transform hover:scale-110 transition-transform duration-300"
+        alt={itemName}
+        className="w-full h-full transform hover:scale-110 transition-transform duration-300"
       />
 
-      <button className="flex absolute left-1/2 bottom-2 transform -translate-x-1/2 hover:scale-90 flex-col justify-center items-center gap-1 self-stretch">
+      <button className="absolute left-1/2 bottom-2 transform -translate-x-1/2 hover:scale-90 flex flex-col items-center gap-1">
         <Text level="h6">{itemName}</Text>
         <Text level="caption" className="text-gray">
           Rp. {itemPrice}
@@ -41,6 +41,7 @@ export const CardItem = ({ index, itemPrice, itemName, itemImg }) => {
 };
 
 CardItem.propTypes = {
+  index: PropTypes.number.isRequired,
   itemName: PropTypes.string.isRequired,
   itemPrice: PropTypes.number.isRequired,
   itemImg: PropTypes.string.isRequired,
@@ -51,16 +52,16 @@ export const CardBanner = ({
   label,
   itemImg,
   itemName,
-  ItemPrice,
+  itemPrice,
   buttonLink,
   to,
 }) => {
   const isEven = index % 2 === 0;
 
   return (
-    <div className={`flex gap-0 w-full `}>
+    <div className="flex gap-0 w-full">
       <section
-        className={`relative flex-1 h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw]  flex   flex-shrink-0 flex-col justify-center items-center border-l border-b    ${
+        className={`relative flex flex-1 h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw] flex-col justify-center items-center border-l border-b ${
           isEven ? "order-1" : "order-2"
         }`}
       >
@@ -72,21 +73,22 @@ export const CardBanner = ({
         </p>
       </section>
       <section
-        className={` flex flex-1 flex-shrink-0  h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw]  flex-col justify-end items-center overflow-hidden     border-l border-b relative  ${
+        className={`relative flex flex-1 flex-col justify-end items-center h-[200px] md:h-[384px] lg:min-h-[25vw] lg:max-h-[25vw] border-l border-b overflow-hidden ${
           isEven ? "order-2" : "order-1"
         }`}
       >
         <img
           src={itemImg}
           alt={itemName}
-          className="w-full h-full  transform hover:scale-110 transition-transform duration-300"
+          className="w-full h-full transform hover:scale-110 transition-transform duration-300"
         />
 
-        <div className="flex absolute left-1/2 bottom-2 transform -translate-x-1/2 hover:scale-90 flex-col justify-center items-center gap-1 self-stretch">
+        <div className="absolute left-1/2 bottom-2 transform -translate-x-1/2 hover:scale-90 flex flex-col items-center gap-1">
           <Text level="h6">{itemName}</Text>
-          <Text level="caption" className=" self-stretch text-center text-gray">
-            {ItemPrice}
-          </Text>
+          <Text
+            level="caption"
+            className="text-gray"
+          >{`Rp. ${itemPrice}`}</Text>
         </div>
       </section>
     </div>
@@ -98,6 +100,7 @@ CardBanner.propTypes = {
   label: PropTypes.string.isRequired,
   itemImg: PropTypes.string.isRequired,
   itemName: PropTypes.string.isRequired,
-  ItemPrice: PropTypes.string.isRequired,
+  itemPrice: PropTypes.number.isRequired,
   buttonLink: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
 };
