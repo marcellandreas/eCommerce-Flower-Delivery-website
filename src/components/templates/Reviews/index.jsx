@@ -9,7 +9,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Button } from "../../atoms/Button";
 import Text from "../../atoms/Text";
-import Content from "../../molecules/Content";
 
 import { ReviewsCustomer } from "../../../assets/data/DataReview";
 import { Layout } from "../../Layout/Layout";
