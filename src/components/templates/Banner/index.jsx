@@ -1,12 +1,12 @@
 import hero from "../../../assets/images/hero.png";
 import { CardBanner } from "../../molecules/Card";
 import { Categories } from "../../../assets/data/categoryShop";
-import { FontTextCaption } from "../../atoms/Font";
 import Text from "../../atoms/Text";
+import { Layout } from "../../Layout/Layout";
 
 const Banner = () => {
   return (
-    <section className="  grid grid-flow-dense grid-cols-12">
+    <Layout>
       <div className=" col-span-12 lg:col-span-6 px-4 py-10 md:p-20 border-b border-black flex flex-col items-start lg:max-h-[50vw] lg:min-h-[50vw]  lg:sticky top-0">
         {/* row 1 */}
         <div
@@ -50,7 +50,7 @@ const Banner = () => {
           />
         ))}
       </div>
-    </section>
+    </Layout>
   );
 };
 

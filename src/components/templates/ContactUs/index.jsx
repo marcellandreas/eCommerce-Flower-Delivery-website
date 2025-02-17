@@ -4,10 +4,11 @@ import { FaPhoneAlt } from "react-icons/fa";
 import CardMediaSosial from "../../molecules/CardMediaSosial";
 import Text from "../../atoms/Text";
 import { Button } from "../../atoms/Button";
+import { Layout } from "../../Layout/Layout";
 
 const ContactUs = () => {
   return (
-    <section className="grid grid-flow-dense grid-cols-12 ">
+    <Layout>
       {/* left */}
       <div className=" order-2 md:order-1  flex flex-col items-center col-span-12 lg:col-span-6 ">
         <div className="min-h-[360px] h-[360px] border-t   py-10 px-4 lg:p-20 flex flex-col items-start gap-6">
@@ -89,7 +90,7 @@ const ContactUs = () => {
           />
         </div>
       </div>
-    </section>
+    </Layout>
   );
 };
 

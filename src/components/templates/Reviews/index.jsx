@@ -12,11 +12,12 @@ import Text from "../../atoms/Text";
 import Content from "../../molecules/Content";
 
 import { ReviewsCustomer } from "../../../assets/data/DataReview";
+import { Layout } from "../../Layout/Layout";
 
 const Reviews = () => {
   return (
-    <section className="flex flex-col justify-center items-center gap-4 self-stretch">
-      <Content>
+    <Layout>
+      <section className=" col-span-12 flex  py-10 px-4 lg:p-20 flex-col overflow-hidden w-full items-center justify-center gap-16">
         <div className="flex flex-col items-start gap-4">
           <div className="flex flex-col justify-center w-full items-center gap-2">
             <p>
@@ -51,8 +52,8 @@ const Reviews = () => {
             </div>
           </div>
         </div>
-      </Content>
-    </section>
+      </section>
+    </Layout>
   );
 };
 

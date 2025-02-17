@@ -2,16 +2,17 @@ import SERVICE_IMG from "../../../assets/images/ourService.png";
 import service2 from "../../../assets/images/section-2.png";
 import { Button } from "../../atoms/Button";
 import Text from "../../atoms/Text";
+import { Layout } from "../../Layout/Layout";
 import Content from "../../molecules/Content";
 
 const Service = () => {
   return (
-    <>
+    <Layout>
       {/* title */}
-      <section className=" flex py-10 px-4 lg:py-20 lg:px-10 justify-start md:justify-center items-center w-full border-b">
+      <section className=" col-span-12 flex py-10 px-4 lg:py-20 lg:px-10 justify-start md:justify-center items-center w-full border-b">
         <Text level="h2">Our Service</Text>
       </section>
-      <section className=" flex flex-col lg:flex-row gap-0 ">
+      <section className="col-span-12 flex flex-col lg:flex-row gap-0 ">
         <img
           src={SERVICE_IMG}
           className="flex-1 h-[420px] md:h-[500px] lg:h-[720px] border-b"
@@ -49,7 +50,7 @@ const Service = () => {
           backgroundAttachment: "fixed",
           backgroundPosition: "center center",
         }}
-        className="  h-[420px] text-white md:h-[500px] lg:h-[560px] flex flex-col items-center justify-center"
+        className=" col-span-12  h-[420px] text-white md:h-[500px] lg:h-[560px] flex flex-col items-center justify-center"
       >
         <Content>
           <div className="flex flex-col items-center gap-6">
@@ -70,7 +71,7 @@ const Service = () => {
           </div>
         </Content>
       </section>
-    </>
+    </Layout>
   );
 };
 
