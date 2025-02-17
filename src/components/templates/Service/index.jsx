@@ -18,24 +18,22 @@ const Service = () => (
         alt="Our Service"
         className="flex-1 h-[420px] md:h-[500px] lg:h-[720px] border-b"
       />
-      <div className="border-l border-b">
-        <Content>
-          <div className="flex flex-col items-center gap-16">
-            <div className="flex flex-col items-center gap-6 text-center">
-              <Text level="overline">SERVICE</Text>
-              <div className="flex flex-col items-center gap-4">
-                <Text level="h2">Flower Subscriptions</Text>
-                <Text level="subtitle">
-                  Experience the convenience and savings of regular flower
-                  deliveries with our flexible subscription service.
-                </Text>
-              </div>
+      <div className="border-l border-b content-wrapper">
+        <div className="flex flex-col items-center gap-16">
+          <div className="flex flex-col items-center gap-6 text-center">
+            <Text level="overline">SERVICE</Text>
+            <div className="flex flex-col items-center gap-4">
+              <Text level="h2">Flower Subscriptions</Text>
+              <Text level="subtitle">
+                Experience the convenience and savings of regular flower
+                deliveries with our flexible subscription service.
+              </Text>
             </div>
-            <Button to="/subcribe-now" type="secondary" className="w-1/2">
-              Subscribe Now
-            </Button>
           </div>
-        </Content>
+          <Button to="/subcribe-now" type="secondary" className="w-1/2">
+            Subscribe Now
+          </Button>
+        </div>
       </div>
     </section>
 
