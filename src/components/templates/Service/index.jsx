@@ -3,12 +3,11 @@ import service2 from "../../../assets/images/section-2.png";
 import { Button } from "../../atoms/Button";
 import Text from "../../atoms/Text";
 import { Layout } from "../../Layout/Layout";
-import Content from "../../molecules/Content";
 
 const Service = () => (
   <Layout>
     {/* Title Section */}
-    <section className="col-span-12 flex py-10 px-4 lg:py-20 lg:px-10 justify-center items-center w-full border-b">
+    <section className="col-span-12 content-wrapper">
       <Text level="h2">Our Service</Text>
     </section>
 
@@ -49,9 +48,9 @@ const Service = () => (
         backgroundAttachment: "fixed",
         backgroundPosition: "center",
       }}
-      className="col-span-12 h-[420px] text-white md:h-[500px] lg:h-[560px] flex flex-col items-center justify-center"
+      className="col-span-12 h-[420px] text-white md:h-[500px] lg:h-[560px] flex-center  flex-col "
     >
-      <section>
+      <section className="col-span-12 content-wrapper ">
         <div className="flex flex-col items-center gap-6">
           <Text level="overline">SERVICE</Text>
           <div className="flex flex-col items-center gap-4 lg:w-[586px]">
