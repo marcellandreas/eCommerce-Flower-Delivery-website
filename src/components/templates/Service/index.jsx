@@ -46,7 +46,7 @@ const Service = () => (
         backgroundAttachment: "fixed",
         backgroundPosition: "center",
       }}
-      className="col-span-12 h-[420px] text-white md:h-[500px] lg:h-[560px] flex-center  flex-col "
+      className=" h-[420px] text-white md:h-[500px] lg:h-[560px] flex-center  flex-col "
     >
       <section className="col-span-12 content-wrapper ">
         <div className="flex flex-col items-center gap-6">
