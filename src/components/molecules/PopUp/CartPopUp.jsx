@@ -1,11 +1,6 @@
 import { IoClose } from "react-icons/io5";
 import CartImage from "../../../assets/images/item.png";
 import { Button } from "../../atoms/Button";
-import {
-  FontTextBody,
-  FontTextCaption,
-  FontTextSubtitle,
-} from "../../atoms/Font";
 import Text from "../../atoms/Text";
 
 const CartPopUp = ({ show, onClose }) => {
