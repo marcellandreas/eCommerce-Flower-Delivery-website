@@ -6,6 +6,7 @@ import {
   FontTextCaption,
   FontTextSubtitle,
 } from "../../atoms/Font";
+import Text from "../../atoms/Text";
 
 const CartPopUp = ({ show, onClose }) => {
   if (!show) return null;
@@ -20,7 +21,7 @@ const CartPopUp = ({ show, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between h-16 items-center border-b px-6 md:px-10 lg:py-[26px] md:py-4  py-3">
-          <h2 className="text-lg font-semibold">Shopping Cart</h2>
+          <Text level="h2">Shopping Cart</Text>
           <button onClick={onClose} className="text-xl">
             <IoClose />
           </button>
@@ -29,28 +30,28 @@ const CartPopUp = ({ show, onClose }) => {
           <img src={CartImage} alt="" className="border" width={160} />
           <div className="flex justify-between w-full">
             <div>
-              <FontTextSubtitle>Rosy Delight</FontTextSubtitle>
-              <FontTextBody>Quantity (1)</FontTextBody>
-              <FontTextSubtitle>$100</FontTextSubtitle>
+              <Text level="subtitle">Rosy Delight</Text>
+              <Text level="body">Quantity (1)</Text>
+              <Text level="subtitle"> $100</Text>
             </div>
             <button>Remove</button>
           </div>
         </div>
         <div className="flex justify-between items-center py-6 px-4 md:p-10 border-b">
-          <FontTextSubtitle>Subtotal</FontTextSubtitle>
-          <FontTextSubtitle>$100.00</FontTextSubtitle>
+          <Text level="subtitle">Subtotal</Text>
+          <Text level="subtitle">$100.00</Text>
         </div>
         <div className="flex justify-between items-center py-6 px-4 md:p-10 border-b">
           <textarea
             placeholder="Gift Message..."
             className="h-32 border-none focus:border-none outline-none w-full"
-          ></textarea>
+          />
         </div>
         <div className="flex justify-center items-center text-center w-full py-6 px-4 md:p-10 border-b">
-          <FontTextCaption>
+          <Text level="subtitle">
             Shipping & taxes calculated at checkout Free standard shipping
             within Kyiv
-          </FontTextCaption>
+          </Text>
         </div>
         <div className="p-5">
           <Button type="primary">CHECK OUT</Button>
