@@ -1,5 +1,5 @@
 import Navbar from "../../components/organisms/Navbar";
-import Footer from "../../components/organisms/footer";
+import Footer from "../../components/organisms/Footer";
 import CardMediaSosial from "../../components/molecules/CardMediaSosial";
 import ABOUT_IMG from "../../assets/images/about/about.png";
 import { dataAbout } from "../../assets/data/dataAbout";
