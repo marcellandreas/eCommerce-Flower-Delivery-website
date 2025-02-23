@@ -8,7 +8,7 @@ import {
   FaPinterest,
   FaTelegram,
   FaX,
-  FaPhoneAlt,
+  // FaPhoneAlt,
   FaAnglesLeft,
 } from "react-icons/fa6";
 import { LuArrowDownRight, LuArrowUpRight } from "react-icons/lu";
@@ -25,7 +25,7 @@ export const PinterestIcon = () => <FaPinterest />;
 export const XIcon = () => <FaX />;
 export const TelegramIcon = () => <FaTelegram />;
 export const HamburgerIcon = () => <GiHamburgerMenu />;
-export const PhoneIcon = () => <FaPhoneAlt />;
+// export const PhoneIcon = () => <FaPhoneAlt />;
 export const ShoppingBagIcon = () => <RiShoppingBagFill />;
 export const AnglesLeftIcon = () => <FaAnglesLeft />;
 export const ArrowDownRightIcon = () => <LuArrowDownRight />;
