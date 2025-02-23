@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const Text = ({
+export const Text = ({
   level = "body",
   className,
   children,
@@ -71,5 +71,3 @@ Text.propTypes = {
   dataAos: PropTypes.string,
   to: PropTypes.string,
 };
-
-export default Text;

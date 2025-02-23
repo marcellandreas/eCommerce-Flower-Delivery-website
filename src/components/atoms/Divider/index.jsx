@@ -1,4 +1,4 @@
-const Divider = () => {
+export const Divider = () => {
   return (
     <div className="flex items-center py-4">
       <div className="flex-grow border-t border-gray-300"></div>
@@ -7,5 +7,3 @@ const Divider = () => {
     </div>
   );
 };
-
-export default Divider;

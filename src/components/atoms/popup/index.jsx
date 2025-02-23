@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const PopUp = ({ show, onClose, children }) => {
+export const PopUp = ({ show, onClose, children }) => {
   if (!show) return null;
 
   return (
@@ -15,5 +15,3 @@ const PopUp = ({ show, onClose, children }) => {
     </div>
   );
 };
-
-export default PopUp;

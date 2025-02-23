@@ -1,6 +1,7 @@
 import React from "react";
-import { FaArrowRight, FaArrowLeft } from "react-icons/fa6";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+
 export const Button = ({
   children,
   onChange,

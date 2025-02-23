@@ -38,6 +38,7 @@ export const InputDate = ({ value }) => {
       <input
         className="flex min-w-[360px] py-3 px-4 justify-between items-center bg-white border border-lightGray"
         type="date"
+        value={value}
       />
     </div>
   );
