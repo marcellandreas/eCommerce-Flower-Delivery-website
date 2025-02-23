@@ -1,6 +1,6 @@
 import React from "react";
 import Text from "../../atoms/Text";
-import { AppleIcon, GoogleIcon } from "../../Icon";
+import { AppleIcon, GoogleIcon } from "../../atoms/Icon";
 
 export const SocialLoginButtons = () => {
   return (
