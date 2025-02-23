@@ -1,3 +1,7 @@
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
 const Text = ({
   level = "body",
   className,
@@ -5,6 +9,7 @@ const Text = ({
   color,
   textStyle,
   dataAos,
+  to,
 }) => {
   const levels = {
     h1: "text-mobileH1 md:text-desktopH1 font-bold",
@@ -16,7 +21,7 @@ const Text = ({
     subtitle: "text-mobileSub md:text-desktopSub font-normal",
     body: "text-mobileBody md:text-desktopBody font-normal",
     button: "text-mobileButton uppercase md:text-desktopB font-normal",
-    link: "text-mobileLinks md:text-desktopLinks font-medium",
+    Link: "text-mobileLinks md:text-desktopLinks font-medium",
     overline:
       "text-mobileOverline md:text-desktopOverline uppercase font-medium",
     caption: "text-mobileCaption md:text-desktopCaption font-normal",
@@ -24,7 +29,7 @@ const Text = ({
       "text-mobileCaptionSmall md:text-desktopCaptionSmall font-medium",
   };
 
-  const Component = level || "p";
+  const Component = level === "link" ? Link : level || "p";
   const textStyleClass = levels[level] || "";
 
   const combinedClassNames = `${textStyleClass} ${textStyle || ""} ${
@@ -33,12 +38,38 @@ const Text = ({
 
   return (
     <Component
+      to={to}
       data-aos={dataAos}
       className={`text-${color} ${combinedClassNames}`}
     >
       {children}
     </Component>
   );
+};
+
+// PropTypes untuk komponen Text
+Text.propTypes = {
+  level: PropTypes.oneOf([
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "subtitle",
+    "body",
+    "button",
+    "link",
+    "overline",
+    "caption",
+    "captionSmall",
+  ]),
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  color: PropTypes.string,
+  textStyle: PropTypes.string,
+  dataAos: PropTypes.string,
+  to: PropTypes.string,
 };
 
 export default Text;
