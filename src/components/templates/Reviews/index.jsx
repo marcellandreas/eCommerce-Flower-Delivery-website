@@ -7,8 +7,7 @@ import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { Button } from "../../atoms/Button";
-import Text from "../../atoms/Text";
+import { Button, Text } from "../../atoms";
 
 import { ReviewsCustomer } from "../../../assets/data/DataReview";
 import { Layout } from "../../Layout/Layout";

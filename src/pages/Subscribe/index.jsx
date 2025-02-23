@@ -5,8 +5,7 @@ import {
   subscriptionOptions,
 } from "../../assets/data/Subscribe";
 import subscriptionImage from "../../assets/images/subscription.png";
-import { Button } from "../../components/atoms/Button";
-import Text from "../../components/atoms/Text";
+import { Button, Text } from "../../components/atoms";
 import { MainLayout } from "../../components/Layout/MainLayout";
 import { BenefitBlock } from "../../components/molecules/BenefitBlock";
 import FAQSection from "../../components/organisms/FAQSection";

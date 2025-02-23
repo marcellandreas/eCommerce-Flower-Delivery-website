@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LuArrowDownRight, LuArrowUpRight } from "react-icons/lu";
-import Text from "../atoms/Text";
+import { Text } from "../atoms";
 
 const AccordionCard = ({ title, description }) => {
   const [isOpen, setIsOpen] = useState(false);

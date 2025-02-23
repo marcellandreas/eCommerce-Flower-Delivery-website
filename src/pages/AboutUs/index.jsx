@@ -1,8 +1,7 @@
 import { FaAnglesLeft } from "react-icons/fa6";
 import { dataAbout } from "../../assets/data/dataAbout";
 import ABOUT_IMG from "../../assets/images/about/about.png";
-import { Button } from "../../components/atoms/Button";
-import Text from "../../components/atoms/Text";
+import { Button, Text } from "../../components/atoms";
 import { MainLayout } from "../../components/Layout/MainLayout";
 import CardMediaSosial from "../../components/molecules/CardMediaSosial";
 import useBackMenu from "../../utils/useBackMenu";

@@ -1,8 +1,5 @@
 /* eslint-disable react/prop-types */
-import PopUp from "../../atoms/popup";
-import { InputText } from "../../atoms/Input";
-import { Button } from "../../atoms/Button";
-import Divider from "../../atoms/Divider";
+import { InputText, PopUp, Button, Divider } from "../../atoms";
 import { SocialLoginButtons } from "../SocialLoginButtons";
 
 const LoginPopUp = ({ onClose, show }) => {

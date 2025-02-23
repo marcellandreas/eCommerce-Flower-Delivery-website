@@ -1,4 +1,4 @@
-import Text from "../atoms/Text";
+import { Text } from "../atoms";
 import PropTypes from "prop-types";
 
 export const BenefitBlock = ({ title, content, className }) => {

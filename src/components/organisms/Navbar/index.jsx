@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { RiShoppingBagFill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useLocation, Link } from "react-router-dom";
-import CardMediaSosial from "../../molecules/CardMediaSosial";
-import LoginPopUp from "../../molecules/PopUp/LoginPopUp";
-import CartPopUp from "../../molecules/PopUp/CartPopUp";
+import { RiShoppingBagFill } from "react-icons/ri";
+import { Link, useLocation } from "react-router-dom";
 import usePopUp from "../../../utils/usePopUp";
+import CardMediaSosial from "../../molecules/CardMediaSosial";
+import CartPopUp from "../../molecules/PopUp/CartPopUp";
+import LoginPopUp from "../../molecules/PopUp/LoginPopUp";
 
 const Navbar = () => {
   const [activeToggle, setActiveToggle] = useState(false);

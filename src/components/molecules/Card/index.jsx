@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-import { CustomButtonLink } from "../../atoms/Button";
-import Text from "../../atoms/Text";
+import { CustomButtonLink, Text } from "../../atoms";
 
 export const CardCategory = ({ label, children }) => {
   return (

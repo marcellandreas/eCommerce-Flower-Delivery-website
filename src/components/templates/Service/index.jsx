@@ -1,7 +1,6 @@
 import SERVICE_IMG from "../../../assets/images/ourService.png";
 import service2 from "../../../assets/images/section-2.png";
-import { Button } from "../../atoms/Button";
-import Text from "../../atoms/Text";
+import { Button, Text } from "../../atoms";
 import { Layout } from "../../Layout/Layout";
 
 const Service = () => (

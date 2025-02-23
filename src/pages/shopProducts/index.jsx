@@ -3,7 +3,7 @@ import { Categories } from "../../assets/data/categoryShop";
 import { FaAnglesLeft } from "react-icons/fa6";
 import useBackMenu from "../../utils/useBackMenu";
 import { MainLayout } from "../../components/Layout/MainLayout";
-import Text from "../../components/atoms/Text";
+import { Text } from "../../components/atoms";
 
 const ShopProductsPage = () => {
   const handleBack = useBackMenu();
