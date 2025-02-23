@@ -2,7 +2,7 @@ import React from "react";
 import AccordionCard from "../molecules/AccordionCard";
 import { FAQ } from "../../assets/data/Subscribe";
 
-export const FAQSection = () => {
+const FAQSection = () => {
   return (
     <article className="w-3/4">
       {FAQ.map((data) => {
@@ -20,3 +20,5 @@ export const FAQSection = () => {
     </article>
   );
 };
+
+export default FAQSection;

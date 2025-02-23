@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Footer from "../../components/organisms/footer";
+import Footer from "../../components/organisms/Footer";
 import Navbar from "../../components/organisms/Navbar";
 import subscriptionImage from "../../assets/images/subscription.png";
 import { Button } from "../../components/atoms/Button";
 import subscss from "./subscribe.module.css";
-import { FAQSection } from "../../components/organisms/FAQSection";
+import FAQSection from "../../components/organisms/FAQSection";
 import {
   DataPlainCard,
   howItWorksSteps,

@@ -1,5 +1,6 @@
 import React from "react";
-import { Navbar, Footer } from "../organisms";
+import Navbar from "../organisms/Navbar";
+import Footer from "../organisms/Footer";
 
 export const MainLayout = ({ children }) => {
   return (

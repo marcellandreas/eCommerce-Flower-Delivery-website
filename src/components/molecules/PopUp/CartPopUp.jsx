@@ -16,7 +16,7 @@ const CartPopUp = ({ show, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between h-16 items-center border-b px-6 md:px-10 lg:py-[26px] md:py-4  py-3">
-          <Text level="h2">Shopping Cart</Text>
+          <Text level="h4">Shopping Cart</Text>
           <button onClick={onClose} className="text-xl">
             <IoClose />
           </button>
