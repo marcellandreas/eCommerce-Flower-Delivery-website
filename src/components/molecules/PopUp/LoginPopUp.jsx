@@ -3,9 +3,9 @@ import PopUp from "../../atoms/popup";
 import { InputText } from "../../atoms/Input";
 import { Button } from "../../atoms/Button";
 import Divider from "../../atoms/Divider";
-import WrapMediaSosial from "../../atoms/WrapMediaSosial";
+import { SocialLoginButtons } from "../SocialLoginButtons";
 
-function LoginPopUp({ onClose, show }) {
+const LoginPopUp = ({ onClose, show }) => {
   return (
     <PopUp onClose={onClose} show={show}>
       <div className="">
@@ -29,7 +29,7 @@ function LoginPopUp({ onClose, show }) {
           <Button type="primary">CONTINUE</Button>
         </div>
         <Divider />
-        <WrapMediaSosial />
+        <SocialLoginButtons />
       </div>
       <div className=" mt-10 flex gap-5 justify-center items-center md:items-end flex-col md:flex-row">
         <p className=" underline cursor-pointer">Privacy Policy</p>
@@ -38,6 +38,6 @@ function LoginPopUp({ onClose, show }) {
       </div>
     </PopUp>
   );
-}
+};
 
 export default LoginPopUp;
