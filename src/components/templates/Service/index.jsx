@@ -37,18 +37,18 @@ const Service = () => (
     </section>
 
     {/* Wedding & Event Decor Section */}
-    <section
-      style={{
-        backgroundImage: `url(${service2})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-        backgroundPosition: "center",
-      }}
-      className=" h-[420px] text-white md:h-[500px] lg:h-[560px] flex-center  flex-col "
-    >
-      <section className="col-span-12 content-wrapper ">
-        <div className="flex flex-col items-center gap-6">
+    <section className=" col-span-12">
+      <section
+        style={{
+          backgroundImage: `url(${service2})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+        }}
+        className=" h-[420px]  text-white md:h-[500px] lg:h-[560px] flex-center  flex-col "
+      >
+        <div className="flex flex-col items-center gap-6 content-wrapper">
           <Text level="overline">SERVICE</Text>
           <div className="flex flex-col items-center gap-4 lg:w-[586px]">
             <Text level="h2" className="text-center">
@@ -59,8 +59,8 @@ const Service = () => (
               on-trend floral décor for your special day.
             </Text>
           </div>
+          <Button className="w-1/4">Inquire Now</Button>
         </div>
-        <Button className="w-1/4">Inquire Now</Button>
       </section>
     </section>
   </Layout>
