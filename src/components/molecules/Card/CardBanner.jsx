@@ -39,10 +39,11 @@ export const CardBanner = ({
 
         <div className="absolute left-1/2 bottom-2 transform -translate-x-1/2 hover:scale-90 flex flex-col items-center gap-1">
           <Text level="h6">{itemName}</Text>
-          <Text
-            level="caption"
-            className="text-gray"
-          >{`Rp. ${itemPrice}`}</Text>
+          {itemPrice && (
+            <Text level="caption" className="text-gray">
+              {`Rp. ${itemPrice}`}
+            </Text>
+          )}
         </div>
       </section>
     </div>
@@ -54,7 +55,7 @@ CardBanner.propTypes = {
   label: PropTypes.string.isRequired,
   itemImg: PropTypes.string.isRequired,
   itemName: PropTypes.string.isRequired,
-  itemPrice: PropTypes.number.isRequired,
+  itemPrice: PropTypes.number,
   buttonLink: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
 };
