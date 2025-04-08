@@ -1,5 +1,5 @@
 import { Button, Text } from "../../atoms";
-import { Layout } from "../../Layout/Layout";
+import { Layout } from "../../organisms";
 
 const AboutUs = () => {
   return (

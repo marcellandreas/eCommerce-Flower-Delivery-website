@@ -1,7 +1,7 @@
 import { dataBenefit } from "../../../assets/data/Benefits";
 import { Text } from "../../atoms";
-import { Layout } from "../../Layout/Layout";
 import { BenefitBlock } from "../../molecules/BenefitBlock";
+import { Layout } from "../../organisms";
 
 const Benefits = () => {
   return (

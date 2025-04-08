@@ -2,8 +2,8 @@ import { InputText } from "../../atoms/Input";
 import CONTACT_IMG from "../../../assets/images/contact.png";
 import { FaPhoneAlt } from "react-icons/fa";
 import { Button, Text } from "../../atoms";
-import { Layout } from "../../Layout/Layout";
 import { CardMediaSosial } from "../../molecules/Card";
+import { Layout } from "../../organisms";
 
 const ContactUs = () => {
   return (

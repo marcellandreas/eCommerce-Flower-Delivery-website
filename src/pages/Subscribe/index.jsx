@@ -6,10 +6,10 @@ import {
 } from "../../assets/data/Subscribe";
 import subscriptionImage from "../../assets/images/subscription.png";
 import { Button, Text } from "../../components/atoms";
-import { MainLayout } from "../../components/Layout/MainLayout";
 import { BenefitBlock } from "../../components/molecules/BenefitBlock";
 import FAQSection from "../../components/organisms/FAQSection";
 import subscss from "./subscribe.module.css";
+import { MainLayout } from "../../components/organisms";
 
 const PlainCard = ({ plain }) => {
   const { title, image, descriptionPoint } = plain;

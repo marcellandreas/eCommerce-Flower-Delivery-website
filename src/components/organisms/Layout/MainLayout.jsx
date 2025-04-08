@@ -1,7 +1,7 @@
 import React from "react";
-import { Footer, Navbar } from "../organisms";
+import { Footer, Navbar } from "..";
 
-export const MainLayout = ({ children }) => {
+const MainLayout = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen w-full">
       <Navbar />
@@ -12,3 +12,5 @@ export const MainLayout = ({ children }) => {
     </div>
   );
 };
+
+export default MainLayout;

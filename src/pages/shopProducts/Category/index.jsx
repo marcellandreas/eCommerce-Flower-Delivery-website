@@ -2,10 +2,10 @@ import { FaAnglesLeft } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { Categories } from "../../../assets/data/categoryShop";
 import { Text } from "../../../components/atoms";
-import { MainLayout } from "../../../components/Layout/MainLayout";
 import { CardItem } from "../../../components/molecules/Card";
 import useBackMenu from "../../../utils/useBackMenu";
 import { freshFlowers } from "../dataFreshFlowers";
+import { MainLayout } from "../../../components/organisms";
 
 const CategoryPage = () => {
   const handleBack = useBackMenu();

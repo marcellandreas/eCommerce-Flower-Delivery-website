@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Button, Text } from "../../atoms";
 
 import { ReviewsCustomer } from "../../../assets/data/DataReview";
-import { Layout } from "../../Layout/Layout";
+import { Layout } from "../../organisms";
 
 const Reviews = () => {
   return (

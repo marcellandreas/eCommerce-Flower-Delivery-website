@@ -1,7 +1,7 @@
 import SERVICE_IMG from "../../../assets/images/ourService.png";
 import service2 from "../../../assets/images/section-2.png";
 import { Button, Text } from "../../atoms";
-import { Layout } from "../../Layout/Layout";
+import { Layout } from "../../organisms";
 
 const Service = () => (
   <Layout>
