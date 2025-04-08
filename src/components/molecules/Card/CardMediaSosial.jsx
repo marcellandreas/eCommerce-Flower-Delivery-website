@@ -7,7 +7,7 @@ import {
   FaX,
 } from "react-icons/fa6";
 
-export default function CardMediaSosial({ className }) {
+export function CardMediaSosial({ className }) {
   return (
     <div className={`flex justify-between items-center ${className}`}>
       <span>

@@ -3,8 +3,8 @@ import { dataAbout } from "../../assets/data/dataAbout";
 import ABOUT_IMG from "../../assets/images/about/about.png";
 import { Button, Text } from "../../components/atoms";
 import { MainLayout } from "../../components/Layout/MainLayout";
-import CardMediaSosial from "../../components/molecules/CardMediaSosial";
 import useBackMenu from "../../utils/useBackMenu";
+import { CardMediaSosial } from "../../components/molecules/Card";
 
 const AboutUsPage = () => {
   const handleBack = useBackMenu();

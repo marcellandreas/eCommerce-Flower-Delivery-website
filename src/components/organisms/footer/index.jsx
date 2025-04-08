@@ -1,5 +1,5 @@
 import { Button, Text } from "../../atoms";
-import CardMediaSosial from "../../molecules/CardMediaSosial";
+import { CardMediaSosial } from "../../molecules/Card";
 
 const Footer = () => {
   const CategoryShop = [
