@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../organisms/Navbar";
-import Footer from "../organisms/Footer";
 
 export const MainLayout = ({ children }) => {
   return (
@@ -9,7 +8,7 @@ export const MainLayout = ({ children }) => {
       <main className="bg-white w-full min-h-screen grid grid-cols-12">
         {children}
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
