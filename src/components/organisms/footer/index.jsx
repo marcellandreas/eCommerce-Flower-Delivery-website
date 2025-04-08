@@ -3,13 +3,13 @@ import CardMediaSosial from "../../molecules/CardMediaSosial";
 
 const Footer = () => {
   const CategoryShop = [
-    { name: "All Products", to: "" },
+    { name: "All Products", to: "/shop" },
     { name: "Fresh Flowers", to: "/shop" },
-    { name: "Dried Flowers", to: "" },
-    { name: "Live Plants", to: "" },
-    { name: "Aroma Candles", to: "" },
-    { name: "Designer Vases", to: "" },
-    { name: "Freshener Fiffuser", to: "" },
+    { name: "Dried Flowers", to: "/shop" },
+    { name: "Live Plants", to: "/shop" },
+    { name: "Aroma Candles", to: "/shop" },
+    { name: "Designer Vases", to: "/shop" },
+    { name: "Freshener Fiffuser", to: "/shop" },
   ];
   const ContactUs = [
     {
