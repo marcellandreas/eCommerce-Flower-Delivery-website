@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar } from "..";
+import Footer from "../Footer";
 
 const MainLayout = ({ children }) => {
   return (
@@ -8,6 +9,7 @@ const MainLayout = ({ children }) => {
       <main className="bg-white w-full min-h-screen grid grid-cols-12">
         {children}
       </main>
+      <Footer />
     </div>
   );
 };
