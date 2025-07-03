@@ -1,6 +1,6 @@
 import { IoClose } from "react-icons/io5";
 import CartImage from "../../../assets/images/item.png";
-import { Button, LinkButton, Text } from "../../atoms";
+import { LinkButton, Text } from "../../atoms";
 
 const CartPopUp = ({ show, onClose }) => {
   if (!show) return null;
