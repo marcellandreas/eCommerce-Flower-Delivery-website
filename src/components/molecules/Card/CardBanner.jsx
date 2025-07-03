@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { CustomButtonLink, Text } from "../../atoms";
+import { CustomNavLink, Text } from "../../atoms";
 
 export const CardBanner = ({
   index,
@@ -21,9 +21,9 @@ export const CardBanner = ({
       >
         <Text level="h3">{label}</Text>
         <p className="absolute bottom-6">
-          <CustomButtonLink to={to} leftIcon={!isEven} rightIcon={isEven}>
+          <CustomNavLink to={to} leftIcon={!isEven} rightIcon={isEven}>
             {buttonLink}
-          </CustomButtonLink>
+          </CustomNavLink>
         </p>
       </section>
       <section
@@ -33,7 +33,7 @@ export const CardBanner = ({
       >
         <img
           src={itemImg}
-          alt={itemName}
+          alt="a"
           className="w-full h-full transform hover:scale-110 transition-transform duration-300"
         />
 
