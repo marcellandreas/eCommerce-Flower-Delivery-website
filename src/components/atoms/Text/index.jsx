@@ -11,6 +11,24 @@ export const Text = ({
   dataAos,
   to,
 }) => {
+  // Mapping tag yang aman berdasarkan level
+  const tagMap = {
+    h1: "h1",
+    h2: "h2",
+    h3: "h3",
+    h4: "h4",
+    h5: "h5",
+    h6: "h6",
+    subtitle: "p",
+    body: "p",
+    button: "span",
+    link: Link,
+    overline: "span",
+    caption: "p", // ✅ caption pakai <p>
+    captionSmall: "span", // ✅ captionSmall pakai <span>
+  };
+
+  // Styling class sesuai level
   const levels = {
     h1: "text-mobileH1 md:text-desktopH1 font-bold",
     h2: "text-mobileH2 md:text-desktopH2 font-semibold",
@@ -21,7 +39,7 @@ export const Text = ({
     subtitle: "text-mobileSub md:text-desktopSub font-normal",
     body: "text-mobileBody md:text-desktopBody font-normal",
     button: "text-mobileButton uppercase md:text-desktopB font-normal",
-    Link: "text-mobileLinks md:text-desktopLinks font-medium",
+    link: "text-mobileLinks md:text-desktopLinks font-medium",
     overline:
       "text-mobileOverline md:text-desktopOverline uppercase font-medium",
     caption: "text-mobileCaption md:text-desktopCaption font-normal",
@@ -29,7 +47,7 @@ export const Text = ({
       "text-mobileCaptionSmall md:text-desktopCaptionSmall font-medium",
   };
 
-  const Component = level === "link" ? Link : level || "p";
+  const Component = tagMap[level] || "p";
   const textStyleClass = levels[level] || "";
 
   const combinedClassNames = `${textStyleClass} ${textStyle || ""} ${
@@ -38,7 +56,7 @@ export const Text = ({
 
   return (
     <Component
-      to={to}
+      {...(level === "link" ? { to } : {})}
       data-aos={dataAos}
       className={`text-${color} ${combinedClassNames}`}
     >
@@ -47,7 +65,6 @@ export const Text = ({
   );
 };
 
-// PropTypes untuk komponen Text
 Text.propTypes = {
   level: PropTypes.oneOf([
     "h1",
