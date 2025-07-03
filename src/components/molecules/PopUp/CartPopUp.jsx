@@ -1,6 +1,6 @@
 import { IoClose } from "react-icons/io5";
 import CartImage from "../../../assets/images/item.png";
-import { Button, Text } from "../../atoms";
+import { Button, LinkButton, Text } from "../../atoms";
 
 const CartPopUp = ({ show, onClose }) => {
   if (!show) return null;
@@ -48,7 +48,9 @@ const CartPopUp = ({ show, onClose }) => {
           </Text>
         </div>
         <div className="p-5">
-          <Button type="primary">CHECK OUT</Button>
+          <LinkButton to="/check-out" type="primary">
+            CHECK OUT
+          </LinkButton>
         </div>
       </div>
     </div>
