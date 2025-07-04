@@ -1,6 +1,5 @@
-import React from "react";
-import { Text } from "../../atoms";
-import { AppleIcon, GoogleIcon } from "../../atoms/Icon";
+import { Text } from "../atoms";
+import { AppleIcon, GoogleIcon } from "../atoms/Icon";
 
 export const SocialLoginButtons = () => {
   return (
