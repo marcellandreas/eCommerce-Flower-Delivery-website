@@ -1,13 +1,13 @@
-import fresh_1 from "../../assets/images/fresh/1.png";
-import fresh_2 from "../../assets/images/fresh/2.png";
-import fresh_3 from "../../assets/images/fresh/3.png";
-import fresh_4 from "../../assets/images/fresh/4.png";
-import fresh_5 from "../../assets/images/fresh/5.png";
-import fresh_6 from "../../assets/images/fresh/6.png";
-import fresh_7 from "../../assets/images/fresh/7.png";
-import fresh_8 from "../../assets/images/fresh/8.png";
-import fresh_9 from "../../assets/images/fresh/9.png";
-import fresh_10 from "../../assets/images/fresh/10.png";
+import fresh_1 from "../../../assets/images/fresh/1.png";
+import fresh_2 from "../../../assets/images/fresh/2.png";
+import fresh_3 from "../../../assets/images/fresh/3.png";
+import fresh_4 from "../../../assets/images/fresh/4.png";
+import fresh_5 from "../../../assets/images/fresh/5.png";
+import fresh_6 from "../../../assets/images/fresh/6.png";
+import fresh_7 from "../../../assets/images/fresh/7.png";
+import fresh_8 from "../../../assets/images/fresh/8.png";
+import fresh_9 from "../../../assets/images/fresh/9.png";
+import fresh_10 from "../../../assets/images/fresh/10.png";
 
 export const FRESH_FLOWER = [
   {
