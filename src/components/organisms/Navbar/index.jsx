@@ -3,9 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiShoppingBagFill } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
 import usePopUp from "../../../utils/usePopUp";
-import CartPopUp from "../../molecules/PopUp/CartPopUp";
-import LoginPopUp from "../../molecules/PopUp/LoginPopUp";
-import { CardMediaSosial } from "../../molecules/Card";
+import { CardMediaSosial, CartPopUp, LoginPopUp } from "../../molecules";
 
 const Navbar = () => {
   const [activeToggle, setActiveToggle] = useState(false);

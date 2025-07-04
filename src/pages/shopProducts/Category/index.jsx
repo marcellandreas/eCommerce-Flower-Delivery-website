@@ -2,7 +2,7 @@ import { FaAnglesLeft } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { Categories } from "../../../assets/data/categoryShop";
 import { Text } from "../../../components/atoms";
-import { CardItem } from "../../../components/molecules/Card";
+import { CardItem } from "../../../components/molecules";
 import useBackMenu from "../../../utils/useBackMenu";
 
 import { MainLayout } from "../../../components/organisms";

@@ -2,9 +2,9 @@ import { FaAnglesLeft } from "react-icons/fa6";
 import { dataAbout } from "../../assets/data/dataAbout";
 import ABOUT_IMG from "../../assets/images/about/about.png";
 import { Button, Text } from "../../components/atoms";
-import useBackMenu from "../../utils/useBackMenu";
-import { CardMediaSosial } from "../../components/molecules/Card";
+import { CardMediaSosial } from "../../components/molecules";
 import { MainLayout } from "../../components/organisms";
+import useBackMenu from "../../utils/useBackMenu";
 
 const AboutUsPage = () => {
   const handleBack = useBackMenu();

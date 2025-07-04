@@ -1,4 +1,4 @@
-import { CardBanner } from "../../components/molecules/Card";
+import { CardBanner } from "../../components/molecules";
 import { Categories } from "../../assets/data/categoryShop";
 import { FaAnglesLeft } from "react-icons/fa6";
 import useBackMenu from "../../utils/useBackMenu";

@@ -1,8 +1,8 @@
 import hero from "../../../assets/images/hero.png";
-import { CardBanner } from "../../molecules/Card";
 import { Categories } from "../../../assets/data/categoryShop";
 import { Text } from "../../atoms";
 import { Layout } from "../../organisms";
+import { CardBanner } from "../../molecules";
 
 const Banner = () => {
   return (
