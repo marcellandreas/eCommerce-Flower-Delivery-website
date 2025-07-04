@@ -1,12 +1,16 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Landing from "./pages/Landing";
-import AboutUsPage from "./pages/AboutUs";
 import Aos from "aos";
-import { useEffect } from "react";
 import "aos/dist/aos.css";
-import ShopProducts from "./pages/shopProducts";
-import Subcription from "./pages/Subscribe";
-import CategoryPage from "./pages/shopProducts/Category";
+import { useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  AboutPage,
+  CategoryProductsPage,
+  CheckOutPage,
+  ContactPage,
+  LandingPage,
+  ShopProductsPage,
+  SubscribePage,
+} from "./pages";
 
 const App = () => {
   useEffect(() => {
@@ -20,12 +24,14 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/">
-          <Route index element={<Landing />} />
+          <Route index element={<LandingPage />} />
         </Route>
-        <Route path="/shop/:name" element={<CategoryPage />} />
-        <Route path="/shop" element={<ShopProducts />} />
-        <Route path="/about" element={<AboutUsPage />} />
-        <Route path="/subcribe-now" element={<Subcription />} />
+        <Route path="/shop/:name" element={<CategoryProductsPage />} />
+        <Route path="/shop" element={<ShopProductsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/subcribe-now" element={<SubscribePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/check-out" element={<CheckOutPage />} />
       </Routes>
     </BrowserRouter>
   );
