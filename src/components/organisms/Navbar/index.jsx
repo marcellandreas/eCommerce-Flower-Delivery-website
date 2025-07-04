@@ -9,6 +9,8 @@ const Navbar = () => {
   const [activeToggle, setActiveToggle] = useState(false);
   const { pathname } = useLocation();
 
+  console.log(pathname);
+
   const handleActiveToggle = () => {
     setActiveToggle(!activeToggle);
   };
@@ -49,13 +51,16 @@ const Navbar = () => {
         <section className="flex h-full w-1/4">
           <button
             onClick={openLogin}
-            className="w-1/2 border-l flex justify-center items-center"
+            className="flex-1 border-l flex justify-center items-center"
           >
             Sign In
           </button>
+
           <button
             onClick={openCart}
-            className="w-1/2 border-l flex justify-center items-center"
+            className={` flex-1 border-l ${
+              pathname === "/check-out" ? "hidden" : "flex"
+            }  justify-center items-center`}
           >
             Cart
           </button>
