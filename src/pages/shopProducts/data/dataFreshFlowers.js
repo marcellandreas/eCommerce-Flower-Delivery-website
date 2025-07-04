@@ -9,7 +9,7 @@ import fresh_8 from "../../assets/images/fresh/8.png";
 import fresh_9 from "../../assets/images/fresh/9.png";
 import fresh_10 from "../../assets/images/fresh/10.png";
 
-export const freshFlowers = [
+export const FRESH_FLOWER = [
   {
     name: "Rose Bouquet",
     image: fresh_1,

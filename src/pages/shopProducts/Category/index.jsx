@@ -4,8 +4,9 @@ import { Categories } from "../../../assets/data/categoryShop";
 import { Text } from "../../../components/atoms";
 import { CardItem } from "../../../components/molecules/Card";
 import useBackMenu from "../../../utils/useBackMenu";
-import { freshFlowers } from "../dataFreshFlowers";
+
 import { MainLayout } from "../../../components/organisms";
+import { FRESH_FLOWER } from "../data/dataFreshFlowers";
 
 const CategoryPage = () => {
   const handleBack = useBackMenu();
@@ -21,7 +22,7 @@ const CategoryPage = () => {
 
   return (
     <MainLayout>
-      <section className="  grid grid-flow-dense grid-cols-12 col-span-12">
+      <section className="grid grid-flow-dense grid-cols-12 col-span-12">
         <div className=" col-span-12 lg:col-span-6  border-b border-black flex flex-col items-start h-[50vw] lg:max-h-[50vw] lg:min-h-[50vw]  lg:sticky top-0 relative">
           {/* row 1 */}
           <button
@@ -40,7 +41,7 @@ const CategoryPage = () => {
           </div>
         </div>
         <div className=" col-span-12 lg:col-span-6 grid grid-cols-2 grid-rows-2  ">
-          {freshFlowers.map((data, i) => (
+          {FRESH_FLOWER.map((data, i) => (
             <div
               key={i}
               className=" col-span-2 row-span-1  md:col-span-1 md:row-span-1"

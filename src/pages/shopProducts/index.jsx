@@ -19,9 +19,9 @@ const ShopProductsPage = () => {
           >
             <FaAnglesLeft size={20} />
           </button>
-          <div className="flex flex-col gap-4 bg-red-700 flex-1 items-center justify-center self-stretch h-full bg-center bg-cover">
-            <Text level="h2" color="white">
-              SHOP
+          <div className="flex flex-col gap-4 bg-white flex-1 items-center justify-center self-stretch h-full bg-center bg-cover">
+            <Text level="h1" color="black">
+              Chose a <br /> Category
             </Text>
           </div>
         </div>
@@ -33,6 +33,7 @@ const ShopProductsPage = () => {
               key={index}
               index={index}
               label={category.name}
+              itemName={category.name}
               itemImg={category.itemImg}
               to={`/shop/${category.name}`}
               buttonLink="Shop Now"
