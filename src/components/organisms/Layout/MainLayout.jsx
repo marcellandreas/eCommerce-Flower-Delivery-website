@@ -1,6 +1,4 @@
-import React from "react";
-import { Navbar } from "..";
-import Footer from "../Footer";
+import { Navbar, Footer } from "../../organisms";
 
 const MainLayout = ({ children }) => {
   return (
