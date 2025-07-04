@@ -10,6 +10,7 @@ export const Button = ({
   rightIcon,
   leftIcon,
   className,
+  disabled = false,
 }) => {
   const getButtonClass = () => {
     switch (type) {
@@ -32,6 +33,7 @@ export const Button = ({
       className={buttonClass}
       onClick={onClick}
       onChange={onChange}
+      disabled={disabled}
     >
       {leftIcon ? <FaArrowLeft size={24} /> : null}
       {children}
