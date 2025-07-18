@@ -19,7 +19,7 @@ Flower Delivery is a responsive e-commerce website built with React.js, Tailwind
 
 ### Demo Screeshots
 
-![Flower Delivery Desktop Demo]("https://github.com/user-attachments/assets/d6426baa-742c-4594-a776-8fe759627c81")
+![Flower Delivery Desktop Demo](https://github.com/user-attachments/assets/d6426baa-742c-4594-a776-8fe759627c81)
 
 ### Prerequisites
 
