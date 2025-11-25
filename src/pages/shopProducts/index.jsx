@@ -1,12 +1,12 @@
 import { memo, useMemo } from "react";
 import { FaAnglesLeft } from "react-icons/fa6";
 import { useParams, Navigate } from "react-router-dom";
-import { Categories } from "../../../assets/data/categoryShop";
-import { Text } from "../../../components/atoms";
-import { CardItem, CardBanner } from "../../../components/molecules";
-import { useBackMenu } from "../../../utils/usePopUp";
-import { MainLayout } from "../../../components/organisms";
-import { FRESH_FLOWER } from "../data/dataFreshFlowers";
+import {Categories} from '../../assets/data/categoryShop'
+import { Text } from "../../components/atoms";
+import { CardItem, CardBanner } from "../../components/molecules";
+import { useBackMenu } from "../../utils/usePopUp";
+import { MainLayout } from "../../components/organisms";
+import { FRESH_FLOWER } from "./data/dataFreshFlowers";
 
 // BackButton Component
 const BackButton = memo(({ onClick }) => (
