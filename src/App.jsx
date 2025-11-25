@@ -1,38 +1,70 @@
+import { useEffect, lazy, Suspense } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import {
-  AboutPage,
-  CategoryProductsPage,
-  CheckOutPage,
-  ContactPage,
-  LandingPage,
-  ShopProductsPage,
-  SubscribePage,
-} from "./pages";
 
+// Lazy load pages for better performance
+const LandingPage = lazy(() => import("./pages/Landing"));
+const CategoryProductsPage = lazy(() => import("./pages/shopProducts/Category"));
+const ShopProductsPage = lazy(() => import("./pages/shopProducts"));
+const AboutPage = lazy(() => import("./pages/AboutUs"));
+const SubscribePage = lazy(() => import("./pages/Subscribe"));
+const ContactPage = lazy(() => import("./pages/Contact"));
+const CheckOutPage = lazy(() => import("./pages/CheckOut"));
+
+// AOS Configuration
+const AOS_CONFIG = {
+  duration: 800,
+  easing: "ease-in-out",
+  once: true,
+  offset: 100,
+};
+
+// Loading Component
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center min-h-screen bg-white">
+    <div className="flex flex-col items-center gap-4">
+      <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin" />
+      <p className="text-gray-600">Loading...</p>
+    </div>
+  </div>
+);
+
+// Error Boundary would be good to add here
 const App = () => {
+  // Initialize AOS
   useEffect(() => {
-    Aos.init({
-      duration: 800, // Durasi animasi dalam milidetik
-      easing: "ease-in-out", // Jenis easing (e.g., 'ease', 'linear', 'ease-in-out', 'ease-in', 'ease-out')
-      once: true, // Animasi hanya terjadi sekali saat halaman dimuat
-    });
+    Aos.init(AOS_CONFIG);
+
+    // Refresh AOS on route change
+    return () => {
+      Aos.refresh();
+    };
   }, []);
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/">
-          <Route index element={<LandingPage />} />
-        </Route>
-        <Route path="/shop/:name" element={<CategoryProductsPage />} />
-        <Route path="/shop" element={<ShopProductsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/subcribe-now" element={<SubscribePage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/check-out" element={<CheckOutPage />} />
-      </Routes>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          {/* Home */}
+          <Route path="/" element={<LandingPage />} />
+
+          {/* Shop Routes */}
+          <Route path="/shop">
+            <Route index element={<ShopProductsPage />} />
+            <Route path=":name" element={<CategoryProductsPage />} />
+          </Route>
+
+          {/* Other Pages */}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/subcribe-now" element={<SubscribePage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/check-out" element={<CheckOutPage />} />
+
+          {/* 404 - Redirect to home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };
