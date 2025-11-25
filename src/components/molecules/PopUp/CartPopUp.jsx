@@ -55,7 +55,7 @@ CartItem.propTypes = {
   onRemove: PropTypes.func.isRequired,
 };
 
-const CartPopUp = ({ show, onClose }) => {
+export const CartPopUp = ({ show, onClose }) => {
   const [cartItems, setCartItems] = useState(INITIAL_CART_ITEMS);
   const [giftMessage, setGiftMessage] = useState("");
 
@@ -165,5 +165,3 @@ CartPopUp.propTypes = {
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
-
-export default CartPopUp;
