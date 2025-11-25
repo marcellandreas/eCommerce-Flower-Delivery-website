@@ -2,87 +2,144 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.card-banner-flower .image-banner:hover {
-  transform: scale(1.2);
-}
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-  color: black;
-}
-
-.rotate-text {
-  /* display: inline-block; */
-  transition: transform 1s ease-in-out;
-  transform-origin: top;
-}
-
-.rotate-text:hover {
-  animation: rotate 1s forwards;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotateX(0deg);
+/* Base styles */
+@layer base {
+  * {
+    @apply transition-colors duration-300;
   }
 
-  25% {
-    transform: rotateX(90deg);
+  body {
+    @apply bg-white dark:bg-dark-bg text-black dark:text-dark-text;
   }
 
-  50% {
-    transform: rotateX(180deg);
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
   }
 
-  75% {
-    transform: rotateX(270deg);
-  }
-
-  100% {
-    transform: rotateX(360deg);
+  /* Selection colors */
+  ::selection {
+    @apply bg-black text-white dark:bg-white dark:text-black;
   }
 }
 
-.about-page-position:nth-child(odd) {
-  order: 1;
+/* Component utilities */
+@layer components {
+  /* Card with dark mode */
+  .card {
+    @apply bg-white dark:bg-dark-surface border border-lightGray dark:border-dark-border;
+  }
+
+  /* Button dark mode variants */
+  .btn-primary {
+    @apply bg-black text-white hover:bg-darkGray dark:bg-white dark:text-black dark:hover:bg-gray-200;
+  }
+
+  .btn-secondary {
+    @apply border border-black text-black hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black;
+  }
+
+  /* Input dark mode */
+  .input-base {
+    @apply bg-white dark:bg-dark-surface border-lightGray dark:border-dark-border text-black dark:text-dark-text;
+    @apply focus:border-gray dark:focus:border-white focus:ring-black dark:focus:ring-white;
+  }
+
+  /* Border utilities for dark mode */
+  .border-default {
+    @apply border-lightGray dark:border-dark-border;
+  }
+
+  .border-emphasis {
+    @apply border-black dark:border-white;
+  }
+
+  /* Text color utilities */
+  .text-primary {
+    @apply text-black dark:text-white;
+  }
+
+  .text-secondary {
+    @apply text-gray dark:text-dark-textSecondary;
+  }
+
+  .text-muted {
+    @apply text-lightGray dark:text-dark-textSecondary;
+  }
+
+  /* Background utilities */
+  .bg-primary {
+    @apply bg-white dark:bg-dark-bg;
+  }
+
+  .bg-secondary {
+    @apply bg-extraLight dark:bg-dark-surface;
+  }
+
+  /* Hover states */
+  .hover-bg {
+    @apply hover:bg-gray-50 dark:hover:bg-dark-surface;
+  }
 }
 
-.about-page-position:nth-child(even) {
-  order: 2;
+/* Custom animations */
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Rotate text animation */
+  .rotate-text {
+    @apply transition-transform duration-300 hover:-rotate-2;
+  }
+
+  /* Smooth transitions for theme switching */
+  .theme-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
 }
 
-.content-wrapper {
-  @apply col-span-12  py-10 px-4 lg:py-20 lg:px-10 justify-center items-center flex w-full border-b;
+/* Scrollbar styling for dark mode */
+@layer utilities {
+  /* Webkit browsers (Chrome, Safari, Edge) */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-extraLight dark:bg-dark-surface;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray dark:bg-dark-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-darkGray dark:bg-dark-textSecondary;
+  }
 }
 
-.flex-center {
-  @apply flex justify-center items-center;
+/* Image loading placeholder */
+@layer utilities {
+  .image-loading {
+    @apply bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-dark-surface dark:via-dark-border dark:to-dark-surface animate-pulse;
+  }
+}
+
+/* Focus visible for accessibility */
+@layer utilities {
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 dark:focus:ring-offset-dark-bg;
+  }
 }
