@@ -1,13 +1,21 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
 
+import {
+  FaInstagram,
+  FaFacebook,
+  FaPinterest,
+  FaX,
+  FaTelegram,
+} from "react-icons/fa6";
+
 export const CardMediaSosial = memo(({ className = "" }) => {
   const socialLinks = [
-    { Icon: require("react-icons/fa6").FaInstagram, label: "Instagram", url: "#" },
-    { Icon: require("react-icons/fa6").FaFacebook, label: "Facebook", url: "#" },
-    { Icon: require("react-icons/fa6").FaPinterest, label: "Pinterest", url: "#" },
-    { Icon: require("react-icons/fa6").FaX, label: "X (Twitter)", url: "#" },
-    { Icon: require("react-icons/fa6").FaTelegram, label: "Telegram", url: "#" },
+    { Icon: FaInstagram, label: "Instagram", url: "#" },
+    { Icon: FaFacebook, label: "Facebook", url: "#" },
+    { Icon: FaPinterest, label: "Pinterest", url: "#" },
+    { Icon: FaX, label: "X (Twitter)", url: "#" },
+    { Icon: FaTelegram, label: "Telegram", url: "#" },
   ];
 
   return (
