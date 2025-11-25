@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { MainLayout } from "../../components/organisms";
 import {
   AboutTemplate,
@@ -8,7 +9,7 @@ import {
   ServiceTemplate,
 } from "../../components/templates";
 
-const Landing = () => {
+const Landing = memo(() => {
   return (
     <MainLayout>
       <BannerTemplate />
@@ -19,6 +20,8 @@ const Landing = () => {
       <ReviewTemplate />
     </MainLayout>
   );
-};
+});
+
+Landing.displayName = "Landing";
 
 export default Landing;
