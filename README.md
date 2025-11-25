@@ -1,66 +1,97 @@
-<div align="center">
-  
-  ![GitHub repo size](https://img.shields.io/github/repo-size/marcellandreas/eCommerce-Flower-Delivery-website)
-  ![GitHub stars](https://img.shields.io/github/stars/marcellandreas/eCommerce-Flower-Delivery-website?style=social)
-  ![GitHub forks](https://img.shields.io/github/forks/marcellandreas/eCommerce-Flower-Delivery-website?style=social)
+# E-Commerce Flower Shop
 
-  <br />
-  <br />
+![Logo](./public/logo.svg)
 
-  <h2 align="center">Flower Delivery - E-Commerce </h2>
+Aplikasi e-commerce untuk toko bunga online yang dibangun dengan React, Vite, dan Tailwind CSS.
 
-Flower Delivery is a responsive e-commerce website built with React.js, Tailwind CSS, and React Router, designed to provide a seamless user experience across all devices.
+## 📋 Deskripsi
 
-<a href="https://flower-delivery-one.vercel.app/"><strong>➥ Live Demo</strong></a>
+E-Commerce Flower adalah platform belanja online yang menawarkan berbagai jenis bunga segar dan produk floral. Aplikasi ini memungkinkan pengguna untuk menjelajahi katalog produk, berlangganan pengiriman bunga berkala, dan melakukan pembelian dengan mudah.
 
-</div>
+## ✨ Fitur
 
-<br />
+- **Halaman Beranda** - Tampilan utama dengan highlight produk
+- **Katalog Produk** - Jelajahi berbagai jenis bunga dan produk floral
+- **Sistem Keranjang Belanja** - Tambahkan produk ke keranjang dan kelola pembelian
+- **Checkout** - Proses pembayaran yang aman dan mudah
+- **Langganan Bunga** - Layanan pengiriman bunga berkala
+- **Halaman Tentang Kami** - Informasi tentang toko dan layanan
+- **Halaman Kontak** - Formulir kontak dan informasi
 
-### Demo Screeshots
+## 🚀 Teknologi
 
-![Flower Delivery Desktop Demo](https://github.com/user-attachments/assets/d6426baa-742c-4594-a776-8fe759627c81)
+Proyek ini dibangun dengan teknologi modern:
 
-### Prerequisites
+- **React** - Library JavaScript untuk membangun antarmuka pengguna
+- **Vite** - Build tool yang cepat untuk pengembangan web
+- **Tailwind CSS** - Framework CSS untuk desain yang responsif
+- **React Router** - Navigasi antar halaman
+- **Mantine** - Komponen UI yang dapat disesuaikan
+- **AOS** - Animasi scroll
+- **Swiper** - Slider/carousel untuk tampilan produk
 
-Before you begin, ensure you have met the following requirements:
+## 📦 Struktur Proyek
 
-- [Git](https://git-scm.com/downloads "Download Git") must be installed on your operating system.
-
-### 🚀 Run Locally
-
-To run **Flower Delivery** locally, run this command on your git bash:
-
-#### 1. Clone the repository
-
-```bash
-git clone https://github.com/marcellandreas/flower-delivery.git
+```
+ecommerce-flower/
+├── public/                # Aset statis
+├── src/
+│   ├── assets/            # Gambar dan data
+│   ├── components/        # Komponen React
+│   │   ├── atoms/         # Komponen dasar
+│   │   ├── molecules/     # Komponen menengah
+│   │   ├── organisms/     # Komponen kompleks
+│   │   └── templates/     # Template halaman
+│   ├── features/          # Fitur aplikasi
+│   ├── pages/             # Halaman aplikasi
+│   │   ├── AboutUs/       # Halaman Tentang Kami
+│   │   ├── CheckOut/      # Halaman Checkout
+│   │   ├── Contact/       # Halaman Kontak
+│   │   ├── Landing/       # Halaman Beranda
+│   │   ├── Subscribe/     # Halaman Langganan
+│   │   └── shopProducts/  # Halaman Produk
+│   └── utils/             # Utilitas dan hooks
+└── ...
 ```
 
-#### 2. Go to the project directory
+## 🛠️ Instalasi dan Penggunaan
 
-```bash
-cd flower-delivery
-```
+### Prasyarat
 
-#### 3. Install dependencies
+- Node.js (versi 14 atau lebih baru)
+- npm atau yarn
 
-```bash
-npm install
-```
+### Langkah Instalasi
 
-#### 4. Start the development server
+1. Clone repositori
+   ```bash
+   git clone [url-repositori]
+   cd ecommerce-flower
+   ```
 
-```bash
-npm run dev
-```
+2. Instal dependensi
+   ```bash
+   npm install
+   # atau
+   yarn
+   ```
 
-> The app will run at http://localhost:5173/ by default.
+3. Jalankan aplikasi dalam mode pengembangan
+   ```bash
+   npm run dev
+   # atau
+   yarn dev
+   ```
 
-## 👨‍💻 Authors
+4. Buka `http://localhost:5173` di browser Anda
 
-- [@marcellandreas](https://www.github.com/marcellandreas)
+### Perintah yang Tersedia
 
-### License
+- `npm run dev` - Menjalankan server pengembangan
+- `npm run build` - Membangun aplikasi untuk produksi
+- `npm run preview` - Pratinjau build produksi
+- `npm run lint` - Menjalankan ESLint
 
-[MIT](https://choosealicense.com/licenses/mit/)
+## 📝 Lisensi
+
+Proyek ini dilisensikan di bawah [Lisensi MIT](./LICENSE).
