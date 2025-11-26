@@ -6,7 +6,7 @@ import { Layout } from "../../organisms";
 const Service = () => (
   <Layout>
     {/* Title Section */}
-    <section className="col-span-12 content-wrapper">
+    <section className="col-span-12 content-wrapper py-20 text-center border-b border-b-black">
       <Text level="h2">Our Service</Text>
     </section>
 
@@ -17,8 +17,8 @@ const Service = () => (
         alt="Our Service"
         className="flex-1 h-[420px] md:h-[500px] lg:h-[720px] border-b"
       />
-      <div className="border-l border-b content-wrapper">
-        <div className="flex flex-col items-center gap-16">
+      <div className="border-l border-b content-wrapper flex justify-center items-center md:px-10">
+        <div className="flex flex-col items-center gap-16 ">
           <div className="flex flex-col items-center gap-6 text-center">
             <Text level="overline">SERVICE</Text>
             <div className="flex flex-col items-center gap-4">
@@ -48,7 +48,7 @@ const Service = () => (
         }}
         className=" h-[420px]  text-white md:h-[500px] lg:h-[560px] flex-center  flex-col "
       >
-        <div className="flex flex-col items-center gap-6 content-wrapper">
+        <div className="flex flex-col items-center gap-6 content-wrapper justify-center h-full">
           <Text level="overline">SERVICE</Text>
           <div className="flex flex-col items-center gap-4 lg:w-[586px]">
             <Text level="h2" className="text-center">
@@ -59,7 +59,10 @@ const Service = () => (
               on-trend floral décor for your special day.
             </Text>
           </div>
-          <Button className="w-1/4">Inquire Now</Button>
+          <div className="w-full md:w-1/5 pt-6">
+
+          <Button  className="w-1/4  " type="tertiary">Inquire Now</Button>
+          </div>
         </div>
       </section>
     </section>

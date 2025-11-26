@@ -60,11 +60,11 @@
   }
 
   .text-secondary {
-    @apply text-gray dark:text-dark-textSecondary;
+    @apply text-gray dark:text-dark-text-secondary;
   }
 
   .text-muted {
-    @apply text-lightGray dark:text-dark-textSecondary;
+    @apply text-lightGray dark:text-dark-text-secondary;
   }
 
   /* Background utilities */
@@ -126,7 +126,7 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-darkGray dark:bg-dark-textSecondary;
+    @apply bg-darkGray dark:bg-dark-text-secondary;
   }
 }
 

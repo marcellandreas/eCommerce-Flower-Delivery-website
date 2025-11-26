@@ -47,9 +47,9 @@ const CONTACT_INFO = [
 ];
 
 const FooterSection = memo(({ title, children }) => (
-  <section className="col-span-1 min-h-[150px] border-l p-5">
+  <section className="col-span-1 min-h-[150px] border-l dark:border-dark-border p-5">
     <div className="flex flex-col gap-4">
-      <Text level="h5" className="text-gray self-stretch">
+      <Text level="h5" className="text-gray dark:text-dark-textSecondary self-stretch">
         {title}
       </Text>
       {children}
@@ -83,10 +83,10 @@ const Footer = () => {
   }, [email]);
 
   return (
-    <footer className="border border-black grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 z-30">
+    <footer className="border border-black dark:border-dark-border grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 z-30 bg-white dark:bg-dark-bg transition-colors duration-300">
       {/* Newsletter Section */}
       <section className="col-span-1 min-h-[150px] p-5 flex flex-col gap-4">
-        <Text level="body" className="text-gray-700">
+        <Text level="body" className="text-gray-700 dark:text-dark-textSecondary">
           Remember to offer beautiful flowers from Kyiv Florist Studio on
           Valentine's Day, Mother's Day, Christmas... Reminds you 7 days before.
           No spam or sharing your address.
@@ -98,7 +98,7 @@ const Footer = () => {
             placeholder="Your Email"
             value={email}
             onChange={handleEmailChange}
-            className="p-4 w-full placeholder:text-sm text-sm focus:text-black border border-lightGray focus:border-gray focus:outline-none focus:ring-2 focus:ring-black transition-all duration-200"
+            className="p-4 w-full placeholder:text-sm text-sm text-black dark:text-dark-text bg-white dark:bg-dark-surface border border-lightGray dark:border-dark-border focus:border-gray dark:focus:border-white focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition-all duration-300"
             aria-label="Email for newsletter"
             required
           />
@@ -110,7 +110,7 @@ const Footer = () => {
               {subscribeStatus}
             </Text>
           )}
-          <div className="bg-black">
+          <div className="bg-black dark:bg-white">
             <Button type="primary">Subscribe</Button>
           </div>
         </form>
@@ -120,7 +120,7 @@ const Footer = () => {
       <FooterSection title="Contact Us">
         {CONTACT_INFO.map((contact) => (
           <div key={contact.name} className="flex flex-col gap-1">
-            <Text level="caption" className="text-gray">
+            <Text level="caption" className="text-gray dark:text-dark-textSecondary">
               {contact.name}
             </Text>
             {contact.href ? (
@@ -128,19 +128,19 @@ const Footer = () => {
                 href={contact.href}
                 className="hover:underline transition-all duration-200"
               >
-                <Text level="link">{contact.content}</Text>
+                <Text level="link" className="dark:text-dark-text">{contact.content}</Text>
               </a>
             ) : (
-              <Text level="link">{contact.content}</Text>
+              <Text level="link" className="dark:text-dark-text">{contact.content}</Text>
             )}
           </div>
         ))}
 
         <div className="mt-4">
-          <Text level="h5" className="pb-4 text-gray">
+          <Text level="h5" className="pb-4 text-gray dark:text-dark-textSecondary">
             Follow Us
           </Text>
-          <CardMediaSosial className="text-darkGray" />
+          <CardMediaSosial className="text-darkGray dark:text-dark-text" />
         </div>
       </FooterSection>
 
@@ -149,7 +149,7 @@ const Footer = () => {
         <ul className="flex flex-col gap-1">
           {SHOP_CATEGORIES.map((category) => (
             <li key={category.name}>
-              <Text level="link" to={category.to}>
+              <Text level="link" to={category.to} className="dark:text-dark-text">
                 {category.name}
               </Text>
             </li>
@@ -157,13 +157,13 @@ const Footer = () => {
         </ul>
 
         <div className="flex flex-col gap-4 mt-4">
-          <Text level="h5" className="text-gray self-stretch">
+          <Text level="h5" className="text-gray dark:text-dark-textSecondary self-stretch">
             Service
           </Text>
           <ul className="flex flex-col gap-1">
             {SERVICES.map((service) => (
               <li key={service.name}>
-                <Text level="link" to={service.to}>
+                <Text level="link" to={service.to} className="dark:text-dark-text">
                   {service.name}
                 </Text>
               </li>
@@ -177,7 +177,7 @@ const Footer = () => {
         <ul className="flex flex-col gap-1">
           {ABOUT_LINKS.map((link) => (
             <li key={link.name}>
-              <Text level="link" to={link.to}>
+              <Text level="link" to={link.to} className="dark:text-dark-text">
                 {link.name}
               </Text>
             </li>
@@ -187,7 +187,7 @@ const Footer = () => {
         <ul className="flex flex-col gap-1 mt-4">
           {LEGAL_LINKS.map((item) => (
             <li key={item}>
-              <Text level="link" to="#">
+              <Text level="link" to="#" className="dark:text-dark-text">
                 {item}
               </Text>
             </li>

@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
-// Constants untuk button styles
+// Constants untuk button styles dengan dark mode
 const BUTTON_VARIANTS = {
-  primary: "text-white bg-black hover:bg-darkGray disabled:bg-lightGray",
-  secondary: "text-black border border-black hover:bg-black hover:text-white disabled:bg-lightGray disabled:text-gray",
-  tertiary: "text-white border border-white hover:text-black disabled:bg-lightGray disabled:text-gray"
+  primary: "text-white bg-black hover:bg-darkGray disabled:bg-lightGray dark:bg-white dark:text-black dark:hover:bg-gray-200 dark:disabled:bg-dark-border",
+  secondary: "text-black border border-black hover:bg-black hover:text-white disabled:bg-lightGray disabled:text-gray dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-black dark:disabled:bg-dark-surface dark:disabled:text-dark-textSecondary dark:disabled:border-dark-border",
+  tertiary: "text-white border border-white hover:text-black disabled:bg-lightGray disabled:text-gray dark:text-black dark:border-black dark:hover:text-white dark:disabled:bg-dark-surface dark:disabled:text-dark-textSecondary"
 };
 
-const BASE_BUTTON_CLASSES = "w-full max-h-[48px] min-h-[48px] md:max-h-[56px] md:min-h-[56px] px-6 py-4 flex justify-center items-center flex-shrink-0 gap-2 text-mobileButton md:text-desktopButton uppercase transition-colors duration-200";
+const BASE_BUTTON_CLASSES = "w-full max-h-[48px] min-h-[48px] md:max-h-[56px] md:min-h-[56px] px-6 py-4 flex justify-center items-center flex-shrink-0 gap-2 text-mobileButton md:text-desktopButton uppercase transition-all duration-300";
 
 export const Button = ({
   children,

@@ -5,7 +5,7 @@ const AboutUs = () => {
   return (
     <Layout>
       <div className=" h-[60px]  lg:top-0 lg:sticky col-span-12 lg:col-span-6 flex flex-col items-start justify-start gap-4 py-10 px-10 md:py-20 md:px-20">
-        <Text level="h2" dataAos="fade-up" color="black">
+        <Text level="h2" dataAos="fade-up" >
           About Us
         </Text>
       </div>

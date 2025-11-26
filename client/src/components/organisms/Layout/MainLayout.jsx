@@ -5,10 +5,10 @@ import { Navbar, Footer } from "../../organisms";
 
 const MainLayout = memo(({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen w-full">
+    <div className="flex flex-col min-h-screen w-full bg-white dark:bg-dark-bg text-black dark:text-dark-text transition-colors duration-300">
       <Navbar />
       
-      <main className="bg-white w-full min-h-screen grid grid-cols-12 flex-1">
+      <main className="bg-white dark:bg-dark-bg w-full min-h-screen grid grid-cols-12 flex-1 transition-colors duration-300">
         {children}
       </main>
       

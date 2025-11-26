@@ -46,7 +46,7 @@ const Reviews = () => {
               </Swiper>
             </div>
             <div className=" w-1/5">
-              <Button>Read Views</Button>
+              <Button type="secondary">Read Views</Button>
             </div>
           </div>
         </div>

@@ -11,9 +11,9 @@ const Banner = () => {
         {/* row 1 */}
         <div
           data-aos="fade-up"
-          className="flex flex-col gap-4 flex-1 self-stretch "
+          className="flex flex-col  gap-4 flex-1 self-stretch "
         >
-          <Text level="h1">
+          <Text level="h2">
             Kyiv LuxeBouquets
             <Text level="h3">®</Text>
           </Text>
