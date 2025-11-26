@@ -1,5 +1,7 @@
 const { User, Order } = require('../models');
 const clerk = require('../config/clerk');
+const { asyncHandler } = require('../middleware/errorHandler');
+
 
 /**
  * Get current user profile
