@@ -1,5 +1,3 @@
-
-// client/src/store/slices/categoriesSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const categoriesSlice = createSlice({
