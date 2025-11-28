@@ -3,7 +3,7 @@
 const clerk = require('../config/clerk');
 
 /**
- * Middleware to verify Clerk session token
+ * Middleware to verify Clerk session token (JWT)
  */
 const requireAuth = async (req, res, next) => {
   try {
@@ -16,18 +16,20 @@ const requireAuth = async (req, res, next) => {
       });
     }
 
-    // Verify session with Clerk
-    const session = await clerk.sessions.verifySession(sessionToken);
+    // Verify session token (JWT) with Clerk
+    // Note: verifyToken returns the decoded JWT payload if valid, throws otherwise
+    const decodedToken = await clerk.verifyToken(sessionToken);
 
-    if (!session) {
+    if (!decodedToken) {
       return res.status(401).json({
         success: false,
         message: 'Invalid or expired session token.'
       });
     }
 
-    // Get user details from Clerk
-    const user = await clerk.users.getUser(session.userId);
+    // Get user details from Clerk using the subject (sub) claim which holds the user ID
+    const userId = decodedToken.sub;
+    const user = await clerk.users.getUser(userId);
 
     // Attach user info to request
     req.user = {
@@ -57,16 +59,21 @@ const optionalAuth = async (req, res, next) => {
     const sessionToken = req.headers.authorization?.replace('Bearer ', '');
 
     if (sessionToken) {
-      const session = await clerk.sessions.verifySession(sessionToken);
-      if (session) {
-        const user = await clerk.users.getUser(session.userId);
-        req.user = {
-          id: user.id,
-          email: user.emailAddresses[0]?.emailAddress,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          imageUrl: user.imageUrl,
-        };
+      try {
+        const decodedToken = await clerk.verifyToken(sessionToken);
+        if (decodedToken) {
+          const userId = decodedToken.sub;
+          const user = await clerk.users.getUser(userId);
+          req.user = {
+            id: user.id,
+            email: user.emailAddresses[0]?.emailAddress,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            imageUrl: user.imageUrl,
+          };
+        }
+      } catch (err) {
+        // Token invalid, just ignore
       }
     }
 
