@@ -1,5 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '../lib/axios';
+import { useApi } from '../lib/axios';
+
+
 
 // Query Keys
 export const productKeys = {
@@ -13,6 +15,7 @@ export const productKeys = {
 // --- Queries ---
 
 export const useProductsQuery = (params) => {
+    const api = useApi();
     return useQuery({
         queryKey: productKeys.list(params),
         queryFn: async () => {
@@ -24,6 +27,7 @@ export const useProductsQuery = (params) => {
 };
 
 export const useProductDetailQuery = (idOrSlug) => {
+    const api = useApi();
     return useQuery({
         queryKey: productKeys.detail(idOrSlug),
         queryFn: async () => {
@@ -34,9 +38,23 @@ export const useProductDetailQuery = (idOrSlug) => {
     });
 };
 
+export const useProductsByCategoryQuery = (slug, params) => {
+    const api = useApi();
+    return useQuery({
+        queryKey: [...productKeys.list(params), 'category', slug],
+        queryFn: async () => {
+            const { data } = await api.get(`/products/category/${slug}`, { params });
+            return data;
+        },
+        enabled: !!slug,
+        keepPreviousData: true,
+    });
+};
+
 // --- Mutations ---
 
 export const useCreateProductMutation = () => {
+    const api = useApi();
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (newProduct) => api.post('/products', newProduct),
@@ -47,6 +65,7 @@ export const useCreateProductMutation = () => {
 };
 
 export const useUpdateProductMutation = () => {
+    const api = useApi();
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({ id, data }) => api.put(`/products/${id}`, data),
@@ -58,6 +77,7 @@ export const useUpdateProductMutation = () => {
 };
 
 export const useDeleteProductMutation = () => {
+    const api = useApi();
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (id) => api.delete(`/products/${id}`),
