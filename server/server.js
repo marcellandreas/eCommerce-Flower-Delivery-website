@@ -9,9 +9,10 @@ const startServer = async () => {
     // Test database connection
     await testConnection();
 
-    // Start server
-    app.listen(PORT, () => {
-      console.log(`
+    // Start server only if not in Vercel environment or if run directly
+    if (require.main === module) {
+      app.listen(PORT, () => {
+        console.log(`
 ╔═══════════════════════════════════════════╗
 ║                                           ║
 ║   🌸 Flower Delivery API Server           ║
@@ -24,35 +25,42 @@ const startServer = async () => {
 ║   API Base: /api/${process.env.API_VERSION || 'v1'}                  ║
 ║                                           ║
 ╚═══════════════════════════════════════════╝
-      `);
+        `);
 
-      if (process.env.NODE_ENV === 'development') {
-        console.log('\n📍 Available Routes:');
-        console.log(`   GET  /api/v1/health`);
-        console.log(`   GET  /api/v1/products`);
-        console.log(`   GET  /api/v1/categories`);
-        console.log(`   POST /api/v1/orders`);
-        console.log(`   GET  /api/v1/cart`);
-        console.log(`\n✨ Server is ready to accept connections\n`);
-      }
-    });
+        if (process.env.NODE_ENV === 'development') {
+          console.log('\n📍 Available Routes:');
+          console.log(`   GET  /api/v1/health`);
+          console.log(`   GET  /api/v1/products`);
+          console.log(`   GET  /api/v1/categories`);
+          console.log(`   POST /api/v1/orders`);
+          console.log(`   GET  /api/v1/cart`);
+          console.log(`\n✨ Server is ready to accept connections\n`);
+        }
+      });
+    }
   } catch (error) {
     console.error('❌ Failed to start server:', error);
-    process.exit(1);
+    // Do not exit process in Vercel
+    if (require.main === module) process.exit(1);
   }
 };
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
-  console.error('UNHANDLED REJECTION! 💥 Shutting down...');
+  console.error('UNHANDLED REJECTION! 💥');
   console.error(err.name, err.message);
-  process.exit(1);
+  // Do not exit process in Vercel
+  if (require.main === module) process.exit(1);
 });
 
 // Handle SIGTERM
 process.on('SIGTERM', () => {
   console.log('👋 SIGTERM received. Shutting down gracefully');
-  process.exit(0);
+  if (require.main === module) process.exit(0);
 });
 
+// Execute startServer
 startServer();
+
+// Export app for Vercel
+module.exports = app;
