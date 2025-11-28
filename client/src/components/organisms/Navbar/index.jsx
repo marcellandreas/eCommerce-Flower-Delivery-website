@@ -2,8 +2,9 @@ import { useState, useCallback, useMemo } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiShoppingBagFill } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import usePopUp from "../../../utils/usePopUp";
-import { CardMediaSosial, CartPopUp, LoginPopUp } from "../../molecules";
+import { CardMediaSosial, CartPopUp } from "../../molecules";
 import DarkModeToggle from "../../atoms/DarkModeToggle";
 
 // Navigation Items Configuration
@@ -36,12 +37,6 @@ const MobileMenuItem = ({ to, label, onClick }) => (
 const Navbar = () => {
   const [activeToggle, setActiveToggle] = useState(false);
   const { pathname } = useLocation();
-
-  const {
-    showPopUp: showLogin,
-    handleOpenPopUp: openLogin,
-    handleClosePopUp: closeLogin,
-  } = usePopUp();
 
   const {
     showPopUp: showCart,
@@ -88,13 +83,20 @@ const Navbar = () => {
             <DarkModeToggle />
           </div>
 
-          <button
-            onClick={openLogin}
-            className="h-full px-6 border-l dark:border-dark-border flex justify-center items-center hover:bg-gray-50 dark:hover:bg-dark-surface transition-colors duration-200"
-            aria-label="Sign in"
-          >
-            Sign In
-          </button>
+          <SignedOut>
+            <Link
+              to="/sign-in"
+              className="h-full px-6 border-l dark:border-dark-border flex justify-center items-center hover:bg-gray-50 dark:hover:bg-dark-surface transition-colors duration-200"
+              aria-label="Sign in"
+            >
+              Sign In
+            </Link>
+          </SignedOut>
+          <SignedIn>
+            <div className="h-full px-6 border-l dark:border-dark-border flex justify-center items-center hover:bg-gray-50 dark:hover:bg-dark-surface transition-colors duration-200">
+              <UserButton afterSignOutUrl="/" />
+            </div>
+          </SignedIn>
 
           {shouldShowCart && (
             <button
@@ -122,7 +124,7 @@ const Navbar = () => {
         {/* Mobile Dark Mode Toggle */}
         <div className="flex items-center gap-4">
           <DarkModeToggle />
-          
+
           <button
             onClick={openCart}
             className="flex border-l dark:border-dark-border h-16 w-16 justify-center items-center hover:bg-gray-50 dark:hover:bg-dark-surface transition-colors duration-200"
@@ -134,7 +136,6 @@ const Navbar = () => {
       </article>
 
       {/* Popups */}
-      <LoginPopUp show={showLogin} onClose={closeLogin} />
       <CartPopUp show={showCart} onClose={closeCart} />
 
       {/* Mobile Menu */}
@@ -149,15 +150,20 @@ const Navbar = () => {
               ✕
             </button>
 
-            <button
-              onClick={() => {
-                openLogin();
-                handleCloseMenu();
-              }}
-              className="border-b dark:border-dark-border p-5 flex items-center text-left hover:bg-gray-50 dark:hover:bg-dark-surface"
-            >
-              Sign In
-            </button>
+            <SignedOut>
+              <Link
+                to="/sign-in"
+                onClick={handleCloseMenu}
+                className="border-b dark:border-dark-border p-5 flex items-center text-left hover:bg-gray-50 dark:hover:bg-dark-surface"
+              >
+                Sign In
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <div className="border-b dark:border-dark-border p-5 flex items-center text-left hover:bg-gray-50 dark:hover:bg-dark-surface">
+                <UserButton afterSignOutUrl="/" showName />
+              </div>
+            </SignedIn>
 
             {MOBILE_MENU_ITEMS.map(({ path, label }) => {
               const navItem = getNavItem(path, label);

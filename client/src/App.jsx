@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { ThemeProvider } from "./context/ThemeContext";
+import ExampleProducts from "./pages/ExampleProducts";
+import UserSync from "./components/auth/UserSync";
 
 // Lazy load pages for better performance
 const LandingPage = lazy(() => import("./pages/Landing"));
@@ -12,6 +14,8 @@ const AboutPage = lazy(() => import("./pages/AboutUs"));
 const SubscribePage = lazy(() => import("./pages/Subscribe"));
 const ContactPage = lazy(() => import("./pages/Contact"));
 const CheckOutPage = lazy(() => import("./pages/CheckOut"));
+const SignInPage = lazy(() => import("./pages/auth/SignInPage"));
+const SignUpPage = lazy(() => import("./pages/auth/SignUpPage"));
 
 // AOS Configuration
 const AOS_CONFIG = {
@@ -45,6 +49,7 @@ const App = () => {
   return (
     <ThemeProvider>
       <BrowserRouter>
+        <UserSync />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             {/* Home */}
@@ -61,6 +66,12 @@ const App = () => {
             <Route path="/subcribe-now" element={<SubscribePage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/check-out" element={<CheckOutPage />} />
+            <Route path="/check-out" element={<CheckOutPage />} />
+            <Route path="/example-products" element={<ExampleProducts />} />
+
+            {/* Auth Routes */}
+            <Route path="/sign-in/*" element={<SignInPage />} />
+            <Route path="/sign-up/*" element={<SignUpPage />} />
 
             {/* 404 - Redirect to home */}
             <Route path="*" element={<Navigate to="/" replace />} />

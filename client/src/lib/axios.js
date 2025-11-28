@@ -1,23 +1,24 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api/v1';
-
-// Create axios instance
-const axiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 15000,
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api', // Adjust based on your backend URL
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Request interceptor
-axiosInstance.interceptors.request.use(
-  (config) => {
-    // Get auth token from Clerk or localStorage
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+// Request Interceptor: Attach Clerk Token
+api.interceptors.request.use(
+  async (config) => {
+    try {
+      // Access Clerk client from window object (injected by ClerkProvider)
+      const token = await window.Clerk?.session?.getToken();
+
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    } catch (error) {
+      console.error('Error fetching Clerk token:', error);
     }
     return config;
   },
@@ -26,41 +27,17 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// Response interceptor
-axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+// Response Interceptor: Global Error Handling
+api.interceptors.response.use(
+  (response) => response,
   (error) => {
-    // Handle errors globally
-    if (error.response) {
-      const { status, data } = error.response;
-      
-      switch (status) {
-        case 401:
-          localStorage.removeItem('authToken');
-          window.location.href = '/login';
-          break;
-        case 403:
-          console.error('Access forbidden:', data.message);
-          break;
-        case 404:
-          console.error('Resource not found:', data.message);
-          break;
-        case 500:
-          console.error('Server error:', data.message);
-          break;
-        default:
-          console.error('Error:', data.message);
-      }
-    } else if (error.request) {
-      console.error('Network error: No response from server');
-    } else {
-      console.error('Error:', error.message);
+    // Handle specific error codes if needed (e.g., 401 logout)
+    if (error.response?.status === 401) {
+      console.warn('Unauthorized access - redirecting to login...');
+      // Optional: Trigger logout or redirect
     }
-    
     return Promise.reject(error);
   }
 );
 
-export default axiosInstance;
+export default api;
