@@ -34,6 +34,7 @@ const config = {
   production: {
     url: process.env.DATABASE_URL,
     dialect: 'postgres',
+    dialectModule: require('pg'), // Required for Vercel
     dialectOptions: {
       ssl: {
         require: true,
