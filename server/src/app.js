@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 const routes = require('./routes');
+const webhookRoutes = require('./routes/webhooks');
 const { errorHandler } = require('./middleware/errorHandler');
 const { apiLimiter } = require('./middleware/rateLimiter');
 
@@ -22,6 +23,13 @@ app.use(cors(corsOptions));
 
 // Compression
 app.use(compression());
+
+// Webhook routes (must be before body parser to get raw body)
+app.use(
+  `/api/${process.env.API_VERSION || 'v1'}/webhooks`,
+  express.raw({ type: 'application/json' }),
+  webhookRoutes
+);
 
 // Body parser
 app.use(express.json({ limit: '10mb' }));
