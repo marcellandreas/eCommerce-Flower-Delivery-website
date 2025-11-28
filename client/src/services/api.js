@@ -1,59 +1,83 @@
-import axios from '../lib/axios';
+import { useApi } from '../lib/api';
 
 // Products API
-export const productsAPI = {
-  getAll: (params) => axios.get('/products', { params }),
-  getById: (id) => axios.get(`/products/${id}`),
-  getBySlug: (slug) => axios.get(`/products/${slug}`),
-  getFeatured: () => axios.get('/products/featured'),
-  getByCategory: (categorySlug, params) => 
-    axios.get(`/products/category/${categorySlug}`, { params }),
-  create: (data) => axios.post('/products', data),
-  update: (id, data) => axios.put(`/products/${id}`, data),
-  delete: (id) => axios.delete(`/products/${id}`),
-  updateStock: (id, quantity) => 
-    axios.patch(`/products/${id}/stock`, { quantity }),
-};
+export const productsAPI = () => {
+  const api = useApi()
+
+  return {
+    getAll: (params) => api.get('/products', { params }),
+    getById: (id) => api.get(`/products/${id}`),
+    getBySlug: (slug) => api.get(`/products/${slug}`),
+    getFeatured: () => api.get('/products/featured'),
+    getByCategory: (categorySlug, params) =>
+      api.get(`/products/category/${categorySlug}`, { params }),
+    create: (data) => api.post('/products', data),
+    update: (id, data) => api.put(`/products/${id}`, data),
+    delete: (id) => api.delete(`/products/${id}`),
+    updateStock: (id, quantity) =>
+      api.patch(`/products/${id}/stock`, { quantity }),
+  }
+}
 
 // Categories API
-export const categoriesAPI = {
-  getAll: () => axios.get('/categories'),
-  getById: (id) => axios.get(`/categories/${id}`),
-  getBySlug: (slug) => axios.get(`/categories/${slug}`),
-  create: (data) => axios.post('/categories', data),
-  update: (id, data) => axios.put(`/categories/${id}`, data),
-  delete: (id) => axios.delete(`/categories/${id}`),
-};
+export const categoriesAPI = () => {
+  const api = useApi()
+
+  return {
+    getAll: () => api.get('/categories'),
+    getById: (id) => api.get(`/categories/${id}`),
+    getBySlug: (slug) => api.get(`/categories/${slug}`),
+    create: (data) => api.post('/categories', data),
+    update: (id, data) => api.put(`/categories/${id}`, data),
+    delete: (id) => api.delete(`/categories/${id}`),
+  }
+}
 
 // Cart API
-export const cartAPI = {
-  get: () => axios.get('/cart'),
-  addItem: (data) => axios.post('/cart/items', data),
-  updateItem: (itemId, data) => axios.put(`/cart/items/${itemId}`, data),
-  removeItem: (itemId) => axios.delete(`/cart/items/${itemId}`),
-  clear: () => axios.delete('/cart'),
+export const cartAPI = () => {
+  const api = useApi()
+
+  return {
+    get: () => api.get('/cart'),
+    addItem: (data) => api.post('/cart/items', data),
+    updateItem: (itemId, data) => api.put(`/cart/items/${itemId}`, data),
+    removeItem: (itemId) => api.delete(`/cart/items/${itemId}`),
+    clear: () => api.delete('/cart'),
+  }
 };
 
 // Orders API
-export const ordersAPI = {
-  create: (data) => axios.post('/orders', data),
-  getAll: (params) => axios.get('/orders', { params }),
-  getById: (id) => axios.get(`/orders/${id}`),
-  cancel: (id) => axios.post(`/orders/${id}/cancel`),
-  updateStatus: (id, status) => 
-    axios.patch(`/orders/${id}/status`, { status }),
+export const ordersAPI = () => {
+  const api = useApi()
+
+  return {
+    create: (data) => api.post('/orders', data),
+    getAll: (params) => api.get('/orders', { params }),
+    getById: (id) => api.get(`/orders/${id}`),
+    cancel: (id) => api.post(`/orders/${id}/cancel`),
+    updateStatus: (id, status) =>
+      api.patch(`/orders/${id}/status`, { status }),
+  }
 };
 
 // Users API
-export const usersAPI = {
-  getCurrentUser: () => axios.get('/users/me'),
-  updateCurrentUser: (data) => axios.put('/users/me', data),
-  getAll: (params) => axios.get('/users', { params }),
-  getById: (id) => axios.get(`/users/${id}`),
-  update: (id, data) => axios.put(`/users/${id}`, data),
-};
+export const usersAPI = () => {
+  const api = useApi()
+
+  return {
+    getCurrentUser: () => api.get('/users/me'),
+    updateCurrentUser: (data) => api.put('/users/me', data),
+    getAll: (params) => api.get('/users', { params }),
+    getById: (id) => api.get(`/users/${id}`),
+    update: (id, data) => api.put(`/users/${id}`, data),
+  }
+}
 
 // Health Check
-export const healthAPI = {
-  check: () => axios.get('/health'),
-};
+export const healthAPI = () => {
+  const api = useApi()
+
+  return {
+    check: () => api.get('/health'),
+  }
+}
