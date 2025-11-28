@@ -1,11 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '../lib/axios';
+import { useApi } from '../lib/axios';
 
 export const cartKeys = {
     all: ['cart'],
 };
 
 export const useCartQuery = () => {
+    const api = useApi();
     return useQuery({
         queryKey: cartKeys.all,
         queryFn: async () => {
@@ -16,6 +17,7 @@ export const useCartQuery = () => {
 };
 
 export const useAddToCartMutation = () => {
+    const api = useApi();
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (item) => api.post('/cart/items', item),
@@ -26,6 +28,7 @@ export const useAddToCartMutation = () => {
 };
 
 export const useUpdateCartItemMutation = () => {
+    const api = useApi();
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({ itemId, data }) => api.put(`/cart/items/${itemId}`, data),
@@ -36,6 +39,7 @@ export const useUpdateCartItemMutation = () => {
 };
 
 export const useRemoveCartItemMutation = () => {
+    const api = useApi();
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (itemId) => api.delete(`/cart/items/${itemId}`),
@@ -46,6 +50,7 @@ export const useRemoveCartItemMutation = () => {
 };
 
 export const useClearCartMutation = () => {
+    const api = useApi();
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: () => api.delete('/cart'),

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '../lib/axios';
+import { useApi } from '../lib/axios';
 
 export const orderKeys = {
     all: ['orders'],
@@ -10,6 +10,7 @@ export const orderKeys = {
 };
 
 export const useOrdersQuery = (params) => {
+    const api = useApi();
     return useQuery({
         queryKey: orderKeys.list(params),
         queryFn: async () => {
@@ -20,6 +21,7 @@ export const useOrdersQuery = (params) => {
 };
 
 export const useOrderDetailQuery = (id) => {
+    const api = useApi();
     return useQuery({
         queryKey: orderKeys.detail(id),
         queryFn: async () => {
@@ -31,6 +33,7 @@ export const useOrderDetailQuery = (id) => {
 };
 
 export const useCreateOrderMutation = () => {
+    const api = useApi();
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (orderData) => api.post('/orders', orderData),
