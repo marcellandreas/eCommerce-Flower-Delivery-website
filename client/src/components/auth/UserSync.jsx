@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useUser, useAuth } from '@clerk/clerk-react';
-import api from '../../lib/axios';
+import { useApi } from '../../lib/axios';
 
 const UserSync = () => {
+
+    const api = useApi();
     const { isSignedIn, isLoaded } = useAuth();
     const { user } = useUser();
 
@@ -12,8 +14,9 @@ const UserSync = () => {
                 try {
                     // This endpoint (GET /users/me) in the backend checks if user exists,
                     // and creates it if not (based on the controller logic we saw).
-                    await api.get('/users/me');
+                    const response = await api.get('/users/me');
                     console.log('User synced with backend');
+                    console.log('Backend user data:', response.data);
                 } catch (error) {
                     console.error('Failed to sync user:', error);
                 }
