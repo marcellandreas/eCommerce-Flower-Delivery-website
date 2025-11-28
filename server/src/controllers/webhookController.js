@@ -55,9 +55,24 @@ exports.handleClerkWebhook = asyncHandler(async (req, res) => {
 
     console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
 
+    console.log('Webhook payload data:', evt.data); // Debug logging
+
     if (eventType === 'user.created' || eventType === 'user.updated') {
-        const email = email_addresses[0]?.email_address;
-        const phone = phone_numbers?.[0]?.phone_number;
+        // Clerk sends email_addresses as an array. We take the first one.
+        // Ensure we handle cases where it might be missing or structured differently.
+        const email = email_addresses && email_addresses.length > 0
+            ? email_addresses[0].email_address
+            : null;
+
+        const phone = phone_numbers && phone_numbers.length > 0
+            ? phone_numbers[0].phone_number
+            : null;
+
+        if (!email) {
+            console.error('Missing email in webhook payload for user:', id);
+            // Return success to acknowledge webhook, but log error
+            return res.status(200).json({ success: true, message: 'Skipped: No email found' });
+        }
 
         const userData = {
             clerk_id: id,
