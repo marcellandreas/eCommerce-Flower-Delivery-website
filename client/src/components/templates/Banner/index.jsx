@@ -1,10 +1,12 @@
 import hero from "../../../assets/images/hero.png";
-import { Categories } from "../../../assets/data/categoryShop";
+import { useCategories } from "../../../hooks/useCategories";
 import { Text } from "../../atoms";
 import { Layout } from "../../organisms";
 import { CardBanner } from "../../molecules";
 
 const Banner = () => {
+  const { data: categories, isLoading } = useCategories();
+
   return (
     <Layout>
       <div className=" col-span-12 lg:col-span-6 px-4 py-10 md:p-20 border-b border-black flex flex-col items-start lg:max-h-[50vw] lg:min-h-[50vw]  lg:sticky top-0">
@@ -39,17 +41,23 @@ const Banner = () => {
         </div>
       </div>
       <div className=" col-span-12 lg:col-span-6  ">
-        {Categories.map((data, i) => (
-          <CardBanner
-            key={i}
-            index={i}
-            label={data.name}
-            itemName={data.name}
-            itemImg={data.itemImg}
-            to={`/shop/${data.name}`}
-            buttonLink={"Shop Now"}
-          />
-        ))}
+        {isLoading ? (
+          <div className="flex items-center justify-center h-[50vw]">
+            <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : (
+          categories?.map((data, i) => (
+            <CardBanner
+              key={data.id || i}
+              index={i}
+              label={data.name}
+              itemName={data.name}
+              itemImg={data.image_url}
+              to={`/shop/${data.slug}`}
+              buttonLink={"Shop Now"}
+            />
+          ))
+        )}
       </div>
     </Layout>
   );
