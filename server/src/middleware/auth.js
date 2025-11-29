@@ -1,6 +1,7 @@
 // ============================================
 // src/middleware/auth.js
 const clerk = require('../config/clerk');
+const { User } = require('../models');
 
 /**
  * Middleware to verify Clerk session token (JWT)
@@ -17,7 +18,6 @@ const requireAuth = async (req, res, next) => {
     }
 
     // Verify session token (JWT) with Clerk
-    // Note: verifyToken returns the decoded JWT payload if valid, throws otherwise
     const decodedToken = await clerk.verifyToken(sessionToken);
 
     if (!decodedToken) {
@@ -27,17 +27,32 @@ const requireAuth = async (req, res, next) => {
       });
     }
 
-    // Get user details from Clerk using the subject (sub) claim which holds the user ID
-    const userId = decodedToken.sub;
-    const user = await clerk.users.getUser(userId);
+    // Get user details from Clerk
+    const clerkUserId = decodedToken.sub;
+    const clerkUser = await clerk.users.getUser(clerkUserId);
 
-    // Attach user info to request
+    // Find or create local user
+    const [user] = await User.findOrCreate({
+      where: { clerk_id: clerkUserId },
+      defaults: {
+        clerk_id: clerkUserId,
+        email: clerkUser.emailAddresses[0]?.emailAddress,
+        first_name: clerkUser.firstName,
+        last_name: clerkUser.lastName,
+        image_url: clerkUser.imageUrl,
+        role: clerkUser.publicMetadata?.role || 'customer',
+      }
+    });
+
+    // Attach local user info to request
     req.user = {
-      id: user.id,
-      email: user.emailAddresses[0]?.emailAddress,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      imageUrl: user.imageUrl,
+      id: user.id, // This is now the local UUID
+      clerk_id: user.clerk_id,
+      email: user.email,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      imageUrl: user.image_url,
+      role: user.role,
     };
 
     next();
@@ -62,24 +77,42 @@ const optionalAuth = async (req, res, next) => {
       try {
         const decodedToken = await clerk.verifyToken(sessionToken);
         if (decodedToken) {
-          const userId = decodedToken.sub;
-          const user = await clerk.users.getUser(userId);
+          const clerkUserId = decodedToken.sub;
+          const clerkUser = await clerk.users.getUser(clerkUserId);
+
+          // Find or create local user
+          const [user] = await User.findOrCreate({
+            where: { clerk_id: clerkUserId },
+            defaults: {
+              clerk_id: clerkUserId,
+              email: clerkUser.emailAddresses[0]?.emailAddress,
+              first_name: clerkUser.firstName,
+              last_name: clerkUser.lastName,
+              image_url: clerkUser.imageUrl,
+              role: clerkUser.publicMetadata?.role || 'customer',
+            }
+          });
+
           req.user = {
-            id: user.id,
-            email: user.emailAddresses[0]?.emailAddress,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            imageUrl: user.imageUrl,
+            id: user.id, // This is now the local UUID
+            clerk_id: user.clerk_id,
+            email: user.email,
+            firstName: user.first_name,
+            lastName: user.last_name,
+            imageUrl: user.image_url,
+            role: user.role,
           };
         }
       } catch (err) {
         // Token invalid, just ignore
+        console.error('Optional auth token error:', err);
       }
     }
 
     next();
   } catch (error) {
     // Continue without auth
+    console.error('Optional auth error:', error);
     next();
   }
 };
@@ -97,7 +130,7 @@ const requireAdmin = async (req, res, next) => {
     }
 
     // Get user metadata from Clerk
-    const user = await clerk.users.getUser(req.user.id);
+    const user = await clerk.users.getUser(req.user.clerk_id);
     const isAdmin = user.publicMetadata?.role === 'admin';
 
     if (!isAdmin) {

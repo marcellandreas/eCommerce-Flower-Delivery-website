@@ -106,10 +106,12 @@ const CategoryProductsPage = memo(() => {
     const addToCart = useAddToCartMutation();
 
     const handleAddToCart = (product) => {
+        console.log('handleAddToCart triggered for:', product);
         addToCart.mutate(
             { product_id: product.id, quantity: 1 },
             {
-                onSuccess: () => {
+                onSuccess: (data) => {
+                    console.log('addToCart success:', data);
                     dispatch(
                         showToast({
                             type: "success",
@@ -118,6 +120,7 @@ const CategoryProductsPage = memo(() => {
                     );
                 },
                 onError: (error) => {
+                    console.error('addToCart error:', error);
                     dispatch(
                         showToast({
                             type: "error",
