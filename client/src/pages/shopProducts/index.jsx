@@ -1,16 +1,10 @@
-import { memo, useMemo, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { memo } from "react";
 import { FaAnglesLeft } from "react-icons/fa6";
-import { useParams, Navigate } from "react-router-dom";
 import { Text } from "../../components/atoms";
-import { CardItem, CardBanner } from "../../components/molecules";
-import { useBackMenu } from "../../utils/usePopUp";
+import { CardBanner } from "../../components/molecules";
 import { MainLayout } from "../../components/organisms";
-import { useProducts, useProductsByCategory } from "../../hooks/useProducts";
 import { useCategories } from "../../hooks/useCategories";
-import { useAddToCart } from "../../hooks/useCart";
-import { setFilters } from "../../store/slices/productsSlice";
-import { showToast } from "../../store/slices/uiSlice";
+import { useBackMenu } from "../../utils/usePopUp";
 
 // Loading Component
 const LoadingSpinner = () => (
@@ -74,6 +68,8 @@ export const ShopProductsPage = memo(() => {
   const handleBack = useBackMenu();
   const { data: categories, isLoading, error } = useCategories();
 
+  console.log("data categories", categories);
+
   if (isLoading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error.message} />;
 
@@ -90,7 +86,7 @@ export const ShopProductsPage = memo(() => {
         />
 
         <div className="col-span-12 lg:col-span-6">
-          {categories?.categories?.map((category, index) => (
+          {categories?.map((category, index) => (
             <CardBanner
               key={category.id}
               index={index}
@@ -108,135 +104,5 @@ export const ShopProductsPage = memo(() => {
 });
 
 ShopProductsPage.displayName = "ShopProductsPage";
-
-// Category Products Page - Specific Category
-export const CategoryProductsPage = memo(() => {
-  const handleBack = useBackMenu();
-  const { name } = useParams();
-  const dispatch = useDispatch();
-  const filters = useSelector((state) => state.products.filters);
-  const [page, setPage] = useState(1);
-  
-  // Fetch category data
-  const { data: categories } = useCategories();
-  const category = useMemo(() => {
-    return categories?.categories?.find(
-      (cat) => cat.slug === decodeURIComponent(name)
-    );
-  }, [categories, name]);
-
-  // Fetch products for this category
-  const {
-    data: productsData,
-    isLoading,
-    error,
-  } = useProductsByCategory(name, {
-    page,
-    limit: 12,
-    ...filters,
-  });
-
-  // Add to cart mutation
-  const addToCart = useAddToCart();
-
-  const handleAddToCart = (product) => {
-    addToCart.mutate(
-      { product_id: product.id, quantity: 1 },
-      {
-        onSuccess: () => {
-          dispatch(
-            showToast({
-              type: "success",
-              message: `${product.name} added to cart!`,
-            })
-          );
-        },
-        onError: (error) => {
-          dispatch(
-            showToast({
-              type: "error",
-              message: error.response?.data?.message || "Failed to add to cart",
-            })
-          );
-        },
-      }
-    );
-  };
-
-  // Handle category not found
-  if (!isLoading && !category) {
-    return <Navigate to="/shop" replace />;
-  }
-
-  if (isLoading) return <LoadingSpinner />;
-  if (error) return <ErrorMessage message={error.message} />;
-
-  const products = productsData?.products || [];
-
-  return (
-    <MainLayout>
-      <section className="grid grid-flow-dense grid-cols-12 col-span-12">
-        <HeroSection
-          title={category?.name}
-          backgroundImage={category?.image_url}
-          onBack={handleBack}
-        />
-
-        <div className="col-span-12 lg:col-span-6 grid grid-cols-2">
-          {products.length === 0 ? (
-            <div className="col-span-2 flex items-center justify-center p-20">
-              <Text level="h5" className="text-gray-500">
-                No products available in this category
-              </Text>
-            </div>
-          ) : (
-            products.map((product, i) => (
-              <div
-                key={product.id}
-                className="col-span-2 md:col-span-1"
-                data-aos="fade-up"
-                data-aos-delay={i * 50}
-              >
-                <CardItem
-                  itemPrice={product.price}
-                  index={i}
-                  itemName={product.name}
-                  itemImg={product.image_url}
-                  onAddToCart={() => handleAddToCart(product)}
-                  product={product}
-                />
-              </div>
-            ))
-          )}
-
-          {/* Pagination */}
-          {productsData?.pagination?.totalPages > 1 && (
-            <div className="col-span-2 flex justify-center gap-4 py-8">
-              <button
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={page === 1}
-                className="px-4 py-2 border rounded disabled:opacity-50"
-              >
-                Previous
-              </button>
-              <Text>
-                Page {page} of {productsData.pagination.totalPages}
-              </Text>
-              <button
-                onClick={() => setPage((p) => p + 1)}
-                disabled={page >= productsData.pagination.totalPages}
-                className="px-4 py-2 border rounded disabled:opacity-50"
-              >
-                Next
-              </button>
-            </div>
-          )}
-        </div>
-      </section>
-    </MainLayout>
-  );
-});
-
-CategoryProductsPage.displayName = "CategoryProductsPage";
 
 export default ShopProductsPage;

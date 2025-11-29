@@ -1,83 +1,85 @@
-import { useApi } from '../lib/api';
+import { useApi } from '../lib/axios';
 
-// Products API
+// Factory functions that accept an axios instance
+export const createProductsAPI = (api) => ({
+  getAll: (params) => api.get('/products', { params }),
+  getById: (id) => api.get(`/products/${id}`),
+  getBySlug: (slug) => api.get(`/products/${slug}`),
+  getFeatured: () => api.get('/products/featured'),
+  getByCategory: (categorySlug, params) =>
+    api.get(`/products/category/${categorySlug}`, { params }),
+  create: (data) => api.post('/products', data),
+  update: (id, data) => api.put(`/products/${id}`, data),
+  delete: (id) => api.delete(`/products/${id}`),
+  updateStock: (id, quantity) =>
+    api.patch(`/products/${id}/stock`, { quantity }),
+});
+
+export const createCategoriesAPI = (api) => ({
+  getAll: () => api.get('/categories'),
+  getById: (id) => api.get(`/categories/${id}`),
+  getBySlug: (slug) => api.get(`/categories/${slug}`),
+  create: (data) => api.post('/categories', data),
+  update: (id, data) => api.put(`/categories/${id}`, data),
+  delete: (id) => api.delete(`/categories/${id}`),
+});
+
+export const createCartAPI = (api) => ({
+  get: () => api.get('/cart'),
+  addItem: (data) => api.post('/cart/items', data),
+  updateItem: (itemId, data) => api.put(`/cart/items/${itemId}`, data),
+  removeItem: (itemId) => api.delete(`/cart/items/${itemId}`),
+  clear: () => api.delete('/cart'),
+});
+
+export const createOrdersAPI = (api) => ({
+  create: (data) => api.post('/orders', data),
+  getAll: (params) => api.get('/orders', { params }),
+  getById: (id) => api.get(`/orders/${id}`),
+  cancel: (id) => api.post(`/orders/${id}/cancel`),
+  updateStatus: (id, status) =>
+    api.patch(`/orders/${id}/status`, { status }),
+});
+
+export const createUsersAPI = (api) => ({
+  getCurrentUser: () => api.get('/users/me'),
+  updateCurrentUser: (data) => api.put('/users/me', data),
+  getAll: (params) => api.get('/users', { params }),
+  getById: (id) => api.get(`/users/${id}`),
+  update: (id, data) => api.put(`/users/${id}`, data),
+});
+
+export const createHealthAPI = (api) => ({
+  check: () => api.get('/health'),
+});
+
+// Hooks for usage in components
 export const productsAPI = () => {
-  const api = useApi()
+  const api = useApi();
+  return createProductsAPI(api);
+};
 
-  return {
-    getAll: (params) => api.get('/products', { params }),
-    getById: (id) => api.get(`/products/${id}`),
-    getBySlug: (slug) => api.get(`/products/${slug}`),
-    getFeatured: () => api.get('/products/featured'),
-    getByCategory: (categorySlug, params) =>
-      api.get(`/products/category/${categorySlug}`, { params }),
-    create: (data) => api.post('/products', data),
-    update: (id, data) => api.put(`/products/${id}`, data),
-    delete: (id) => api.delete(`/products/${id}`),
-    updateStock: (id, quantity) =>
-      api.patch(`/products/${id}/stock`, { quantity }),
-  }
-}
-
-// Categories API
 export const categoriesAPI = () => {
-  const api = useApi()
+  const api = useApi();
+  return createCategoriesAPI(api);
+};
 
-  return {
-    getAll: () => api.get('/categories'),
-    getById: (id) => api.get(`/categories/${id}`),
-    getBySlug: (slug) => api.get(`/categories/${slug}`),
-    create: (data) => api.post('/categories', data),
-    update: (id, data) => api.put(`/categories/${id}`, data),
-    delete: (id) => api.delete(`/categories/${id}`),
-  }
-}
-
-// Cart API
 export const cartAPI = () => {
-  const api = useApi()
-
-  return {
-    get: () => api.get('/cart'),
-    addItem: (data) => api.post('/cart/items', data),
-    updateItem: (itemId, data) => api.put(`/cart/items/${itemId}`, data),
-    removeItem: (itemId) => api.delete(`/cart/items/${itemId}`),
-    clear: () => api.delete('/cart'),
-  }
+  const api = useApi();
+  return createCartAPI(api);
 };
 
-// Orders API
 export const ordersAPI = () => {
-  const api = useApi()
-
-  return {
-    create: (data) => api.post('/orders', data),
-    getAll: (params) => api.get('/orders', { params }),
-    getById: (id) => api.get(`/orders/${id}`),
-    cancel: (id) => api.post(`/orders/${id}/cancel`),
-    updateStatus: (id, status) =>
-      api.patch(`/orders/${id}/status`, { status }),
-  }
+  const api = useApi();
+  return createOrdersAPI(api);
 };
 
-// Users API
 export const usersAPI = () => {
-  const api = useApi()
+  const api = useApi();
+  return createUsersAPI(api);
+};
 
-  return {
-    getCurrentUser: () => api.get('/users/me'),
-    updateCurrentUser: (data) => api.put('/users/me', data),
-    getAll: (params) => api.get('/users', { params }),
-    getById: (id) => api.get(`/users/${id}`),
-    update: (id, data) => api.put(`/users/${id}`, data),
-  }
-}
-
-// Health Check
 export const healthAPI = () => {
-  const api = useApi()
-
-  return {
-    check: () => api.get('/health'),
-  }
-}
+  const api = useApi();
+  return createHealthAPI(api);
+};

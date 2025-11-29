@@ -1,16 +1,17 @@
-// client/src/store/slices/ordersSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { ordersAPI } from '../../services/api';
+import { createOrdersAPI } from '../../services/api';
 
 export const createOrder = createAsyncThunk(
   'orders/create',
-  async (orderData) => {
+  async ({ api, orderData }) => {
+    const ordersAPI = createOrdersAPI(api);
     const response = await ordersAPI.create(orderData);
     return response.data.data;
   }
 );
 
-export const fetchOrders = createAsyncThunk('orders/fetchAll', async (params) => {
+export const fetchOrders = createAsyncThunk('orders/fetchAll', async ({ api, params }) => {
+  const ordersAPI = createOrdersAPI(api);
   const response = await ordersAPI.getAll(params);
   return response.data.data;
 });

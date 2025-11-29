@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { usersAPI } from '../../services/api';
+import { createUsersAPI } from '../../services/api';
 
-export const fetchCurrentUser = createAsyncThunk('user/fetchCurrent', async () => {
+export const fetchCurrentUser = createAsyncThunk('user/fetchCurrent', async (api) => {
+  const usersAPI = createUsersAPI(api);
   const response = await usersAPI.getCurrentUser();
   return response.data.data;
 });
 
 export const updateCurrentUser = createAsyncThunk(
   'user/updateCurrent',
-  async (data) => {
+  async ({ api, data }) => {
+    const usersAPI = createUsersAPI(api);
     const response = await usersAPI.updateCurrentUser(data);
     return response.data.data;
   }

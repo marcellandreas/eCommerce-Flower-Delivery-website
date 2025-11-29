@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { cartAPI } from '../../services/api';
+import { createCartAPI } from '../../services/api';
 
 const CART_STORAGE_KEY = 'flower_shop_cart';
 
@@ -19,15 +19,17 @@ const saveCartToStorage = (cart) => {
 };
 
 // Async thunks
-export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
+export const fetchCart = createAsyncThunk('cart/fetchCart', async (api) => {
+  const cartAPI = createCartAPI(api);
   const response = await cartAPI.get();
   return response.data.data;
 });
 
 export const addToCart = createAsyncThunk(
   'cart/addItem',
-  async ({ productId, quantity = 1 }, { rejectWithValue }) => {
+  async ({ api, productId, quantity = 1 }, { rejectWithValue }) => {
     try {
+      const cartAPI = createCartAPI(api);
       const response = await cartAPI.addItem({ product_id: productId, quantity });
       return response.data.data;
     } catch (error) {
@@ -38,8 +40,9 @@ export const addToCart = createAsyncThunk(
 
 export const updateCartItem = createAsyncThunk(
   'cart/updateItem',
-  async ({ itemId, quantity }, { rejectWithValue }) => {
+  async ({ api, itemId, quantity }, { rejectWithValue }) => {
     try {
+      const cartAPI = createCartAPI(api);
       const response = await cartAPI.updateItem(itemId, { quantity });
       return response.data.data;
     } catch (error) {
@@ -50,8 +53,9 @@ export const updateCartItem = createAsyncThunk(
 
 export const removeFromCart = createAsyncThunk(
   'cart/removeItem',
-  async (itemId, { rejectWithValue }) => {
+  async ({ api, itemId }, { rejectWithValue }) => {
     try {
+      const cartAPI = createCartAPI(api);
       await cartAPI.removeItem(itemId);
       return itemId;
     } catch (error) {
@@ -60,7 +64,8 @@ export const removeFromCart = createAsyncThunk(
   }
 );
 
-export const clearCart = createAsyncThunk('cart/clear', async () => {
+export const clearCart = createAsyncThunk('cart/clear', async (api) => {
+  const cartAPI = createCartAPI(api);
   await cartAPI.clear();
   return null;
 });
