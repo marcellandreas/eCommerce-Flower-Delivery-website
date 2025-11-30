@@ -1,4 +1,9 @@
+import { memo, useCallback } from "react";
+import PropTypes from "prop-types";
+import { Button, InputText, Text } from "../../components/atoms";
+
 // FormPayment Component
+
 export const FormPayment = memo(({ onSubmit }) => {
   const handlePayment = useCallback((e) => {
     e.preventDefault();

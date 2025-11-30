@@ -1,3 +1,7 @@
+import { memo, useCallback } from "react";
+import PropTypes from "prop-types";
+import { Button, InputText, Text } from "../../components/atoms";
+
 // FormShippingDetails Component
 export const FormShippingDetails = memo(({
   active,
