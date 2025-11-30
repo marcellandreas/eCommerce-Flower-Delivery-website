@@ -1,10 +1,11 @@
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo, useEffect } from "react";
 import { MdCheck, MdEditSquare, MdLock } from "react-icons/md";
 import fresh_1 from "../../assets/images/fresh/1.png";
 import { Button, InputText, Text } from "../../components/atoms";
 import LoginPopUp from "../../components/molecules/PopUp/LoginPopUp";
 import { MainLayout } from "../../components/organisms";
 import { usePopUp } from "../../utils/usePopUp";
+import { useSelector } from "react-redux";
 import {
   FormContactInformation,
   FormPayment,
@@ -34,13 +35,12 @@ const Breadcrumb = memo(({ steps, active, setActive }) => (
         key={index}
         onClick={() => setActive(index)}
         disabled={index > active}
-        className={`cursor-pointer px-4 py-2 rounded-full text-sm transition-all duration-200 ${
-          index === active
-            ? "text-black font-semibold"
-            : index < active
+        className={`cursor-pointer px-4 py-2 rounded-full text-sm transition-all duration-200 ${index === active
+          ? "text-black font-semibold"
+          : index < active
             ? "text-gray hover:text-black"
             : "text-lightGray cursor-not-allowed"
-        }`}
+          }`}
         aria-current={index === active ? "step" : undefined}
       >
         {label}
@@ -159,11 +159,24 @@ const CheckOut = () => {
     phone: "",
   });
 
+  const { currentUser } = useSelector((state) => state.user);
+
   const {
     showPopUp: showLogin,
     handleOpenPopUp: openLogin,
     handleClosePopUp: closeLogin,
   } = usePopUp();
+
+  useEffect(() => {
+    if (currentUser) {
+      setFormData((prev) => ({
+        ...prev,
+        name: currentUser.first_name + " " + currentUser.last_name || prev.name,
+        email: currentUser.email || prev.email,
+        phone: currentUser.phone || prev.phone,
+      }));
+    }
+  }, [currentUser]);
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
@@ -183,7 +196,7 @@ const CheckOut = () => {
         <Breadcrumb steps={STEPS} active={active} setActive={setActive} />
 
         {/* Login Info */}
-        {active === 0 && (
+        {active === 0 && !currentUser && (
           <div className="flex flex-col p-6 md:p-10 items-start bg-lightGray rounded-lg">
             <Text level="body">
               Already have an account?{" "}
