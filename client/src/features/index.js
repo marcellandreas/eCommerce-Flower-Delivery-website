@@ -1,3 +1,3 @@
-export { default as FormContactInformation } from "./CheckOut/FormContactInformation";
-export { default as FormPayment } from "./CheckOut/FormPayment";
-export { default as FormShippingDetails } from "./CheckOut/FormShippingDetails";
+export { FormContactInformation } from "./CheckOut/FormContactInformation";
+export { FormPayment } from "./CheckOut/FormPayment";
+export { FormShippingDetails } from "./CheckOut/FormShippingDetails";
