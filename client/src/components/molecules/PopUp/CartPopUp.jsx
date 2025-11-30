@@ -98,18 +98,18 @@ export const CartPopUp = ({ show, onClose }) => {
     setGiftMessage(e.target.value);
   }, []);
 
-  if (!show) return null;
-
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+      className={`fixed inset-0 z-50 flex justify-center items-center transition-colors duration-300 ${show ? "bg-black bg-opacity-50" : "bg-black bg-opacity-0 pointer-events-none"
+        }`}
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="cart-title"
     >
       <div
-        className="bg-white absolute right-0 max-h-screen w-full lg:w-1/2 overflow-y-auto shadow-2xl"
+        className={`bg-white absolute right-0 top-0 h-screen w-full lg:w-1/2 overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out ${show ? "translate-x-0" : "translate-x-full"
+          }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
