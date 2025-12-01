@@ -5,6 +5,12 @@ import "aos/dist/aos.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import ExampleProducts from "./pages/ExampleProducts";
 import UserSync from "./components/auth/UserSync";
+import Dashboard from "./pages/Admin/Dashboard";
+import Categories from "./pages/Admin/Categories";
+import AdminLayout from "./components/organisms/Layout/AdminLayout";
+import Products from "./pages/Admin/Products";
+import Users from "./pages/Admin/Users";
+import Orders from "./pages/Admin/Orders";
 
 // Lazy load pages for better performance
 const LandingPage = lazy(() => import("./pages/Landing"));
@@ -75,6 +81,16 @@ const App = () => {
 
             {/* 404 - Redirect to home */}
             <Route path="*" element={<Navigate to="/" replace />} />
+
+            {/* Admin Routes */}
+            <Route path="/admin/*" element={<AdminLayout />}>
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="categories" element={<Categories />} />
+              <Route path="users" element={<Users />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="products" element={<Products />} />
+            </Route>
           </Routes>
         </Suspense>
       </BrowserRouter>
