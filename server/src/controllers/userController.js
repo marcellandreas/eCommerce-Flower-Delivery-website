@@ -2,24 +2,18 @@ const { User, Order } = require('../models');
 const clerk = require('../config/clerk');
 const { asyncHandler } = require('../middleware/errorHandler');
 
-
 /**
  * Get current user profile
  * @route GET /api/v1/users/me
  */
 exports.getCurrentUser = asyncHandler(async (req, res, next) => {
-  // Find or create user in database
-  let user = await User.findOne({ where: { clerk_id: req.user.id } });
+  // User is already attached to req by requireAuth middleware
+  // But we fetch fresh from DB just in case
+  const user = await User.findByPk(req.user.id);
 
   if (!user) {
-    // Create user if doesn't exist
-    user = await User.create({
-      clerk_id: req.user.id,
-      email: req.user.email,
-      first_name: req.user.firstName,
-      last_name: req.user.lastName,
-      image_url: req.user.imageUrl,
-    });
+    // This should theoretically not happen if middleware worked
+    return res.status(404).json({ success: false, message: 'User not found' });
   }
 
   res.status(200).json({
@@ -35,24 +29,17 @@ exports.getCurrentUser = asyncHandler(async (req, res, next) => {
 exports.updateCurrentUser = asyncHandler(async (req, res, next) => {
   const { first_name, last_name, phone } = req.body;
 
-  let user = await User.findOne({ where: { clerk_id: req.user.id } });
+  const user = await User.findByPk(req.user.id);
 
   if (!user) {
-    user = await User.create({
-      clerk_id: req.user.id,
-      email: req.user.email,
-      first_name,
-      last_name,
-      phone,
-      image_url: req.user.imageUrl,
-    });
-  } else {
-    await user.update({
-      first_name,
-      last_name,
-      phone,
-    });
+    return res.status(404).json({ success: false, message: 'User not found' });
   }
+
+  await user.update({
+    first_name,
+    last_name,
+    phone,
+  });
 
   res.status(200).json({
     success: true,
@@ -109,7 +96,7 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   });
 
   if (!user) {
-    return next(new AppError('User not found', 404));
+    return res.status(404).json({ success: false, message: 'User not found' });
   }
 
   res.status(200).json({
@@ -129,7 +116,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
   const user = await User.findByPk(id);
 
   if (!user) {
-    return next(new AppError('User not found', 404));
+    return res.status(404).json({ success: false, message: 'User not found' });
   }
 
   // Update user in database

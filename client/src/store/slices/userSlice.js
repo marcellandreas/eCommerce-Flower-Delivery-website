@@ -4,6 +4,8 @@ import { createUsersAPI } from '../../services/api';
 export const fetchCurrentUser = createAsyncThunk('user/fetchCurrent', async (api) => {
   const usersAPI = createUsersAPI(api);
   const response = await usersAPI.getCurrentUser();
+
+  console.log("user slice", response.data.data)
   return response.data.data;
 });
 

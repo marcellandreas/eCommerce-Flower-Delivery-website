@@ -1,11 +1,11 @@
-import { useState, useCallback, memo, useEffect } from "react";
+import { useState, useCallback, memo, useEffect, useMemo } from "react";
 import { MdCheck, MdEditSquare, MdLock } from "react-icons/md";
-import fresh_1 from "../../assets/images/fresh/1.png";
 import { Button, InputText, Text } from "../../components/atoms";
 import LoginPopUp from "../../components/molecules/PopUp/LoginPopUp";
 import { MainLayout } from "../../components/organisms";
 import { usePopUp } from "../../utils/usePopUp";
 import { useSelector } from "react-redux";
+import { useCartQuery } from "../../queries/cart";
 import {
   FormContactInformation,
   FormPayment,
@@ -19,14 +19,6 @@ const STEPS = [
   "Get full access",
 ];
 
-// Mock product data
-const PRODUCT = {
-  name: "Snowfall",
-  image: fresh_1,
-  price: 100,
-  quantity: 1,
-};
-
 // Breadcrumb Component
 const Breadcrumb = memo(({ steps, active, setActive }) => (
   <div className="flex gap-3 uppercase text-sm font-medium flex-wrap">
@@ -36,10 +28,10 @@ const Breadcrumb = memo(({ steps, active, setActive }) => (
         onClick={() => setActive(index)}
         disabled={index > active}
         className={`cursor-pointer px-4 py-2 rounded-full text-sm transition-all duration-200 ${index === active
-          ? "text-black font-semibold"
-          : index < active
-            ? "text-gray hover:text-black"
-            : "text-lightGray cursor-not-allowed"
+            ? "text-black font-semibold"
+            : index < active
+              ? "text-gray hover:text-black"
+              : "text-lightGray cursor-not-allowed"
           }`}
         aria-current={index === active ? "step" : undefined}
       >
@@ -82,27 +74,27 @@ const InactiveStep = memo(({ label }) => (
 InactiveStep.displayName = "InactiveStep";
 
 // Product Summary Component
-const ProductSummary = memo(({ product }) => (
+const ProductSummary = memo(({ item }) => (
   <div className="flex pb-6 gap-4 border-b border-lightGray">
     <img
       width={160}
       height={160}
-      src={product.image}
-      alt={product.name}
-      className="border object-cover"
+      src={item.product?.image_url || "https://placehold.co/160"}
+      alt={item.product?.name}
+      className="border object-cover w-[160px] h-[160px]"
       loading="lazy"
     />
     <div className="flex justify-between items-center flex-1">
       <div className="flex flex-col gap-2">
         <Text level="subtitle" color="black">
-          {product.name}
+          {item.product?.name}
         </Text>
         <Text level="body" color="black">
-          Quantity ({product.quantity})
+          Quantity ({item.quantity})
         </Text>
       </div>
       <Text level="subtitle" className="font-semibold">
-        ${product.price}
+        Rp. {(item.product?.price * item.quantity).toLocaleString('id-ID')}
       </Text>
     </div>
   </div>
@@ -160,6 +152,8 @@ const CheckOut = () => {
   });
 
   const { currentUser } = useSelector((state) => state.user);
+  const { data: cartData, isLoading: isCartLoading } = useCartQuery();
+  const cartItems = cartData?.data?.items || [];
 
   const {
     showPopUp: showLogin,
@@ -186,7 +180,9 @@ const CheckOut = () => {
     }));
   }, []);
 
-  const subtotal = PRODUCT.price * PRODUCT.quantity;
+  const subtotal = useMemo(() => {
+    return cartItems.reduce((sum, item) => sum + (item.product?.price || 0) * item.quantity, 0);
+  }, [cartItems]);
 
   return (
     <MainLayout>
@@ -260,8 +256,18 @@ const CheckOut = () => {
         <Text level="overline">ORDER SUMMARY</Text>
 
         <div className="flex flex-col gap-6">
-          {/* Product */}
-          <ProductSummary product={PRODUCT} />
+          {/* Product List */}
+          {isCartLoading ? (
+            <div className="flex justify-center py-10">
+              <div className="w-8 h-8 border-4 border-black border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : cartItems.length > 0 ? (
+            cartItems.map((item) => (
+              <ProductSummary key={item.id} item={item} />
+            ))
+          ) : (
+            <Text className="text-gray-500 py-4">Your cart is empty.</Text>
+          )}
 
           {/* Gift Card */}
           <GiftCardSection />
@@ -270,7 +276,7 @@ const CheckOut = () => {
           <div className="flex flex-col pb-6 gap-6 border-b border-lightGray">
             <div className="flex justify-between">
               <Text>Subtotal</Text>
-              <Text>${subtotal.toFixed(2)}</Text>
+              <Text>Rp. {subtotal.toLocaleString('id-ID')}</Text>
             </div>
             <div className="flex justify-between">
               <Text>Shipping</Text>
@@ -283,7 +289,7 @@ const CheckOut = () => {
             <div className="flex justify-between items-center">
               <Text level="h5">Total</Text>
               <Text level="h5" className="font-bold">
-                ${subtotal.toFixed(2)}
+                Rp. {subtotal.toLocaleString('id-ID')}
               </Text>
             </div>
             <div className="flex items-center justify-center gap-2 text-gray-600 py-4">
