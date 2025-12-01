@@ -1,10 +1,16 @@
 import { memo } from "react";
-import { FaUserCircle, FaBell } from "react-icons/fa";
+import { FaUserCircle, FaBell, FaBars } from "react-icons/fa";
 
-const AdminHeader = memo(() => {
+const AdminHeader = memo(({ onMenuClick }) => {
     return (
         <header className="h-16 bg-white dark:bg-dark-bg border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 transition-colors duration-300">
             <div className="flex items-center gap-4">
+                <button
+                    onClick={onMenuClick}
+                    className="md:hidden text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
+                >
+                    <FaBars className="text-xl" />
+                </button>
                 <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
                     Overview
                 </h2>
