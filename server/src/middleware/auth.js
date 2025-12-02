@@ -32,7 +32,7 @@ const requireAuth = async (req, res, next) => {
     const clerkUser = await clerk.users.getUser(clerkUserId);
 
     // Find or create local user
-    const [user] = await User.findOrCreate({
+    const [user, created] = await User.findOrCreate({
       where: { clerk_id: clerkUserId },
       defaults: {
         clerk_id: clerkUserId,
@@ -44,6 +44,13 @@ const requireAuth = async (req, res, next) => {
       }
     });
 
+    // Sync role if it changed in Clerk
+    const clerkRole = clerkUser.publicMetadata?.role || 'customer';
+    if (!created && user.role !== clerkRole) {
+      await user.update({ role: clerkRole });
+      console.log(`Synced role for user ${user.email}: ${user.role} -> ${clerkRole}`);
+    }
+
     // Attach local user info to request
     req.user = {
       id: user.id, // This is now the local UUID
@@ -52,7 +59,7 @@ const requireAuth = async (req, res, next) => {
       firstName: user.first_name,
       lastName: user.last_name,
       imageUrl: user.image_url,
-      role: user.role,
+      role: created ? clerkRole : (user.role !== clerkRole ? clerkRole : user.role), // Use the latest role
     };
 
     next();
@@ -129,11 +136,31 @@ const requireAdmin = async (req, res, next) => {
       });
     }
 
-    // Get user metadata from Clerk
-    const user = await clerk.users.getUser(req.user.clerk_id);
-    const isAdmin = user.publicMetadata?.role === 'admin';
+    // First check from local database user (already set in req.user by requireAuth)
+    const isAdmin = req.user.role === 'admin';
 
     if (!isAdmin) {
+      // Double check with Clerk as fallback and sync if needed
+      try {
+        const clerkUser = await clerk.users.getUser(req.user.clerk_id);
+        const clerkRole = clerkUser.publicMetadata?.role;
+
+        if (clerkRole === 'admin') {
+          // Sync the role to local database
+          const localUser = await User.findByPk(req.user.id);
+          if (localUser && localUser.role !== 'admin') {
+            await localUser.update({ role: 'admin' });
+            req.user.role = 'admin';
+            console.log(`Synced admin role for user ${req.user.email}`);
+          }
+          // Allow access
+          return next();
+        }
+      } catch (clerkError) {
+        console.error('Error checking Clerk admin status:', clerkError);
+      }
+
+      // If still not admin, deny access
       return res.status(403).json({
         success: false,
         message: 'Admin access required.'

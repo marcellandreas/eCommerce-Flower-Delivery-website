@@ -1,6 +1,40 @@
-import { memo } from "react";
+import { memo, useState } from "react";
+import { useUsers } from "../../hooks/useUsers";
+import { format } from "date-fns";
 
 const Users = memo(() => {
+    const [filterRole, setFilterRole] = useState("All");
+    const { data: usersData, isLoading, error } = useUsers();
+
+
+    const users = usersData?.data?.users || [];
+
+    console.log(usersData)
+
+    const filteredUsers = filterRole === "All"
+        ? users
+        : users.filter(user => user.role === filterRole.toLowerCase());
+
+    if (isLoading) return <div className="p-6">Loading users...</div>;
+
+    if (error) {
+        const errorMessage = error.response?.data?.message || error.message || 'Error loading users';
+        const errorStatus = error.response?.status;
+        return (
+            <div className="p-6 space-y-2">
+                <p className="text-red-500 font-semibold">Error loading users</p>
+                {errorStatus && <p className="text-gray-600 dark:text-gray-400">Status: {errorStatus}</p>}
+                <p className="text-gray-600 dark:text-gray-400">{errorMessage}</p>
+                <button
+                    onClick={() => window.location.reload()}
+                    className="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+                >
+                    Retry
+                </button>
+            </div>
+        );
+    }
+
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
@@ -18,10 +52,14 @@ const Users = memo(() => {
                             placeholder="Search users..."
                             className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
                         />
-                        <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white">
-                            <option>All Roles</option>
-                            <option>Admin</option>
-                            <option>Customer</option>
+                        <select
+                            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white"
+                            value={filterRole}
+                            onChange={(e) => setFilterRole(e.target.value)}
+                        >
+                            <option value="All">All Roles</option>
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
                         </select>
                     </div>
                 </div>
@@ -38,28 +76,40 @@ const Users = memo(() => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {/* Mock Data Row */}
-                            <tr className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-600"></div>
-                                        <div>
-                                            <p className="font-medium text-gray-800 dark:text-white">John Doe</p>
-                                            <p className="text-sm text-gray-500">john@example.com</p>
+                            {filteredUsers.map((user) => (
+                                <tr key={user._id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    <td className="px-6 py-4">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-gray-500">
+                                                {user.name?.charAt(0).toUpperCase()}
+                                            </div>
+                                            <div>
+                                                <p className="font-medium text-gray-800 dark:text-white">{user.name}</p>
+                                                <p className="text-sm text-gray-500">{user.email}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4 text-gray-600 dark:text-gray-300">Customer</td>
-                                <td className="px-6 py-4">
-                                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                                        Active
-                                    </span>
-                                </td>
-                                <td className="px-6 py-4 text-gray-600 dark:text-gray-300">Dec 1, 2023</td>
-                                <td className="px-6 py-4">
-                                    <button className="text-primary hover:text-primary-dark font-medium">Edit</button>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td className="px-6 py-4 text-gray-600 dark:text-gray-300 capitalize">{user.role}</td>
+                                    <td className="px-6 py-4">
+                                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td className="px-6 py-4 text-gray-600 dark:text-gray-300">
+                                        {user.createdAt ? format(new Date(user.createdAt), 'MMM dd, yyyy') : '-'}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <button className="text-primary hover:text-primary-dark font-medium">Edit</button>
+                                    </td>
+                                </tr>
+                            ))}
+                            {filteredUsers.length === 0 && (
+                                <tr>
+                                    <td colSpan="5" className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                                        No users found
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
