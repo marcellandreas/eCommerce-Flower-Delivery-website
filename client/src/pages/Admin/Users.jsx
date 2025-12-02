@@ -59,7 +59,7 @@ const Users = memo(() => {
                         >
                             <option value="All">All Roles</option>
                             <option value="admin">Admin</option>
-                            <option value="user">User</option>
+                            <option value="customer">Customer</option>
                         </select>
                     </div>
                 </div>
