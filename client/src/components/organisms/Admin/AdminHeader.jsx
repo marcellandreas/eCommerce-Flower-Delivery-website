@@ -1,7 +1,8 @@
 import { memo } from "react";
 import { FaUserCircle, FaBell, FaBars } from "react-icons/fa";
 
-const AdminHeader = memo(({ onMenuClick }) => {
+const AdminHeader = memo(({ onMenuClick, user }) => {
+    console.log(user, "test Admin HEader")
     return (
         <header className="h-16 bg-white dark:bg-dark-bg border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 transition-colors duration-300">
             <div className="flex items-center gap-4">
@@ -22,10 +23,22 @@ const AdminHeader = memo(({ onMenuClick }) => {
                 </button>
                 <div className="flex items-center gap-3 pl-6 border-l border-gray-200 dark:border-gray-700">
                     <div className="text-right hidden md:block">
-                        <p className="text-sm font-medium text-gray-800 dark:text-white">Admin User</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Administrator</p>
+                        <p className="text-sm font-medium text-gray-800 dark:text-white">
+                            {user?.first_name + " " + user?.last_name || 'Admin User'}
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
+                            {user?.role || 'Administrator'}
+                        </p>
                     </div>
-                    <FaUserCircle className="text-3xl text-gray-400" />
+                    {user?.image_url ? (
+                        <img
+                            src={user.image_url}
+                            alt={user.name}
+                            className="w-10 h-10 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600"
+                        />
+                    ) : (
+                        <FaUserCircle className="text-3xl text-gray-400" />
+                    )}
                 </div>
             </div>
         </header>
