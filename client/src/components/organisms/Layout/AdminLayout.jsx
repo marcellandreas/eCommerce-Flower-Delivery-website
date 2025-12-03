@@ -28,7 +28,7 @@ const AdminLayout = memo(() => {
     }
 
     return (
-        <div className="flex min-h-screen bg-gray-50 dark:bg-dark-bg transition-colors duration-300">
+        <div className="flex max-h-screen h-screen bg-gray-50 dark:bg-dark-bg transition-colors duration-300">
 
             {/* Overlay background for mobile */}
             {isOpen && (
