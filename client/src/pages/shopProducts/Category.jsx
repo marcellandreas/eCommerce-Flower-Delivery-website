@@ -77,14 +77,14 @@ const CategoryProductsPage = memo(() => {
     const [page, setPage] = useState(1);
 
     // Fetch category data
-    const { data: categories } = useCategories();
+    const { data: categoriesData } = useCategories();
+    const categories = categoriesData?.data || [];
 
     console.log('CategoryPage Params Name:', name);
     console.log('CategoryPage All Categories:', categories);
 
     const category = useMemo(() => {
-        const categoryList = Array.isArray(categories) ? categories : categories?.categories || [];
-        const found = categoryList.find(
+        const found = categories.find(
             (cat) => cat.slug === decodeURIComponent(name)
         );
         console.log('CategoryPage Found Category:', found);

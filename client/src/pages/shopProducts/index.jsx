@@ -66,7 +66,8 @@ HeroSection.displayName = "HeroSection";
 // Shop Products Page - All Categories
 export const ShopProductsPage = memo(() => {
   const handleBack = useBackMenu();
-  const { data: categories, isLoading, error } = useCategories();
+  const { data: categoriesData, isLoading, error } = useCategories();
+  const categories = categoriesData?.data || [];
 
   console.log("data categories", categories);
 

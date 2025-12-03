@@ -5,7 +5,8 @@ import { Layout } from "../../organisms";
 import { CardBanner } from "../../molecules";
 
 const Banner = () => {
-  const { data: categories, isLoading } = useCategories();
+  const { data: categoriesData, isLoading } = useCategories();
+  const categories = categoriesData?.data || [];
 
   return (
     <Layout>
