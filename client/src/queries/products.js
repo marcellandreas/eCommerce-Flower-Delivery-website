@@ -59,7 +59,8 @@ export const useCreateProductMutation = () => {
     return useMutation({
         mutationFn: (newProduct) => api.post('/products', newProduct),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: productKeys.lists() });
+            // Invalidate all product queries (including lists with different filters)
+            queryClient.invalidateQueries({ queryKey: productKeys.all });
         },
     });
 };
@@ -71,7 +72,7 @@ export const useUpdateProductMutation = () => {
         mutationFn: ({ id, data }) => api.put(`/products/${id}`, data),
         onSuccess: (data, variables) => {
             queryClient.invalidateQueries({ queryKey: productKeys.detail(variables.id) });
-            queryClient.invalidateQueries({ queryKey: productKeys.lists() });
+            queryClient.invalidateQueries({ queryKey: productKeys.all });
         },
     });
 };
@@ -82,7 +83,7 @@ export const useDeleteProductMutation = () => {
     return useMutation({
         mutationFn: (id) => api.delete(`/products/${id}`),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: productKeys.lists() });
+            queryClient.invalidateQueries({ queryKey: productKeys.all });
         },
     });
 };
