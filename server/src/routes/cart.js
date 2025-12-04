@@ -1,8 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const cartController = require('../controllers/cartController');
-const { optionalAuth } = require('../middleware/auth');
+const { optionalAuth, requireAuth, requireAdmin } = require('../middleware/auth');
 const { cartValidators } = require('../middleware/validator');
+
+// All cart routes support both authenticated and guest users
+// Admin route
+router.get('/all', requireAuth, requireAdmin, cartController.getAllCarts);
 
 // All cart routes support both authenticated and guest users
 router.get('/', optionalAuth, cartController.getCart);

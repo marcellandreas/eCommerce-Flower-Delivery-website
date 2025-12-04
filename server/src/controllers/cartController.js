@@ -1,11 +1,6 @@
-const { Cart, CartItem, Product } = require('../models');
-const { asyncHandler } = require('../middleware/errorHandler');
+const { AppError, asyncHandler } = require('../middleware/errorHandler');
+const { Cart, CartItem, Product, User } = require('../models');
 
-
-/**
- * Get user's cart
- * @route GET /api/v1/cart
- */
 exports.getCart = asyncHandler(async (req, res) => {
   let cart;
 
@@ -254,5 +249,56 @@ exports.clearCart = asyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     message: 'Cart cleared',
+  });
+});
+
+/**
+ * Get all carts (Admin only)
+ * @route GET /api/v1/cart/all
+ */
+exports.getAllCarts = asyncHandler(async (req, res) => {
+  const carts = await Cart.findAll({
+    include: [
+      {
+        model: User,
+        as: 'user',
+        attributes: ['id', 'first_name', 'last_name', 'email', 'image_url'],
+      },
+      {
+        model: CartItem,
+        as: 'items',
+        include: [
+          {
+            model: Product,
+            as: 'product',
+            attributes: ['id', 'name', 'slug', 'price', 'image_url', 'stock_quantity'],
+          },
+        ],
+      },
+    ],
+    order: [['updated_at', 'DESC']],
+  });
+
+  // Filter out empty carts
+  const activeCarts = carts.filter(cart => cart.items.length > 0);
+
+  const formattedCarts = activeCarts.map(cart => {
+    const subtotal = cart.items.reduce((sum, item) => {
+      return sum + parseFloat(item.product.price) * item.quantity;
+    }, 0);
+
+    return {
+      id: cart.id,
+      user: cart.user,
+      session_id: cart.session_id,
+      items: cart.items,
+      subtotal: subtotal.toFixed(2),
+      updatedAt: cart.updatedAt,
+    };
+  });
+
+  res.status(200).json({
+    success: true,
+    data: formattedCarts,
   });
 });
