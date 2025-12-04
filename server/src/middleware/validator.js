@@ -17,7 +17,7 @@ const productValidators = {
     body('name').trim().notEmpty().withMessage('Product name is required'),
     body('slug').trim().notEmpty().withMessage('Product slug is required'),
     body('price').isFloat({ min: 0 }).withMessage('Price must be a positive number'),
-    body('category_id').isUUID().withMessage('Valid category ID is required'),
+    body('category_id').trim().notEmpty().withMessage('Valid category ID is required'),
     body('stock_quantity').optional().isInt({ min: 0 }).withMessage('Stock must be non-negative'),
     validate,
   ],
