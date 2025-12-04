@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
 const { requireAuth, requireAdmin } = require('../middleware/auth');
+const { upload } = require('../middleware/multer');
 const { productValidators, queryValidators } = require('../middleware/validator');
 
 // Public routes
@@ -15,6 +16,7 @@ router.post(
   '/',
   requireAuth,
   requireAdmin,
+  upload.single("image"),
   productValidators.create,
   productController.createProduct
 );
@@ -23,6 +25,7 @@ router.put(
   '/:id',
   requireAuth,
   requireAdmin,
+  upload.single("image"),
   productValidators.update,
   productController.updateProduct
 );
