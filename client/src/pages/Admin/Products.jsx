@@ -1,15 +1,23 @@
 import { memo, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useProducts, useCreateProduct } from "../../hooks/useProducts";
+import { useProducts, useCreateProduct, useUpdateProduct, useDeleteProduct } from "../../hooks/useProducts";
 import { useCategories } from "../../hooks/useCategories";
 import { setCategories } from "../../store/slices/categoriesSlice";
-import { FaEdit, FaTrash, FaTimes } from "react-icons/fa";
+import { FaEdit, FaTrash, FaTimes, FaExclamationTriangle } from "react-icons/fa";
+import { generateSlug } from "../../utils/string";
 
 const Products = memo(() => {
     const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
+
+    // State for Create/Edit Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingProduct, setEditingProduct] = useState(null);
+
+    // State for Delete Confirmation Modal
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [productToDelete, setProductToDelete] = useState(null);
 
     // Get categories from Redux
     const categoriesFromRedux = useSelector((state) => state.categories.categories);
@@ -29,61 +37,153 @@ const Products = memo(() => {
     });
 
     const createMutation = useCreateProduct();
+    const updateMutation = useUpdateProduct();
+    const deleteMutation = useDeleteProduct();
 
     const products = productsData?.data?.products || [];
 
     // Form state
     const [formData, setFormData] = useState({
         name: "",
+        slug: "",
         description: "",
         price: "",
         stock_quantity: "",
         category_id: "",
         image_url: "",
-        sku: "",
+
     });
 
-    const handleOpenModal = () => {
-        setFormData({
-            name: "",
-            description: "",
-            price: "",
-            stock_quantity: "",
-            category_id: "",
-            image_url: "",
-            sku: "",
-        });
+    // --- Handlers for Create/Edit ---
+
+    const handleNameChange = (e) => {
+        const name = e.target.value;
+        // Auto-generate slug only if creating new product
+        if (!editingProduct) {
+            const slug = generateSlug(name);
+            setFormData(prev => ({ ...prev, name, slug }));
+        } else {
+            setFormData(prev => ({ ...prev, name }));
+        }
+    };
+
+    const handleOpenModal = (product = null) => {
+        if (product) {
+            // Editing existing product
+            setEditingProduct(product);
+            setFormData({
+                name: product.name,
+                slug: product.slug,
+                description: product.description || "",
+                price: product.price,
+                stock_quantity: product.stock_quantity,
+                category_id: product.category_id,
+                image_url: "",
+            });
+        } else {
+            // Creating new product
+            setEditingProduct(null);
+            setFormData({
+                name: "",
+                slug: "",
+                description: "",
+                price: "",
+                stock_quantity: "",
+                category_id: "",
+                image_url: "",
+            });
+        }
         setIsModalOpen(true);
     };
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+        setEditingProduct(null);
         setFormData({
             name: "",
+            slug: "",
             description: "",
             price: "",
             stock_quantity: "",
             category_id: "",
             image_url: "",
-            sku: "",
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validation: check if category is selected
+        if (!formData.category_id) {
+            alert("Please select a category");
+            return;
+        }
+
         try {
-            await createMutation.mutateAsync({
-                ...formData,
-                price: parseFloat(formData.price),
-                stock_quantity: parseInt(formData.stock_quantity),
-                category_id: parseInt(formData.category_id),
-            });
+            if (editingProduct) {
+                // UPDATE: Use FormData for update as well (to support image update)
+                const body = new FormData();
+                body.append("name", formData.name);
+                body.append("slug", formData.slug);
+                body.append("description", formData.description);
+                body.append("price", parseFloat(formData.price));
+                body.append("stock_quantity", parseInt(formData.stock_quantity));
+                body.append("category_id", formData.category_id);
+
+                // Only append image if a new file is selected
+                if (formData.image_url && typeof formData.image_url === 'object') {
+                    body.append("image", formData.image_url);
+                }
+
+                await updateMutation.mutateAsync({ id: editingProduct.id, data: body });
+            } else {
+                // CREATE: Use FormData
+                const body = new FormData();
+                body.append("name", formData.name);
+                body.append("slug", formData.slug);
+                body.append("description", formData.description);
+                body.append("price", parseFloat(formData.price));
+                body.append("stock_quantity", parseInt(formData.stock_quantity));
+                body.append("category_id", formData.category_id);
+
+                // Only append image if file is selected
+                if (formData.image_url) {
+                    body.append("image", formData.image_url);
+                }
+
+                await createMutation.mutateAsync(body);
+            }
             handleCloseModal();
         } catch (err) {
-            console.error("Failed to create product:", err);
-            alert("Failed to create product: " + (err.response?.data?.message || err.message));
+            console.error("Failed to save product:", err);
+            alert("Failed to save product: " + (err.response?.data?.message || err.message));
         }
     };
+
+    // --- Handlers for Delete ---
+
+    const handleOpenDeleteModal = (product) => {
+        setProductToDelete(product);
+        setIsDeleteModalOpen(true);
+    };
+
+    const handleCloseDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+        setProductToDelete(null);
+    };
+
+    const handleConfirmDelete = async () => {
+        if (!productToDelete) return;
+
+        try {
+            await deleteMutation.mutateAsync(productToDelete.id);
+            handleCloseDeleteModal();
+        } catch (err) {
+            console.error("Failed to delete product:", err);
+            alert("Failed to delete product: " + (err.response?.data?.message || err.message));
+        }
+    };
+
 
     if (isLoading) return <div className="p-6">Loading products...</div>;
     if (error) return <div className="p-6 text-red-500">Error loading products: {error.message}</div>;
@@ -93,7 +193,7 @@ const Products = memo(() => {
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Products Management</h1>
                 <button
-                    onClick={handleOpenModal}
+                    onClick={() => handleOpenModal(null)}
                     className="px-4 py-2 bg-primary text-black rounded-lg hover:bg-primary-dark transition-colors shadow-lg border border-black"
                 >
                     Add New Product
@@ -156,7 +256,7 @@ const Products = memo(() => {
                                             </div>
                                             <div>
                                                 <p className="font-medium text-gray-800 dark:text-white">{product.name}</p>
-                                                <p className="text-sm text-gray-500">SKU: {product.sku || 'N/A'}</p>
+
                                             </div>
                                         </div>
                                     </td>
@@ -177,13 +277,15 @@ const Products = memo(() => {
                                     <td className="px-6 py-4">
                                         <div className="flex items-center justify-center gap-3">
                                             <button
-                                                className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                                onClick={() => handleOpenModal(product)}
+                                                className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
                                                 title="Edit"
                                             >
                                                 <FaEdit size={18} />
                                             </button>
                                             <button
-                                                className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                                onClick={() => handleOpenDeleteModal(product)}
+                                                className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                                                 title="Delete"
                                             >
                                                 <FaTrash size={18} />
@@ -204,7 +306,7 @@ const Products = memo(() => {
                 </div>
             </div>
 
-            {/* Add Product Modal */}
+            {/* Add/Edit Product Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
                     <div
@@ -213,7 +315,7 @@ const Products = memo(() => {
                     >
                         <div className="flex justify-between items-center p-6 border-b border-gray-100 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800 z-10">
                             <h2 className="text-xl font-bold text-gray-800 dark:text-white">
-                                Add New Product
+                                {editingProduct ? "Edit Product" : "Add New Product"}
                             </h2>
                             <button
                                 onClick={handleCloseModal}
@@ -233,26 +335,16 @@ const Products = memo(() => {
                                     <input
                                         type="text"
                                         value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                        onChange={handleNameChange}
                                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary transition-shadow"
                                         placeholder="e.g. Red Rose Bouquet"
                                         required
                                     />
                                 </div>
 
-                                {/* SKU */}
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                        SKU
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={formData.sku}
-                                        onChange={(e) => setFormData({ ...formData, sku: e.target.value })}
-                                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary transition-shadow"
-                                        placeholder="e.g. RRB-001"
-                                    />
-                                </div>
+                                {/* Slug field is hidden as it is auto-generated */}
+
+
 
                                 {/* Category */}
                                 <div>
@@ -307,17 +399,29 @@ const Products = memo(() => {
                                     />
                                 </div>
 
-                                {/* Image URL */}
+                                {/* Upload Image */}
                                 <div className="col-span-2">
                                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                        Image URL
+                                        Product Image {editingProduct && "(Upload new to replace)"}
                                     </label>
+
+                                    {/* Show current image if editing */}
+                                    {editingProduct && editingProduct.image_url && (
+                                        <div className="mb-2">
+                                            <img
+                                                src={editingProduct.image_url}
+                                                alt="Current product"
+                                                className="w-24 h-24 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+                                            />
+                                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Current image</p>
+                                        </div>
+                                    )}
+
                                     <input
-                                        type="url"
-                                        value={formData.image_url}
-                                        onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={(e) => setFormData({ ...formData, image_url: e.target.files[0] })}
                                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary transition-shadow"
-                                        placeholder="https://example.com/image.jpg"
                                     />
                                 </div>
 
@@ -346,13 +450,45 @@ const Products = memo(() => {
                                 </button>
                                 <button
                                     type="submit"
-                                    disabled={createMutation.isPending}
+                                    disabled={createMutation.isPending || updateMutation.isPending}
                                     className="px-6 py-2 bg-primary text-black rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 shadow-lg border border-black"
                                 >
-                                    {createMutation.isPending ? "Creating..." : "Create Product"}
+                                    {createMutation.isPending || updateMutation.isPending
+                                        ? "Saving..."
+                                        : editingProduct ? "Update Product" : "Create Product"}
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Delete Confirmation Modal */}
+            {isDeleteModalOpen && (
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+                    <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-sm shadow-2xl p-6 text-center">
+                        <div className="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <FaExclamationTriangle className="text-red-500 text-2xl" />
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">Delete Product?</h3>
+                        <p className="text-gray-600 dark:text-gray-300 mb-6">
+                            Are you sure you want to delete <span className="font-semibold text-gray-800 dark:text-white">"{productToDelete?.name}"</span>? This action cannot be undone.
+                        </p>
+                        <div className="flex justify-center gap-3">
+                            <button
+                                onClick={handleCloseDeleteModal}
+                                className="px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleConfirmDelete}
+                                disabled={deleteMutation.isPending}
+                                className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 shadow-lg shadow-red-500/30"
+                            >
+                                {deleteMutation.isPending ? "Deleting..." : "Delete"}
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
