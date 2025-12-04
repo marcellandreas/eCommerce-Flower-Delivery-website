@@ -44,3 +44,16 @@ export const useCreateOrderMutation = () => {
         },
     });
 };
+
+export const useUpdateOrderStatus = () => {
+    const api = useApi();
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: ({ id, status }) => api.patch(`/orders/${id}/status`, { status }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: orderKeys.lists() });
+            queryClient.invalidateQueries({ queryKey: orderKeys.details() });
+        },
+    });
+};

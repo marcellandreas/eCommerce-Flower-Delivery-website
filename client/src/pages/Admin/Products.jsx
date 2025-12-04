@@ -5,6 +5,7 @@ import { useCategories } from "../../hooks/useCategories";
 import { setCategories } from "../../store/slices/categoriesSlice";
 import { FaEdit, FaTrash, FaTimes, FaExclamationTriangle } from "react-icons/fa";
 import { generateSlug } from "../../utils/string";
+import { usePopUp } from "../../utils/usePopUp";
 
 const Products = memo(() => {
     const dispatch = useDispatch();
@@ -12,11 +13,11 @@ const Products = memo(() => {
     const [selectedCategory, setSelectedCategory] = useState("");
 
     // State for Create/Edit Modal
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { showPopUp: isModalOpen, handleOpenPopUp: openModal, handleClosePopUp: closeModal } = usePopUp();
     const [editingProduct, setEditingProduct] = useState(null);
 
     // State for Delete Confirmation Modal
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const { showPopUp: isDeleteModalOpen, handleOpenPopUp: openDeleteModal, handleClosePopUp: closeDeleteModal } = usePopUp();
     const [productToDelete, setProductToDelete] = useState(null);
 
     // Get categories from Redux
@@ -93,11 +94,11 @@ const Products = memo(() => {
                 image_url: "",
             });
         }
-        setIsModalOpen(true);
+        openModal();
     };
 
     const handleCloseModal = () => {
-        setIsModalOpen(false);
+        closeModal();
         setEditingProduct(null);
         setFormData({
             name: "",
@@ -164,11 +165,11 @@ const Products = memo(() => {
 
     const handleOpenDeleteModal = (product) => {
         setProductToDelete(product);
-        setIsDeleteModalOpen(true);
+        openDeleteModal();
     };
 
     const handleCloseDeleteModal = () => {
-        setIsDeleteModalOpen(false);
+        closeDeleteModal();
         setProductToDelete(null);
     };
 
@@ -189,126 +190,128 @@ const Products = memo(() => {
     if (error) return <div className="p-6 text-red-500">Error loading products: {error.message}</div>;
 
     return (
-        <div className="space-y-6 max-h-screen ">
-            <div className="flex justify-between items-center">
-                <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Products Management</h1>
-                <button
-                    onClick={() => handleOpenModal(null)}
-                    className="px-4 py-2 bg-primary text-black rounded-lg hover:bg-primary-dark transition-colors shadow-lg border border-black"
-                >
-                    Add New Product
-                </button>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-                    <div className="flex gap-4">
-                        <input
-                            type="text"
-                            placeholder="Search products..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
-                        />
-                        <select
-                            value={selectedCategory}
-                            onChange={(e) => setSelectedCategory(e.target.value)}
-                            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white"
-                        >
-                            <option value="">All Categories</option>
-                            {categoriesFromRedux.map((category) => (
-                                <option key={category.id} value={category.slug}>
-                                    {category.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+        <>
+            <div className="space-y-6 h-[90vh]">
+                <div className="flex justify-between items-center">
+                    <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Products Management</h1>
+                    <button
+                        onClick={() => handleOpenModal(null)}
+                        className="px-4 py-2 bg-primary text-black rounded-lg hover:bg-primary-dark transition-colors shadow-lg border border-black"
+                    >
+                        Add New Product
+                    </button>
                 </div>
 
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left">
-                        <thead className="bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 uppercase text-xs font-semibold">
-                            <tr>
-                                <th className="px-6 py-4">Product</th>
-                                <th className="px-6 py-4">Category</th>
-                                <th className="px-6 py-4">Price</th>
-                                <th className="px-6 py-4">Stock</th>
-                                <th className="px-6 py-4 text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {products.map((product) => (
-                                <tr key={product.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                                    <td className="px-6 py-4">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-12 h-12 rounded-lg bg-gray-200 dark:bg-gray-600 overflow-hidden">
-                                                {product.image_url ? (
-                                                    <img
-                                                        src={product.image_url}
-                                                        alt={product.name}
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                ) : (
-                                                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                                                        <span className="text-xs">No img</span>
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="font-medium text-gray-800 dark:text-white">{product.name}</p>
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col h-[calc(100vh-140px)]">
+                    <div className="p-6 border-b border-gray-200 dark:border-gray-700 shrink-0">
+                        <div className="flex gap-4">
+                            <input
+                                type="text"
+                                placeholder="Search products..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                            />
+                            <select
+                                value={selectedCategory}
+                                onChange={(e) => setSelectedCategory(e.target.value)}
+                                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white"
+                            >
+                                <option value="">All Categories</option>
+                                {categoriesFromRedux.map((category) => (
+                                    <option key={category.id} value={category.slug}>
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
 
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="px-6 py-4 text-gray-600 dark:text-gray-300">
-                                        {product.category?.name || 'Uncategorized'}
-                                    </td>
-                                    <td className="px-6 py-4 text-gray-800 dark:text-white font-medium">
-                                        ${parseFloat(product.price).toFixed(2)}
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${product.stock_quantity > 0
-                                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                                            : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-                                            }`}>
-                                            {product.stock_quantity > 0 ? `In Stock (${product.stock_quantity})` : 'Out of Stock'}
-                                        </span>
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <div className="flex items-center justify-center gap-3">
-                                            <button
-                                                onClick={() => handleOpenModal(product)}
-                                                className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
-                                                title="Edit"
-                                            >
-                                                <FaEdit size={18} />
-                                            </button>
-                                            <button
-                                                onClick={() => handleOpenDeleteModal(product)}
-                                                className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                                                title="Delete"
-                                            >
-                                                <FaTrash size={18} />
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                            {products.length === 0 && (
+                    <div className="overflow-auto flex-1">
+                        <table className="w-full text-left relative">
+                            <thead className="bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 uppercase text-xs font-semibold sticky top-0 z-10">
                                 <tr>
-                                    <td colSpan="5" className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
-                                        No products found
-                                    </td>
+                                    <th className="px-6 py-4 bg-gray-50 dark:bg-gray-700">Product</th>
+                                    <th className="px-6 py-4 bg-gray-50 dark:bg-gray-700">Category</th>
+                                    <th className="px-6 py-4 bg-gray-50 dark:bg-gray-700">Price</th>
+                                    <th className="px-6 py-4 bg-gray-50 dark:bg-gray-700">Stock</th>
+                                    <th className="px-6 py-4 text-center bg-gray-50 dark:bg-gray-700">Actions</th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                {products.map((product) => (
+                                    <tr key={product.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-12 h-12 rounded-lg bg-gray-200 dark:bg-gray-600 overflow-hidden shrink-0">
+                                                    {product.image_url ? (
+                                                        <img
+                                                            src={product.image_url}
+                                                            alt={product.name}
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    ) : (
+                                                        <div className="w-full h-full flex items-center justify-center text-gray-400">
+                                                            <span className="text-xs">No img</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="font-medium text-gray-800 dark:text-white">{product.name}</p>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 text-gray-600 dark:text-gray-300">
+                                            {product.category?.name || 'Uncategorized'}
+                                        </td>
+                                        <td className="px-6 py-4 text-gray-800 dark:text-white font-medium">
+                                            ${parseFloat(product.price).toFixed(2)}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className={`px-3 py-1 rounded-full text-xs font-medium ${product.stock_quantity > 0
+                                                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                                                : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                                                }`}>
+                                                {product.stock_quantity > 0 ? `In Stock (${product.stock_quantity})` : 'Out of Stock'}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center justify-center gap-3">
+                                                <button
+                                                    onClick={() => handleOpenModal(product)}
+                                                    className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+                                                    title="Edit"
+                                                >
+                                                    <FaEdit size={18} />
+                                                </button>
+                                                <button
+                                                    onClick={() => handleOpenDeleteModal(product)}
+                                                    className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                                                    title="Delete"
+                                                >
+                                                    <FaTrash size={18} />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {products.length === 0 && (
+                                    <tr>
+                                        <td colSpan="5" className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                                            No products found
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
             {/* Add/Edit Product Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm h-screen">
                     <div
                         className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-2xl shadow-2xl transform transition-all scale-100 opacity-100 max-h-[90vh] overflow-y-auto"
                         onClick={(e) => e.stopPropagation()}
@@ -492,7 +495,7 @@ const Products = memo(() => {
                     </div>
                 </div>
             )}
-        </div>
+        </>
     );
 });
 
