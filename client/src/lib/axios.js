@@ -23,6 +23,12 @@ export const useApi = () => {
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }
+
+        // If sending FormData, remove Content-Type header
+        // Browser will set it automatically with correct boundary
+        if (config.data instanceof FormData) {
+          delete config.headers['Content-Type'];
+        }
       } catch (error) {
         console.error("Error fetching token from Clerk:", error);
       }
