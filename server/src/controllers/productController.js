@@ -1,4 +1,5 @@
 const { Product, Category } = require('../models');
+const cloudinary = require('../config/cloudinary');
 const { AppError, asyncHandler } = require('../middleware/errorHandler');
 const { Op } = require('sequelize');
 
@@ -120,24 +121,30 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
     price,
     compare_at_price,
     stock_quantity,
-    image_url,
-    images,
     is_featured,
     metadata,
   } = req.body;
 
-  // Check if category exists
+  const imageFile = req.file; // file tunggal
+
+  // Check category
   const category = await Category.findByPk(category_id);
-  if (!category) {
-    return next(new AppError('Category not found', 404));
-  }
+  if (!category) return next(new AppError("Category not found", 404));
 
-  // Check if slug already exists
+  // Check slug
   const existingProduct = await Product.findOne({ where: { slug } });
-  if (existingProduct) {
-    return next(new AppError('Product with this slug already exists', 409));
+  if (existingProduct) return next(new AppError("Product with this slug already exists", 409));
+
+  // Upload Cloudinary jika ada file
+  let imageUrl = null;
+  if (imageFile) {
+    const result = await cloudinary.uploader.upload(imageFile.path, {
+      resource_type: "image",
+    });
+    imageUrl = result.secure_url;
   }
 
+  // Create product
   const product = await Product.create({
     category_id,
     name,
@@ -146,18 +153,19 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
     price,
     compare_at_price,
     stock_quantity: stock_quantity || 0,
-    image_url,
-    images: images || [],
+    image_url: imageUrl,
     is_featured: is_featured || false,
     metadata: metadata || {},
   });
 
   res.status(201).json({
     success: true,
-    message: 'Product created successfully',
+    message: "Product created successfully",
     data: product,
   });
 });
+
+
 
 /**
  * Update product (Admin only)
@@ -166,37 +174,48 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
 exports.updateProduct = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const updates = req.body;
+  const imageFile = req.file;
 
   const product = await Product.findByPk(id);
 
   if (!product) {
-    return next(new AppError('Product not found', 404));
+    return next(new AppError("Product not found", 404));
   }
 
-  // If slug is being updated, check uniqueness
+  // If slug is being updated, check if slug exists
   if (updates.slug && updates.slug !== product.slug) {
     const existingProduct = await Product.findOne({ where: { slug: updates.slug } });
     if (existingProduct) {
-      return next(new AppError('Product with this slug already exists', 409));
+      return next(new AppError("Product with this slug already exists", 409));
     }
   }
 
-  // If category is being updated, verify it exists
+  // If category is updated, check category existence
   if (updates.category_id) {
     const category = await Category.findByPk(updates.category_id);
     if (!category) {
-      return next(new AppError('Category not found', 404));
+      return next(new AppError("Category not found", 404));
     }
+  }
+
+  // Upload new image if image uploaded
+  if (imageFile) {
+    const result = await cloudinary.uploader.upload(imageFile.path, {
+      resource_type: "image",
+    });
+
+    updates.image_url = result.secure_url; // replace old with new
   }
 
   await product.update(updates);
 
   res.status(200).json({
     success: true,
-    message: 'Product updated successfully',
+    message: "Product updated successfully",
     data: product,
   });
 });
+
 
 /**
  * Delete product (Admin only)
