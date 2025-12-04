@@ -11,6 +11,7 @@ import AdminLayout from "./components/organisms/Layout/AdminLayout";
 import Products from "./pages/Admin/Products";
 import Users from "./pages/Admin/Users";
 import Orders from "./pages/Admin/Orders";
+import Carts from "./pages/Admin/Carts";
 
 // Lazy load pages for better performance
 const LandingPage = lazy(() => import("./pages/Landing"));
@@ -90,6 +91,7 @@ const App = () => {
               <Route path="users" element={<Users />} />
               <Route path="orders" element={<Orders />} />
               <Route path="products" element={<Products />} />
+              <Route path="carts" element={<Carts />} />
             </Route>
           </Routes>
         </Suspense>
