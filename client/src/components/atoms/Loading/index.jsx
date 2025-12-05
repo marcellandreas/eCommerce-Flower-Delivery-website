@@ -1,10 +1,12 @@
+import { Text } from "../Text";
+
 const Loading = () => {
     return (
-        <div className="flex items-center justify-center h-full">
-            {/* <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div> */}
+        <div className="flex flex-col gap-2 items-center justify-center h-full">
             <div className="w-16 h-16 border-4 border-black dark:border-white border-t-transparent rounded-full animate-spin" />
+            <Text level="body" className="text-center text-dark-textSecondary">Loading...</Text>
         </div>
     );
 };
 
-export default Loading;
+export { Loading }
