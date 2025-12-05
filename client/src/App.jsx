@@ -1,19 +1,27 @@
-import { useEffect, lazy, Suspense } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+// import aos for animation
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { ThemeProvider } from "./context/ThemeContext";
-import ExampleProducts from "./pages/ExampleProducts";
-import UserSync from "./components/auth/UserSync";
-import Dashboard from "./pages/Admin/Dashboard";
-import Categories from "./pages/Admin/Categories";
-import AdminLayout from "./components/organisms/Layout/AdminLayout";
-import Products from "./pages/Admin/Products";
-import Users from "./pages/Admin/Users";
-import Orders from "./pages/Admin/Orders";
-import Carts from "./pages/Admin/Carts";
 
-// Lazy load pages for better performance
+// import react dependencies
+import { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
+// import components
+import UserSync from "./components/auth/UserSync";
+import { ThemeProvider } from "./context/ThemeContext";
+
+// lazy load pages for admin
+const Dashboard = lazy(() => import("./pages/Admin/Dashboard"));
+const Categories = lazy(() => import("./pages/Admin/Categories"));
+const AdminLayout = lazy(() => import("./components/organisms/Layout/AdminLayout"));
+const Products = lazy(() => import("./pages/Admin/Products"));
+const Users = lazy(() => import("./pages/Admin/Users"));
+const Orders = lazy(() => import("./pages/Admin/Orders"));
+const Carts = lazy(() => import("./pages/Admin/Carts"));
+const ExampleProducts = lazy(() => import("./pages/ExampleProducts"));
+
+
+// Lazy load pages for user
 const LandingPage = lazy(() => import("./pages/Landing"));
 const CategoryProductsPage = lazy(() => import("./pages/shopProducts/Category"));
 const ShopProductsPage = lazy(() => import("./pages/shopProducts"));
@@ -59,6 +67,9 @@ const App = () => {
         <UserSync />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
+            {/* not found */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+
             {/* Home */}
             <Route path="/" element={<LandingPage />} />
 
