@@ -1,6 +1,6 @@
 import { useState, useCallback, memo, useEffect, useMemo } from "react";
 import { MdCheck, MdEditSquare, MdLock } from "react-icons/md";
-import { Button, InputText, Text } from "../../components/atoms";
+import { Button, InputText, Loading, Text } from "../../components/atoms";
 import LoginPopUp from "../../components/molecules/PopUp/LoginPopUp";
 import { MainLayout } from "../../components/organisms";
 import { usePopUp } from "../../utils/usePopUp";
@@ -28,10 +28,10 @@ const Breadcrumb = memo(({ steps, active, setActive }) => (
         onClick={() => setActive(index)}
         disabled={index > active}
         className={`cursor-pointer px-4 py-2 rounded-full text-sm transition-all duration-200 ${index === active
-            ? "text-black font-semibold"
-            : index < active
-              ? "text-gray hover:text-black"
-              : "text-lightGray cursor-not-allowed"
+          ? "text-black font-semibold"
+          : index < active
+            ? "text-gray hover:text-black"
+            : "text-lightGray cursor-not-allowed"
           }`}
         aria-current={index === active ? "step" : undefined}
       >
@@ -258,9 +258,7 @@ const CheckOut = () => {
         <div className="flex flex-col gap-6">
           {/* Product List */}
           {isCartLoading ? (
-            <div className="flex justify-center py-10">
-              <div className="w-8 h-8 border-4 border-black border-t-transparent rounded-full animate-spin" />
-            </div>
+            <Loading />
           ) : cartItems.length > 0 ? (
             cartItems.map((item) => (
               <ProductSummary key={item.id} item={item} />

@@ -1,6 +1,7 @@
 import { memo, useState } from "react";
 import { useUsers } from "../../hooks/useUsers";
 import { format } from "date-fns";
+import { Loading } from "../../components/atoms";
 
 const Users = memo(() => {
     const [filterRole, setFilterRole] = useState("All");
@@ -20,7 +21,7 @@ const Users = memo(() => {
         return matchesRole && matchesSearch;
     });
 
-    if (isLoading) return <div className="p-6">Loading users...</div>;
+    if (isLoading) return <Loading />
 
     if (error) {
         const errorMessage = error.response?.data?.message || error.message || 'Error loading users';

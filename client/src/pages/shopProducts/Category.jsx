@@ -2,7 +2,7 @@ import { memo, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaAnglesLeft } from "react-icons/fa6";
 import { useParams, Navigate } from "react-router-dom";
-import { Text } from "../../components/atoms";
+import { Loading, Text } from "../../components/atoms";
 import { CardItem } from "../../components/molecules";
 import { useBackMenu } from "../../utils/usePopUp";
 import { MainLayout } from "../../components/organisms";
@@ -11,12 +11,6 @@ import { useCategories } from "../../hooks/useCategories";
 import { useAddToCartMutation } from "../../queries/cart";
 import { showToast } from "../../store/slices/uiSlice";
 
-// Loading Component
-const LoadingSpinner = () => (
-    <div className="flex items-center justify-center min-h-[400px]">
-        <div className="w-16 h-16 border-4 border-black dark:border-white border-t-transparent rounded-full animate-spin" />
-    </div>
-);
 
 // Error Component
 const ErrorMessage = ({ message }) => (
@@ -139,7 +133,7 @@ const CategoryProductsPage = memo(() => {
         // return <Navigate to="/shop" replace />;
     }
 
-    if (isLoading) return <LoadingSpinner />;
+    if (isLoading) return <Loading />;
     if (error) return <ErrorMessage message={error.message} />;
 
     const products = productsData?.data?.products || [];

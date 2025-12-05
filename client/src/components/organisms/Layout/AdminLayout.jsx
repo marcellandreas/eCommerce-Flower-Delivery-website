@@ -3,6 +3,7 @@ import { Outlet, Navigate, useLocation } from "react-router-dom";
 import AdminSidebar from "../Admin/AdminSidebar";
 import AdminHeader from "../Admin/AdminHeader";
 import { useCurrentUser } from "../../../hooks/useUsers";
+import { Loading } from "../../atoms";
 
 const AdminLayout = memo(() => {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ const AdminLayout = memo(() => {
     if (isLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-dark-bg">
-                <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+                <Loading />
             </div>
         );
     }

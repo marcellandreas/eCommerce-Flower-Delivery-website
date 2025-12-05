@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import { useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory } from "../../hooks/useCategories";
 import { format } from "date-fns";
 import { FaEdit, FaTrash, FaTimes, FaExclamationTriangle } from "react-icons/fa";
+import { Loading } from "../../components/atoms";
 
 const Categories = memo(() => {
     const { data: categoriesData, isLoading, error } = useCategories();
@@ -93,7 +94,7 @@ const Categories = memo(() => {
         }
     };
 
-    if (isLoading) return <div className="p-6">Loading categories...</div>;
+    if (isLoading) return <Loading />;
     if (error) return <div className="p-6 text-red-500">Error loading categories: {error.message}</div>;
 
     return (

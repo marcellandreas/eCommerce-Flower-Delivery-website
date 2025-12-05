@@ -1,17 +1,10 @@
 import { memo } from "react";
 import { FaAnglesLeft } from "react-icons/fa6";
-import { Text } from "../../components/atoms";
+import { Loading, Text } from "../../components/atoms";
 import { CardBanner } from "../../components/molecules";
 import { MainLayout } from "../../components/organisms";
 import { useCategories } from "../../hooks/useCategories";
 import { useBackMenu } from "../../utils/usePopUp";
-
-// Loading Component
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-[400px]">
-    <div className="w-16 h-16 border-4 border-black dark:border-white border-t-transparent rounded-full animate-spin" />
-  </div>
-);
 
 // Error Component
 const ErrorMessage = ({ message }) => (
@@ -71,7 +64,7 @@ export const ShopProductsPage = memo(() => {
 
   console.log("data categories", categories);
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <Loading />;
   if (error) return <ErrorMessage message={error.message} />;
 
   return (

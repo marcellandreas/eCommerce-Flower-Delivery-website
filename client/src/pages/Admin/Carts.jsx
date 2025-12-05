@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import { useAllCarts } from "../../queries/carts";
 import { usePopUp } from "../../utils/usePopUp";
 import { FaEye, FaTimes, FaShoppingBag } from "react-icons/fa";
+import { Loading } from "../../components/atoms";
 
 const Carts = memo(() => {
     const { data: cartsData, isLoading, error } = useAllCarts();
@@ -32,7 +33,7 @@ const Carts = memo(() => {
         return userName.includes(term) || userEmail.includes(term);
     });
 
-    if (isLoading) return <div className="p-6">Loading carts...</div>;
+    if (isLoading) return <Loading />;
     if (error) return <div className="p-6 text-red-500">Error loading carts: {error.message}</div>;
 
     return (

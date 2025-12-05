@@ -6,6 +6,7 @@ import { setCategories } from "../../store/slices/categoriesSlice";
 import { FaEdit, FaTrash, FaTimes, FaExclamationTriangle } from "react-icons/fa";
 import { generateSlug } from "../../utils/string";
 import { usePopUp } from "../../utils/usePopUp";
+import { Loading } from "../../components/atoms";
 
 const Products = memo(() => {
     const dispatch = useDispatch();
@@ -186,7 +187,7 @@ const Products = memo(() => {
     };
 
 
-    if (isLoading) return <div className="p-6">Loading products...</div>;
+    if (isLoading) return <Loading />
     if (error) return <div className="p-6 text-red-500">Error loading products: {error.message}</div>;
 
     return (

@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import { useOrdersQuery, useUpdateOrderStatus } from "../../queries/orders";
 import { format } from "date-fns";
 import { FaEye, FaEdit, FaTimes, FaCheck, FaBox, FaTruck, FaBan } from "react-icons/fa";
+import { Loading } from "../../components/atoms";
 
 const Orders = memo(() => {
     const [filterStatus, setFilterStatus] = useState("All");
@@ -80,7 +81,7 @@ const Orders = memo(() => {
         );
     });
 
-    if (isLoading) return <div className="p-6">Loading orders...</div>;
+    if (isLoading) return <Loading />;
     if (error) return <div className="p-6 text-red-500">Error loading orders: {error.message}</div>;
 
     return (
@@ -338,8 +339,8 @@ const Orders = memo(() => {
                         <div className="space-y-3 mb-6">
                             {['pending', 'processing', 'shipped', 'delivered', 'cancelled'].map((status) => (
                                 <label key={status} className={`flex items-center p-3 rounded-lg border cursor-pointer transition-all ${statusToUpdate === status
-                                        ? 'border-primary bg-primary/5 ring-1 ring-primary'
-                                        : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
+                                    ? 'border-primary bg-primary/5 ring-1 ring-primary'
+                                    : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
                                     }`}>
                                     <input
                                         type="radio"
